@@ -1,0 +1,12 @@
+bootloader with VUSBON disabled
+
+--This line, and those below, will be ignored--
+
+M    Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/nbproject/Makefile-local-default.mk
+M    Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/nbproject/Makefile-genesis.properties
+M    Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/nbproject/configurations.xml
+M    Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/nbproject/private/configurations.xml
+M    Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/.map
+M    Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/dist/default/production/USB_HID_Btl_StarterKit.X.production.hex
+M    Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/dist/default/production/USB_HID_Btl_StarterKit.X.production.elf
+M    Bootloader/Source/BootLoader.c

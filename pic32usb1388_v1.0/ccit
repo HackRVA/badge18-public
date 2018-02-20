@@ -1,0 +1,15 @@
+#gcc -o jump jump.c     -L/usr/lib64 -lusb -lhidapi-libusb /usr/lib/libusb-1.0.so
+
+#gcc -o pic32usb main.c -L/usr/lib64 -lusb -lhidapi-libusb /usr/lib/libusb-1.0.so
+
+#gcc -o pic32usb -static main.c -L/usr/lib64 -lpthread -lusb hidapi/hidapi/libusb/.libs/libhidapi-libusb.a ./libusb-1.0.9/libusb-1.0.9/libusb/.libs/libusb-1.0.so
+
+
+#gcc -o pic32usb main.c /usr/lib64/libc_nonshared.a /usr/lib64/libpthread.a -lusb hidapi/hidapi/libusb/.libs/libhidapi-libusb.a ./libusb-1.0.9/libusb-1.0.9/libusb/.libs/libusb-1.0.a 
+
+
+gcc -o pic32usb main.c -lpthread hidapi/hidapi/libusb/.libs/libhidapi-libusb.a ./libusb-1.0.9/libusb-1.0.9/libusb/.libs/libusb-1.0.a 
+ 
+
+ls hidapi/hidapi/libusb/.libs/libhidapi-libusb.a
+

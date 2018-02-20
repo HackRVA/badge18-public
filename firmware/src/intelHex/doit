@@ -1,0 +1,46 @@
+#!/bin/csh -vf
+
+# search and replace: flashedBadgeId
+#grep flashedBadgeId ../../Badge15.X/mappit
+
+set HEX = "../../harmony_badge_2017.X/dist/pic32mx_usb_badge_int_dyn/production/harmony_badge_2017.X.production.hex"
+
+set count = `grep -i beef $HEX | wc -l`
+if ($count != 1) then
+   grep -i beef $HEX | wc -l
+   echo "MORE THAN ONE MAGIC KEY IN HEX"
+   exit 0
+endif
+
+./badgeId.awk badgeId=01E0 < $HEX > t.hex
+
+set diffCount = `diff -i t.hex $HEX | wc -l`
+if ($diffCount != 4) then
+   echo "DIFF PROBLEM"
+   diff -i t.hex $HEX
+   exit 0
+endif
+
+set checkErrors = `./chkihex.awk $HEX | grep ERROR | wc -l`
+if ($checkErrors != 0) then
+   echo "CHECK ERRORS "
+   ./chkihex.awk t.hex | grep ERROR
+   exit 0
+endif
+
+#../pic32usb t.hex
+
+set i = 300
+while ($i < 310)
+   set badgeId = `echo $i | awk '{printf "%04x", $1 }'`
+   echo $i is hex $badgeId
+
+   cat $HEX \
+   | ./badgeId.awk badgeId=$badgeId \
+   > badge_$i.hex
+
+    @ i++
+end
+
+
+
