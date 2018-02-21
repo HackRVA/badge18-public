@@ -56,7 +56,7 @@ struct IRcallback_t IRcallbacks[] = {
 	{ ir_livetext },	/* stream text screen */
 	{ ir_liveled },	/* stream rgb to LED */
 
-    { ir_udraw},
+//    { ir_udraw},
 	{ ir_app0 },
 	{ ir_app1 },
 	{ ir_app2 },
@@ -316,13 +316,13 @@ void ir_liveled(struct IRpacket_t p)
    DEBUGSTRLVL(DNOISE, "ir_liveled");
 }
 
-extern void draw_ir_udraw(struct IRpacket_t p);//from udraw.c
+//extern void draw_ir_udraw(struct IRpacket_t p);//from udraw.c
 
-void ir_udraw(struct IRpacket_t p)
-{
-    draw_ir_udraw(p);
+//void ir_udraw(struct IRpacket_t p)
+//{
+//    draw_ir_udraw(p);
     //DEBUGSTRLVL(DNOISE, "ir_udraw");
-}
+//}
 
 //QC APP
 void ir_app0(struct IRpacket_t p)

@@ -4,4 +4,4 @@
 # using space in programming flash 
 # it shows the compiled object size
 
-find ../harmony_badge_2017.X -name \*.o -exec ls -lt \{\} \; | sort -g -k 5,6
+find ../harmony_badge_2018.X -name \*.o -exec ls -lt \{\} \; | sort -g -k 5,6

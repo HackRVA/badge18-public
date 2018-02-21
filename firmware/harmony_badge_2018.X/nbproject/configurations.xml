@@ -412,7 +412,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="exclude-floating-point-library" value="false"/>
         <property key="expand-macros" value="false"/>
-        <property key="extra-include-directories-for-assembler" value="../src;"/>
+        <property key="extra-include-directories-for-assembler" value="../src"/>
         <property key="extra-include-directories-for-preprocessor"
                   value="../src;../../../microchip/harmony/v1_09/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX;../../../microchip/harmony/v1_09/third_party/rtos/FreeRTOS/Source/include;../src/system_config/pic32mx_usb_badge_int_dyn"/>
         <property key="false-conditionals" value="false"/>
@@ -443,7 +443,7 @@
         <property key="fill-flash-options-inc-const" value="1"/>
         <property key="fill-flash-options-increment" value=""/>
         <property key="fill-flash-options-seq" value=""/>
-        <property key="fill-flash-options-what" value="1"/>
+        <property key="fill-flash-options-what" value="0"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="true"/>
         <property key="generate-micro-compressed-code" value="false"/>
@@ -458,11 +458,11 @@
         <property key="optimization-level" value=""/>
         <property key="preprocessor-macros" value=""/>
         <property key="remove-unused-sections" value="true"/>
-        <property key="report-memory-usage" value="false"/>
+        <property key="report-memory-usage" value="true"/>
         <property key="serial-length" value=""/>
         <property key="serial-origin" value=""/>
         <property key="stack-size" value=""/>
-        <property key="symbol-stripping" value=""/>
+        <property key="symbol-stripping" value="-s"/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="false"/>
       </C32-LD>
