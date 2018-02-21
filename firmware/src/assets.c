@@ -3,6 +3,7 @@
 #include "assets.h"
 #include "S6B33.h"
 #include "assetList.h"
+#include "audio.h" // pin defs
 
 /**
     simple asset management and display lib
@@ -226,9 +227,11 @@ void endNote(){
     G_hold_note = 0;
 }
 
-// pins RA9 & RA9 control the full bridge
+// see include/audio.h
 void doAudio()
 {
+   static int phase=0;
+
    if (G_duration == 0 && G_hold_note == 0) return;
 
    G_freq_cnt++; /* current note freq counter */
@@ -237,21 +240,29 @@ void doAudio()
    if ((G_duration_cnt != G_duration) || G_hold_note) {
        if (G_freq_cnt == G_freq)  {
           G_freq_cnt = 0;
-          //SYS_PORTS_PinWrite (PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_9, 1);
-          LATAbits.LATA9 = 1; // on
-          LATAbits.LATA4 = 0; // off
+	   /* drive alternately */
+	   if (phase) {
+		AUDIO_PHASE1 = 1;
+		AUDIO_PHASE2 = 0;
+	   }
+	   else {
+		AUDIO_PHASE1 = 0;
+		AUDIO_PHASE2 = 1;
+	   }
+
+	   phase = !phase;
        }
-       else 
-          //SYS_PORTS_PinWrite (PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_9, 0); 
-          LATAbits.LATA9 = 0; // off
-          LATAbits.LATA4 = 1; // on
+       else {
+          AUDIO_PHASE1 = 0; // off
+          AUDIO_PHASE2 = 0; // off
+       }
    }
    else {
        G_duration = 0;
 
-       //SYS_PORTS_PinWrite (PORTS_ID_0, PORT_CHANNEL_A, PORTS_BIT_POS_9, 0);
-       LATAbits.LATA4 = 0; // off
-       LATAbits.LATA9 = 0; // off
+       AUDIO_PHASE1 = 0; // off
+       AUDIO_PHASE2 = 0; // off
+
        if (G_audioAssetId != 255) assetList[G_audioAssetId].datacb(G_audioAssetId, G_audioFrame) ; /* callback routine */
    }
    G_audioFrame++;

@@ -66,6 +66,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "badge_apps.h"
 #include "badge_menu.h"
 
+#include "audio.h"
+#include "mic.h"
+#include "flare_leds.h"
+#include "rf.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -488,6 +493,11 @@ void USBDevice_Task(void* p_arg)
 
 void APP_Initialize ( void )
 {
+/*
+    this init code is to set values to sane defaults quickly in the boot process
+    some of these are modifed in their repective code
+*/
+
 // this is done in the bootload init code, so some of the follow is just for documentation/clarity
 //    ANSELA = 0x00;
 //    ANSELB = 0x00;
@@ -525,10 +535,11 @@ void APP_Initialize ( void )
 
     CFGCONbits.JTAGEN = 0;
 
-    // 2018 audio bridge driver 
-    // driver chip: OnSemi LV8548MC (dual channel, we are using just one)
+    // 2018 audio bridge driver. 
+    // real audio chips are expensive and complicated, so this use a full bridge motor controller
+    // driver chip: OnSemi LV8548MC (dual channel, we are using just one channel)
     // uses pins RA9 and RA4
-    // they should be driven opposite each other to turn the bridge on
+    // they should be driven opposite each other to turn the bridge on hard
     // both pins off leave outputs off/floating
     // both pins on uses active braking (drains outputs to ground) which will stop the speaker coil
     TRISAbits.TRISA9 = 0;    // output
@@ -544,6 +555,7 @@ void APP_Initialize ( void )
     // 2018 flare LED's
     // RC5
     TRISCbits.TRISC5 = 1; // LED is an output
+    LATCbits.LATC5 = 0;   // RC5 off
     CNPUCbits.CNPUC5 = 0; // pullup off
     CNPDCbits.CNPDC5 = 0; // pulldown off
 
@@ -555,22 +567,24 @@ void APP_Initialize ( void )
     CNPDCbits.CNPDC3 = 0; // pulldown off
 
     /* 2018 RF power section on/off */
-    // RC2 / AN8
+    // RC2 digital
     TRISCbits.TRISC2 = 0; // RF power is an output
+    LATCbits.LATC2 = 0;   // RF off
     CNPUCbits.CNPUC2 = 0; // RF power pullup off
     CNPDCbits.CNPDC2 = 0; // RF power pulldown off
 
-    /* 2018 RF signel input: RB1 or AN3- analog input 3 */
-    // ANSELBbits. = 0x00;
+    /* 2018 RF signel input */
+    //  RB1 or AN3- analog input 3
     ANSELBbits.ANSB1 = 1;
     TRISBbits.TRISB1 = 1; // RF input is analog
     CNPUBbits.CNPUB1 = 0; // pullup off
     CNPDBbits.CNPDB1 = 0; // pulldown off
 
 
-    /* button pullups */
-    // 2018 moved CNPUCbits.CNPUC3 = 1; // pullup == on
+    /* D pad button pullups */
     // the rest of this is set up above
+    // 2018 main button moved to RC4 from RC3
+    // CNPUCbits.CNPUC3 = 1; // pullup == on
     CNPUCbits.CNPUC4 = 1; // RC4 pullup == on
     CNPUBbits.CNPUB14 = 1; // RB14 pullup == on
     CNPUBbits.CNPUB15 = 1; // RB15 pullup == on
