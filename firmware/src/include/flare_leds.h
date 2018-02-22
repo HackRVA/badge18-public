@@ -5,7 +5,8 @@
 #ifndef FLARE_H
 #define	FLARE_H
 
-#define FLARE_OUT LATCbits.LATC5
+void flare(unsigned char onPWM) ;
+#define FLARE_LED LATCbits.LATC5
 
 #endif	/* FLARE_H */
 

@@ -11,6 +11,7 @@
 #include "fb.h"
 #include "buttons.h"
 #include "rgb_led.h"
+#include "flare_leds.h"
 #include "settings.h"
 #include "timer1_int.h"
 #include "flash.h"
@@ -556,12 +557,15 @@ void menu_and_manage_task(void *p_arg){
 #else
 
     
+#ifdef DOLAUNCH
     xReturned = xTaskCreate((TaskFunction_t) LAUNCH_APP,
                             "exec_app",
                             250u, //may want to increase?
                             NULL,
                             1u,
                             &xHandle);
+#endif
+
 #ifdef RUN_TUTORIAL
     // Wait for splash app to finish
     if (xTaskNotifyWait(0, 1u, &ulNotifiedValue, portMAX_DELAY)){
@@ -586,6 +590,9 @@ void menu_and_manage_task(void *p_arg){
 
 #endif
     for(;;){
+	static unsigned char fcnt=0;
+
+	flare_leds(fcnt++);
         switch(idle_state){
             case AWAKE:
                 // If enough time has past, turn off stuff and go to low power state

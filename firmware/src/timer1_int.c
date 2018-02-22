@@ -1,7 +1,7 @@
-
 #include <plib.h>
 #include "flash.h"
 #include "ir.h"
+#include "flare_leds.h"
 
 /*
     38khz IR timer code and interupt code
@@ -36,11 +36,12 @@ void timerInit(void)
     // set up the timer interrupt with a priority of 2
     ConfigIntTimer2(T2_INT_ON | T2_INT_PRIOR_2);
 
-
+    // mic input
     OpenTimer3(T3_ON | T3_SOURCE_INT, T3_TICK);
     // set up the timer interrupt with a priority of 5
     ConfigIntTimer3(T3_INT_ON | T3_INT_PRIOR_5);
 
+    // audio and PWM
     OpenTimer4(T4_ON | T4_SOURCE_INT, T4_TICK);
     // set up the timer interrupt with a priority of 6
     ConfigIntTimer4(T4_INT_ON | T4_INT_PRIOR_6);
@@ -379,10 +380,8 @@ void __ISR( _EXTERNAL_1_VECTOR, IPL1SRS) Int1Interrupt(void)
 //void __ISR(_TIMER_3_VECTOR, IPL5) Timer3Handler(void)
 void __ISR(_TIMER_3_VECTOR, IPL5SRS) Timer3Handler(void)
 {
-   void touchInterrupt();
-
    mT3ClearIntFlag(); // clear the interrupt flag
-//   touchInterrupt(); /* ADC for each button */
+   micInput();
 }
 
 //void __ISR(_TIMER_4_VECTOR, IPL6) Timer4Handler(void)
@@ -402,6 +401,9 @@ unsigned char G_green_pwm=0;
 
 unsigned char G_blue_cnt=0;
 unsigned char G_blue_pwm=0;
+
+unsigned char G_flare_cnt=0;
+unsigned char G_flare_pwm=0;
 
 unsigned char G_bright=0;
 
@@ -429,6 +431,12 @@ void blue(unsigned char onPWM) {
     onPWM >>= G_bright;
     G_blue_pwm = onPWM; 
     G_blue_cnt = 0;
+}
+
+void flare_leds(unsigned char onPWM) {
+    onPWM >>= G_bright;
+    G_flare_pwm = onPWM; 
+    G_flare_cnt = 0;
 }
 
 void doPWM()
@@ -465,6 +473,12 @@ void doPWM()
         LATCbits.LATC9 = 1;
     else
         LATCbits.LATC9 = 0;
+
+    G_flare_cnt++;
+    if (G_flare_cnt < G_flare_pwm)
+        FLARE_LED = 1;
+    else
+        FLARE_LED = 0;
 }
 
 void backlight(unsigned char bright) {
@@ -476,4 +490,8 @@ void led(unsigned char r, unsigned char g, unsigned char b){
     red(r);
     green(g);
     blue(b);
+}
+
+void micInput()
+{
 }

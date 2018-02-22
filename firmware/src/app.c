@@ -415,9 +415,9 @@ void USBDevice_Task(void* p_arg)
                         break;
                     case USBDEVICETASK_READDONECOM1_EVENT:
                         /* Send the received data to COM2 */
-//                        USB_DEVICE_CDC_Write(1, &COM2Write_Handle,
-//                            &com1ReadBuffer, 1,
-//                            USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
+                        USB_DEVICE_CDC_Write(1, &COM2Write_Handle,
+                            &com1ReadBuffer, 1,
+                            USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
 
 //                        FbClear();
 //                        FbMove(16, 32);
@@ -430,9 +430,9 @@ void USBDevice_Task(void* p_arg)
                         break;
                     case USBDEVICETASK_READDONECOM2_EVENT:
                         /* Send the received data to COM1 */
-//                        USB_DEVICE_CDC_Write(0, &COM1Write_Handle,
-//                            &com2ReadBuffer, 1,
-//                            USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
+                        USB_DEVICE_CDC_Write(0, &COM1Write_Handle,
+                            &com2ReadBuffer, 1,
+                            USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
 
 //                        FbClear();
 //                        FbMove(16, 48);
@@ -445,8 +445,8 @@ void USBDevice_Task(void* p_arg)
                          break;
                     case USBDEVICETASK_WRITEDONECOM1_EVENT:
                         /* Schedule a CDC read on COM2 */
-//                        USB_DEVICE_CDC_Read(1,&COM2Read_Handle,
-//                            com2ReadBuffer,APP_READ_BUFFER_SIZE);
+                        USB_DEVICE_CDC_Read(1,&COM2Read_Handle,
+                            com2ReadBuffer,APP_READ_BUFFER_SIZE);
 
                         // Not sure if things other than badge code
                         // will set off this write event, so double check
@@ -457,8 +457,8 @@ void USBDevice_Task(void* p_arg)
                         break;
                     case USBDEVICETASK_WRITEDONECOM2_EVENT:
                         /* Schedule a CDC read on COM1 */
-//                        USB_DEVICE_CDC_Read(0, &COM1Read_Handle,
-//                            com1ReadBuffer,APP_READ_BUFFER_SIZE);
+                        USB_DEVICE_CDC_Read(0, &COM1Read_Handle,
+                            com1ReadBuffer,APP_READ_BUFFER_SIZE);
                         break;
                     case USBDEVICETASK_WRITE_BUFFER_TO_COM1:
                         USB_DEVICE_CDC_Write(0, &COM1Write_Handle, WriteBuffer,
@@ -554,7 +554,7 @@ void APP_Initialize ( void )
 
     // 2018 flare LED's
     // RC5
-    TRISCbits.TRISC5 = 1; // LED is an output
+    TRISCbits.TRISC5 = 0; // LED is an output
     LATCbits.LATC5 = 0;   // RC5 off
     CNPUCbits.CNPUC5 = 0; // pullup off
     CNPDCbits.CNPDC5 = 0; // pulldown off
@@ -789,6 +789,7 @@ void APP_Tasks ( void )
     BaseType_t errStatus;
     timerInit();
 
+    flare_leds(100);
     errStatus = xTaskCreate((TaskFunction_t) USBDevice_Task,
             "USB_AttachTask",
             USBDEVICETASK_SIZE,
