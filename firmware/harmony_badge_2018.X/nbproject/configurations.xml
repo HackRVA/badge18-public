@@ -226,6 +226,7 @@
         <itemPath>../src/flash.c</itemPath>
         <itemPath>../src/settings.c</itemPath>
         <itemPath>../src/schedule.c</itemPath>
+        <itemPath>../src/adc_int.c</itemPath>
       </logicalFolder>
       <logicalFolder name="bsp" displayName="bsp" projectFiles="true">
       </logicalFolder>

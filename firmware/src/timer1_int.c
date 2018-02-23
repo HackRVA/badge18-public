@@ -36,10 +36,9 @@ void timerInit(void)
     // set up the timer interrupt with a priority of 2
     ConfigIntTimer2(T2_INT_ON | T2_INT_PRIOR_2);
 
-    // mic input
-    OpenTimer3(T3_ON | T3_SOURCE_INT, T3_TICK);
-    // set up the timer interrupt with a priority of 5
-    ConfigIntTimer3(T3_INT_ON | T3_INT_PRIOR_5);
+//    OpenTimer3(T3_ON | T3_SOURCE_INT, T3_TICK);
+//    // set up the timer interrupt with a priority of 6
+//    ConfigIntTimer3(T3_INT_ON | T3_INT_PRIOR_5);
 
     // audio and PWM
     OpenTimer4(T4_ON | T4_SOURCE_INT, T4_TICK);
@@ -378,11 +377,11 @@ void __ISR( _EXTERNAL_1_VECTOR, IPL1SRS) Int1Interrupt(void)
 }
 
 //void __ISR(_TIMER_3_VECTOR, IPL5) Timer3Handler(void)
-void __ISR(_TIMER_3_VECTOR, IPL5SRS) Timer3Handler(void)
-{
-   mT3ClearIntFlag(); // clear the interrupt flag
-   micInput();
-}
+//void __ISR(_TIMER_3_VECTOR, IPL5SRS) Timer3Handler(void)
+//{
+//   mT3ClearIntFlag(); // clear the interrupt flag
+//   micInput();
+//}
 
 //void __ISR(_TIMER_4_VECTOR, IPL6) Timer4Handler(void)
 void __ISR(_TIMER_4_VECTOR, IPL6SRS) Timer4Handler(void)

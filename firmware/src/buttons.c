@@ -23,6 +23,9 @@ unsigned int G_entropy_pool = 961748927;
 unsigned int timestamp = 0;
 unsigned int last_input_timestamp = 0;
 
+// 
+// the initial version of this is from example 37-3 of pic32_pdfs/pic32-sec37-ctmu-61167B.pdf
+// 
 void init_CTMU()
 {
     /* setup analog pins */

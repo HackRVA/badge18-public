@@ -580,6 +580,12 @@ void APP_Initialize ( void )
     CNPUBbits.CNPUB1 = 0; // pullup off
     CNPDBbits.CNPDB1 = 0; // pulldown off
 
+    /* touch pad */
+    //  RB2 or AN4- analog input 4
+    ANSELBbits.ANSB2 = 1; // is analog
+    TRISBbits.TRISB2 = 1; // touch pad input
+    CNPUBbits.CNPUB2 = 0; // pullup off
+    CNPDBbits.CNPDB2 = 0; // pulldown off
 
     /* D pad button pullups */
     // the rest of this is set up above
@@ -788,6 +794,7 @@ void APP_Tasks ( void )
 {
     BaseType_t errStatus;
     timerInit();
+    adc_int();
 
     flare_leds(100);
     errStatus = xTaskCreate((TaskFunction_t) USBDevice_Task,
