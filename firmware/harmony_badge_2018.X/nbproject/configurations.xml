@@ -182,6 +182,7 @@
           <itemPath>../src/badge_apps/udraw.c</itemPath>
           <itemPath>../src/badge_apps/administrator.c</itemPath>
           <itemPath>../src/badge_apps/lander.c</itemPath>
+          <itemPath>../src/badge_apps/adc.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
           <logicalFolder name="f1"
@@ -396,8 +397,7 @@
         <property key="place-data-into-section" value="false"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
-        <property key="preprocessor-macros"
-                  value="_DISABLE_OPENADC10_CONFIGPORT_WARNING;_SUPPRESS_PLIB_WARNING;__XC"/>
+        <property key="preprocessor-macros" value="_SUPPRESS_PLIB_WARNING;__XC"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="toplevel-reordering" value=""/>
@@ -462,7 +462,7 @@
         <property key="report-memory-usage" value="true"/>
         <property key="serial-length" value=""/>
         <property key="serial-origin" value=""/>
-        <property key="stack-size" value=""/>
+        <property key="stack-size" value="0"/>
         <property key="symbol-stripping" value="-s"/>
         <property key="trace-symbols" value=""/>
         <property key="warn-section-align" value="false"/>

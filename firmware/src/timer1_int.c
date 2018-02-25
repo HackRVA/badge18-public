@@ -14,6 +14,13 @@
     4/2015
 */
 
+// timer4 is PWM and audio and has priority 1 (low)
+// timer2 is IR send and has priority 2
+// ADC priority 5
+// external interrupt 1 has priority 6  (high)
+
+
+
 #define SYS_FREQ 			(40000000L)
 
 #define TOGGLES_PER_SEC		38000
@@ -32,18 +39,19 @@ void doPWM();
 
 void timerInit(void)
 {
+    // IR send has priority 2
     OpenTimer2(T2_ON | T2_SOURCE_INT, T2_TICK);
-    // set up the timer interrupt with a priority of 2
     ConfigIntTimer2(T2_INT_ON | T2_INT_PRIOR_2);
 
+// unused
 //    OpenTimer3(T3_ON | T3_SOURCE_INT, T3_TICK);
-//    // set up the timer interrupt with a priority of 6
-//    ConfigIntTimer3(T3_INT_ON | T3_INT_PRIOR_5);
+//    // set up the timer interrupt with a priority of 3
+//    ConfigIntTimer3(T3_INT_ON | T3_INT_PRIOR_3);
 
-    // audio and PWM
+    // audio and PWM priority 1 lowest
     OpenTimer4(T4_ON | T4_SOURCE_INT, T4_TICK);
-    // set up the timer interrupt with a priority of 6
-    ConfigIntTimer4(T4_INT_ON | T4_INT_PRIOR_6);
+    // set up the timer interrupt with a priority of 1
+    ConfigIntTimer4(T4_INT_ON | T4_INT_PRIOR_1);
 
     // enable multi-vector interrupts
     INTEnableSystemMultiVectoredInt();
@@ -68,8 +76,8 @@ void timerInit(void)
     SYSKEY = 0x0;
 
     INTCONbits.INT1EP=0; // edge polarity
-    IPC1bits.INT1IP=1; // interrupt priority
-    IPC1bits.INT1IS=1; // interrupt sub priority
+    IPC1bits.INT1IP=6; // interrupt priority
+    IPC1bits.INT1IS=0; // interrupt sub priority
     IEC0bits.INT1IE=1; // enable this interrupt
 
     IEC0bits.T2IE=1; // also enable timer2 interupt
@@ -98,7 +106,7 @@ unsigned char G_halfCount = 0;
   max 2000 short burst/second
   with burst > 70 cycle needs game of 1.2 * burst len
 */
-void __ISR(_TIMER_2_VECTOR, IPL2SOFT) Timer2Handler(void)
+void __ISR(_TIMER_2_VECTOR, IPL2) Timer2Handler(void)
 {
    void do_audio();
    void do_leds();
@@ -358,10 +366,9 @@ void __ISR(_TIMER_2_VECTOR, IPL2SOFT) Timer2Handler(void)
    return;
 }
 
+// external IR receive: interrupt level 6 highest
 // input changed on RB0
-//void __ISR( _EXTERNAL_1_VECTOR, IPL1) Int1Interrupt(void)
-//void __ISR( _EXTERNAL_1_VECTOR, IPL1AUTO) Int1Interrupt(void)
-void __ISR( _EXTERNAL_1_VECTOR, IPL1SRS) Int1Interrupt(void)
+void __ISR( _EXTERNAL_1_VECTOR, IPL6SOFT) Int1Interrupt(void)
 { 
    // if not sending, signal in receive
    if ((G_IRsend == 0) & (G_IRrecv == 0)) {
@@ -376,20 +383,18 @@ void __ISR( _EXTERNAL_1_VECTOR, IPL1SRS) Int1Interrupt(void)
    IFS0bits.INT1IF = 0;
 }
 
-//void __ISR(_TIMER_3_VECTOR, IPL5) Timer3Handler(void)
-//void __ISR(_TIMER_3_VECTOR, IPL5SRS) Timer3Handler(void)
+//void __ISR(_TIMER_3_VECTOR, IP35SOFT) Timer3Handler(void)
 //{
 //   mT3ClearIntFlag(); // clear the interrupt flag
 //   micInput();
 //}
 
-//void __ISR(_TIMER_4_VECTOR, IPL6) Timer4Handler(void)
-void __ISR(_TIMER_4_VECTOR, IPL6SRS) Timer4Handler(void)
+// audio interrupt priority 1 lowest
+void __ISR(_TIMER_4_VECTOR, IPL1SOFT) Timer4Handler(void)
 {
-
-   mT4ClearIntFlag(); // clear the interrupt flag
    doAudio();
    doPWM();
+   mT4ClearIntFlag(); // clear the interrupt flag
 }
 
 unsigned char G_red_cnt=0;

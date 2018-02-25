@@ -71,7 +71,7 @@
 //#pragma config POSCMOD = HS             // Primary Oscillator Mode: High Speed xtal
 #pragma config POSCMOD = XT             // Primary Oscillator Mode: High Speed xtal
 #pragma config FNOSC = PRIPLL           // Oscillator Selection: Primary oscillator  w/ PLL
-#pragma config FPBDIV = DIV_1           // Peripheral Bus Clock: Divide by 1
+#pragma config FPBDIV = DIV_2           // Peripheral Bus Clock: Divide by 2
 #pragma config BWP = OFF                // Boot write protect: OFF
 
 #if defined(__PIC32MX1XX_2XX__)

@@ -12,6 +12,8 @@
 #define	BADGE_APPS_H
 
 // Declare tasks
+void adc_task(void* p_arg);
+
 void hello_world_task(void* p_arg);
 
 void badgey_bird_task(void* p_arg);

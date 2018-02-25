@@ -486,12 +486,9 @@ struct menu_t main_m[] = {
 //        {badge_lander_task}},
 //    {"Star Shooter", VERT_ITEM, TASK,
 //        {star_shooter_task}},    
-//    {"u draw", VERT_ITEM, TASK,
-//        {udraw_task}},
-    {"Conductor", VERT_ITEM, TASK,
-        {conductor_task}},
-    {"blinkenlite", VERT_ITEM, TASK,
-        {blinkenlights_task}},        
+    {"adc", VERT_ITEM|DEFAULT_ITEM, TASK, {adc_task}},
+    {"Conductor", VERT_ITEM, TASK, {conductor_task}},
+    {"blinkenlite", VERT_ITEM, TASK, {blinkenlights_task}},        
 //    {"dice roll", VERT_ITEM, TASK,
 //        {dice_roll_task}},        
 
@@ -545,7 +542,7 @@ void menu_and_manage_task(void *p_arg){
     stop_screensaver = 0;
     
     G_currMenu = main_m;
-    G_selectedMenu = &main_m[1];
+    G_selectedMenu = &main_m[0];
     
 #ifdef QC_FIRST
     xReturned = xTaskCreate((TaskFunction_t) hello_world_task,
@@ -592,7 +589,8 @@ void menu_and_manage_task(void *p_arg){
     for(;;){
 	static unsigned char fcnt=0;
 
-	flare_leds(fcnt++);
+	fcnt++;
+	flare_leds(fcnt >> 6);
         switch(idle_state){
             case AWAKE:
                 // If enough time has past, turn off stuff and go to low power state

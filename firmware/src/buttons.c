@@ -42,7 +42,9 @@ void init_CTMU()
 
     //ANSELA = (1<<0) | (1<<1); //RA0,1
     //ANSELB = (1<<1) | (1<<2); //RB1,2
-    ANSELB = (1<<1) ; //RB1
+    // ANSELB = (1<<1) ; //RB1 // USE FORM BELOW SO OTHER BITS AREN'T AFFECTED 
+    ANSELBbits.ANSB2 = 1; // RB2
+
     vTaskDelay(1 / portTICK_PERIOD_MS);    
 
     // CTMU Setup
@@ -51,20 +53,26 @@ void init_CTMU()
     vTaskDelay(1 / portTICK_PERIOD_MS);    // Wait 1 msec
 
     // ADC Setup
-    AD1CON2 = 0x0; // VR+ = AVDD, V- = AVSS, Don't scan, MUX A only
+AD1CON2 = 0x0; // VR+ = AVDD, V- = AVSS, Don't scan, MUX A only
 
     // ADC clock derived from peripheral buss clock
     // Tadc = 4 * Tpbus = 4 * 25 ns = 100 ns > 65 ns required
     // Tadc = 2*(    1       +1)*Tpbus
     // Tadc = 2*(AD1CON3<7:0>+1)*Tpbus
     AD1CON3 = 1;          // PEB 16 * Tpb;
-    AD1CSSL = 0x0;        // No channels scanned
-    IEC0bits.AD1IE = 0;   // Disable ADC interrupts
-    AD1CON1bits.ON = 1;   // Turn on ADC
+// WTF   AD1CON3bits.ADRC = 0; // PBCLK. clock source is FRC or PBCLK
+// WTF   AD1CON3bits.SAMC = 0b10000; // Tad = 1..31
+// WTF   AD1CON3bits.ADCS = 0b00010000; // needed for autoconvert. conversion clock select
+
+// 2018 XXX    AD1CSSL = 0x0;        // No channels scanned
+IEC0bits.AD1IE = 0;   // Disable ADC interrupts
+AD1CON1bits.ON = 1;   // Turn on ADC
 }
 
 void button_task(void* p_arg)
 {
+#define BADGE_2018
+#ifndef BADGE_2018
     const unsigned char ButtonADCChannels[2] = {3,4};
     const unsigned char n_averages = 16, log2_n_averages = 4;
     unsigned short int ButtonVavgADCs[2]={0,0};
@@ -81,8 +89,6 @@ void button_task(void* p_arg)
 // 2018   #define AN4 ButtonVavgADCs[1]
 
     #define AN3 ButtonVavgADCs[1] // PEB lazy AN3 swap hack
-
-#define BADGE_2018
 
 #ifdef BADGE_2016
     #define Y1 (31000 - 2*AN3)
@@ -101,13 +107,6 @@ void button_task(void* p_arg)
     #define Y2 (  -1500 + 2*AN3)
     #define Y3 (-7500 + 2*AN3)
     #define TOUCH_PCT_CALC (char)((AN3*-10 + AN4*1 + 121400) >> 10)
-#endif
-
-#ifdef BADGE_2018
-    #define Y1 (20000 - 1*AN3)
-    #define Y2 (  -1500 + 2*AN3)
-    #define Y3 (-7500 + 2*AN3)
-    #define TOUCH_PCT_CALC (char)((AN3*-10 + 121400) >> 10)
 #endif
 
     init_CTMU();
@@ -157,7 +156,7 @@ void button_task(void* p_arg)
         }
         //---------
         // Check activation boundaries
-#ifndef BADGE_2018
+#ifdef badge_hack_2018
         if(AN4 < Y1)
         {                        
             if((AN4 < Y3) && (G_down_touch_cnt < 255))
@@ -254,6 +253,11 @@ void button_task(void* p_arg)
         print_to_com1("\n\r");
         
 #endif        
+#else // 2018
+    TickType_t xDelay = 5 / portTICK_PERIOD_MS;
+    for(;;){
+        timestamp++;
+#endif        // badge_2018
 
     //---------------------
     //---Tactile Buttons---

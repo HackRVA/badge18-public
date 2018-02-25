@@ -589,9 +589,11 @@ void APP_Initialize ( void )
 
     /* D pad button pullups */
     // the rest of this is set up above
+
     // 2018 main button moved to RC4 from RC3
     // CNPUCbits.CNPUC3 = 1; // pullup == on
     CNPUCbits.CNPUC4 = 1; // RC4 pullup == on
+
     CNPUBbits.CNPUB14 = 1; // RB14 pullup == on
     CNPUBbits.CNPUB15 = 1; // RB15 pullup == on
     CNPUAbits.CNPUA0 = 1; // RA0 pullup == on
@@ -599,28 +601,29 @@ void APP_Initialize ( void )
 
     //PLIB_PORTS_ChangeNoticePullUpPerPortEnable(PORTS_ID_0, PORT_CHANNEL_C, PORTS_BIT_POS_3);
 
+    // leds etc. can't work until timer is started up
+    timerInit();
+
     led(0, 0, 10);
     LCDInitPins();
     //led(10, 0, 0);
     LCDReset();
-    led(0, 10, 0);
     LCDBars();
-    LCDBacklight(10);
-    led(0, 0, 10);
+    LCDBacklight(100);
     FbInit();
-    led(0, 0, 0);
+    led(0, 10, 0);
 
     cdc_write_buffer_lock = xSemaphoreCreateMutex();
     if(cdc_write_buffer_lock == NULL)
     {
-        led(50, 0, 0);
+        led(10, 0, 0);
         while(1);
     }
 
     USBDeviceTask_EventQueue_Handle = xQueueCreate(15, sizeof(uint32_t));
     if(USBDeviceTask_EventQueue_Handle == NULL)
     {
-        led(50, 0, 0);
+        led(0, 0, 10);
         while(1);
     }
 	/* Initialize the application object */
@@ -793,10 +796,8 @@ void test_task(void* p_arg)
 void APP_Tasks ( void )
 {
     BaseType_t errStatus;
-    timerInit();
-    adc_int();
 
-    flare_leds(100);
+
     errStatus = xTaskCreate((TaskFunction_t) USBDevice_Task,
             "USB_AttachTask",
             USBDEVICETASK_SIZE,
@@ -822,8 +823,12 @@ void APP_Tasks ( void )
     }
     setNote(100, 1024);
     // Wait for for things (USB) to be ready? easier debugging
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    vTaskDelay(2000 / portTICK_PERIOD_MS);
     led(0,0,0);
+
+    adc_init();
+    flare_leds(5);
+
     //test_task(NULL);
     //button_task(NULL);
     menu_and_manage_task(NULL);

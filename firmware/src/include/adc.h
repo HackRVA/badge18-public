@@ -13,7 +13,15 @@
 
 #define N_ADC_PINS 3
 
-#define ADC_BUFFER_SIZE 16 * N_ADC_PINS
+// 128 = one LCD scanline
+//#define ADC_BUFFER_SIZE 128 * N_ADC_PINS
+#define ADC_BUFFER_SAMPLES 16
+#define ADC_BUFFER_MULTIPLE (ADC_BUFFER_SAMPLES * N_ADC_PINS)
+
+// one hidden multiple for when user is processing
+#define ADC_BUFFER_SIZE ((128 / 16) * ADC_BUFFER_MULTIPLE)
+#define ADC_BUFFER_SIZE_EXTRA (ADC_BUFFER_SIZE + ADC_BUFFER_MULTIPLE)
+
 extern volatile unsigned short ADCbuffer[];
 extern volatile unsigned int ADCbufferCnt;
 extern volatile unsigned int ADCbufferCntMark;
