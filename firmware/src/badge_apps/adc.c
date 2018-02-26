@@ -13,13 +13,15 @@ enum adc_state {
     EXIT
 };
 
-
 void adc_task(void* p_arg) {
    unsigned char cnt=0;
    //const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
    const TickType_t xDelay = 20 / portTICK_PERIOD_MS;
    static unsigned char state = INIT;
    int i, ADCloopCnt=0;
+   char title[32];
+   int hz_num=0;
+
 
    for(;;){
         switch(state){
@@ -33,6 +35,12 @@ void adc_task(void* p_arg) {
                 }
                 FbColor(WHITE);
 		FbMove(10,10);
+
+		strcpy(title, "kHZ left-right ");
+		strcat(title, samples_info[hz_num].name);
+
+		ADC_init(hz_num); // slowest
+
 		FbWriteLine("ADC");
                 FbSwapBuffers();
                 break;
@@ -104,6 +112,18 @@ void adc_task(void* p_arg) {
                 FbSwapBuffers();
 */
 
+	if (LEFT_BTN_AND_CONSUME) {
+	   hz_num--;
+	   if (hz_num < 0) hz_num = 0;
+	   state = INIT; // reinit app
+	}
+
+	if (RIGHT_BTN_AND_CONSUME) {
+	   hz_num++;
+	   if (hz_num == HZ_LAST) hz_num--;
+	   state = INIT; // reinit app
+	}
+
 	if (ADCbufferCntMark == 0) { // ADC to start new buffer
 		// the ADC samples and buffers each pin in sequence, 
 		// need to pic them apart and plot them on their own line
@@ -116,12 +136,12 @@ void adc_task(void* p_arg) {
 
 			if ((i % N_ADC_PINS) == 1) {
 			   FbColor(GREEN);
-			   FbPoint(i/4,  96 - (ADCbuffer[i] >> 0));
+			   FbPoint(i/4,  64 - (ADCbuffer[i] >> 0));
 			}
 
 			if ((i % N_ADC_PINS) == 2) {
 			   FbColor(B_BLUE);
-			   FbPoint(i/4, 112 - (ADCbuffer[i] >> 0));
+			   FbPoint(i/4, 128 - (ADCbuffer[i] >> 0));
 			}
 
 			if ((i % N_ADC_PINS) == 3) { // Vref

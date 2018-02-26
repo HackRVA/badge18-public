@@ -2,20 +2,35 @@
 #include "adc.h"
 #include "rf.h"
 
+// see adc.h for HZ_ enums
+const struct sample_info_t samples_info[] = {
+   //{HZ_1000,  "1 ", 28, 124},
+   {HZ_1000,  "1 ", 30, 118},
+   {HZ_8000,  "8 ", 27, 15},
+   {HZ_32000, "16 ", 27,  7},
+   {HZ_48000, "32 ", 27,  3},
+   {HZ_96000, "48 ", 27,  1},
+   {HZ_96000, "96 ", 14,  1}
+};
+
 unsigned int volatile ADCbufferCnt = 0;
 unsigned int volatile ADCbufferCntMark = 0;
 
 // results copied to share with the user app
 volatile unsigned short ADCbuffer[ADC_BUFFER_SIZE+8]; // extra 8 bytes so interrupts have a place to store 
 
-void adc_init()
+void ADC_init(unsigned char sample_hz_num) // HZ_1000 ... (HZ_LAST-1)
 {
    int i;
+
+   IEC0bits.AD1IE = 0; // disable int to reconfig
+   AD1CON1bits.ON = 0;   // adc off
+   RF_POWER = 1; // turn on RF
+
    // MIC_INPUT RC3 / AN12
    // TRISCbits.TRISC3 = 1; // mic is an analog input
 
    // RF_IN     RB1 / AN3
-   RF_POWER = 1; // turn on RF
    // TRISBbits.TRISB1 = 1; // RF input is analog
 
    // touch in  RB2 / AN4

@@ -1,5 +1,0 @@
-
- #define ADC_HZ (8000)                        // ADC sample rate, Hz (all channels sampled, works over range of 232 Hz to 116 kHz)
- #define ADC_CHANNELS    (2)            // number of ADC channels to be read
- #define SAMC_VALUE        (31)        // sample time (Tad units)
- #define ADCS_VALUE        ((FOSC/((2*12)*(SAMC_VALUE+12)/12)/ADC_HZ/ADC_CHANNELS-1))    // rounds frequency up

@@ -829,7 +829,7 @@ void APP_Tasks ( void )
     vTaskDelay(2000 / portTICK_PERIOD_MS);
     led(0,0,0);
 
-    adc_init();
+    ADC_init(0); // slowest sample rate
 //    flare_leds(5);
 
     //test_task(NULL);
