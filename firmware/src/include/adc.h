@@ -11,16 +11,12 @@
    mic, RF and touch
 */
 
-#define N_ADC_PINS 3
+#define N_ADC_PINS 4
 
-// 128 = one LCD scanline
-//#define ADC_BUFFER_SIZE 128 * N_ADC_PINS
-#define ADC_BUFFER_SAMPLES 16
-#define ADC_BUFFER_MULTIPLE (ADC_BUFFER_SAMPLES * N_ADC_PINS)
-
-// one hidden multiple for when user is processing
-#define ADC_BUFFER_SIZE ((128 / 16) * ADC_BUFFER_MULTIPLE)
-#define ADC_BUFFER_SIZE_EXTRA (ADC_BUFFER_SIZE + ADC_BUFFER_MULTIPLE)
+// one LCD scanline
+#define ADC_BYTES_PER_SAMPLE N_ADC_PINS
+#define ADC_SAMPLES_PER_LINE 128
+#define ADC_BUFFER_SIZE (ADC_SAMPLES_PER_LINE * ADC_BYTES_PER_SAMPLE)
 
 extern volatile unsigned short ADCbuffer[];
 extern volatile unsigned int ADCbufferCnt;

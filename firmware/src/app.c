@@ -534,6 +534,9 @@ void APP_Initialize ( void )
     SYS_PORTS_PinDirectionSelect(PORTS_ID_0, SYS_PORTS_DIRECTION_INPUT, PORT_CHANNEL_A, PORTS_BIT_POS_1);  //down
 
     CFGCONbits.JTAGEN = 0;
+    ANSELA = 0x00;
+    ANSELB = 0x00;
+    ANSELC = 0x00;
 
     // 2018 audio bridge driver. 
     // real audio chips are expensive and complicated, so this use a full bridge motor controller
@@ -827,7 +830,7 @@ void APP_Tasks ( void )
     led(0,0,0);
 
     adc_init();
-    flare_leds(5);
+//    flare_leds(5);
 
     //test_task(NULL);
     //button_task(NULL);

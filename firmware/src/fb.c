@@ -445,8 +445,8 @@ void FbFilledRectangle(unsigned char width, unsigned char height)
 
 void FbPoint(unsigned char x, unsigned char y)
 {
-    if (x >= LCD_XSIZE) x = LCD_XSIZE;
-    if (y >= LCD_YSIZE) y = LCD_YSIZE;
+    if (x >= LCD_XSIZE) x = LCD_XSIZE-1;
+    if (y >= LCD_YSIZE) y = LCD_YSIZE-1;
 
     BUFFER(y * LCD_XSIZE + x) = G_Fb.color;
 

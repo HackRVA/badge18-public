@@ -590,7 +590,7 @@ void menu_and_manage_task(void *p_arg){
 	static unsigned char fcnt=0;
 
 	fcnt++;
-	flare_leds(fcnt >> 6);
+//	flare_leds(fcnt >> 6);
         switch(idle_state){
             case AWAKE:
                 // If enough time has past, turn off stuff and go to low power state

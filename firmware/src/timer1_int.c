@@ -106,7 +106,7 @@ unsigned char G_halfCount = 0;
   max 2000 short burst/second
   with burst > 70 cycle needs game of 1.2 * burst len
 */
-void __ISR(_TIMER_2_VECTOR, IPL2) Timer2Handler(void)
+void __ISR(_TIMER_2_VECTOR, IPL2SOFT) Timer2Handler(void)
 {
    void do_audio();
    void do_leds();
@@ -392,6 +392,15 @@ void __ISR( _EXTERNAL_1_VECTOR, IPL6SOFT) Int1Interrupt(void)
 // audio interrupt priority 1 lowest
 void __ISR(_TIMER_4_VECTOR, IPL1SOFT) Timer4Handler(void)
 {
+   // charge touch
+//   TRISBbits.TRISB2 = 0;
+//   LATBbits.LATB2 = 1;
+//   LATBbits.LATB2 = 1;
+//   LATBbits.LATB2 = 1;
+//   LATBbits.LATB2 = 1;
+//   LATBbits.LATB2 = 0;
+//   TRISBbits.TRISB2 = 1;
+
    doAudio();
    doPWM();
    mT4ClearIntFlag(); // clear the interrupt flag

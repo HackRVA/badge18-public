@@ -14,7 +14,8 @@ join (
    select 1000 as adc_hz union
 --   select 4000 as adc_hz union
 --   select 8000 as adc_hz union
-   select 32000 as adc_hz union
+   select 16000 as adc_hz union
+--   select 32000 as adc_hz union
    select 48000 as adc_hz union
    select 96000 as adc_hz
 ) ADC_HZ
