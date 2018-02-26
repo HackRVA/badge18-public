@@ -36,12 +36,12 @@ void adc_task(void* p_arg) {
                 FbColor(WHITE);
 		FbMove(10,10);
 
-		strcpy(title, "kHZ left-right ");
+		strcpy(title, "kHZ ");
 		strcat(title, samples_info[hz_num].name);
 
 		ADC_init(hz_num); // slowest
 
-		FbWriteLine("ADC");
+		FbWriteLine(title);
                 FbSwapBuffers();
                 break;
 

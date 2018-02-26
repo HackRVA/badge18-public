@@ -4,12 +4,12 @@
 
 // see adc.h for HZ_ enums
 const struct sample_info_t samples_info[] = {
-   //{HZ_1000,  "1 ", 28, 124},
+   //{HZ_1000,  "1 ", 28, 124}, // also work
    {HZ_1000,  "1 ", 30, 118},
    {HZ_8000,  "8 ", 27, 15},
-   {HZ_32000, "16 ", 27,  7},
-   {HZ_48000, "32 ", 27,  3},
-   {HZ_96000, "48 ", 27,  1},
+   {HZ_16000, "16 ", 27,  7},
+   {HZ_32000, "32 ", 27,  3},
+   {HZ_64000, "64 ", 27,  1},
    {HZ_96000, "96 ", 14,  1}
 };
 
@@ -19,7 +19,7 @@ unsigned int volatile ADCbufferCntMark = 0;
 // results copied to share with the user app
 volatile unsigned short ADCbuffer[ADC_BUFFER_SIZE+8]; // extra 8 bytes so interrupts have a place to store 
 
-void ADC_init(unsigned char sample_hz_num) // HZ_1000 ... (HZ_LAST-1)
+void ADC_init(unsigned char hz_num) // HZ_1000 ... (HZ_LAST-1)
 {
    int i;
 
@@ -55,8 +55,10 @@ void ADC_init(unsigned char sample_hz_num) // HZ_1000 ... (HZ_LAST-1)
    AD1CON2bits.ALTS = 0; // don't alternate between mux A/B for sample. used for differential IO
 
    AD1CON3bits.ADRC = 0; // PBCLK. clock source is FRC or PBCLK
-   AD1CON3bits.SAMC = 31; // Tad = 1..31
-   AD1CON3bits.ADCS = 154; // PB * 8 needed for autoconvert. conversion clock select
+//   AD1CON3bits.SAMC = 31; // Tad = 1..31
+//   AD1CON3bits.ADCS = 154; // PB * 8 needed for autoconvert. conversion clock select
+   AD1CON3bits.SAMC = samples_info[hz_num].SAMC; // Tad = 1..31
+   AD1CON3bits.ADCS = samples_info[hz_num].ADCS; // PB * 8 needed for autoconvert. conversion clock select
 
    AD1CHSbits.CH0NB = 0; // pos channel select not use with scanning
    AD1CHSbits.CH0SB = 0b0000; // not use with scanning

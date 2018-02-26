@@ -21,17 +21,18 @@
 void ADC_init(unsigned char sample_rate);
 
 struct sample_info_t {
-   int hz; // see list below
+   unsigned char hz; // see list below
    char name[8]; // human name
-   int SAMC;
-   int ADCS;
+   unsigned char SAMC;
+   unsigned char ADCS;
 } sample_info_t;
 
 enum SAMPLE_HZ {
    HZ_1000,
    HZ_8000,
+   HZ_16000,
    HZ_32000,
-   HZ_48000,
+   HZ_64000,
    HZ_96000,
    HZ_LAST
 };
