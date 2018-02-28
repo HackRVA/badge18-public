@@ -43,6 +43,9 @@ from (
    select 40000000 as fosc
 ) FOSC
 join (
+   -- ADCS can't go this low  -- select 128 as adc_hz union
+   -- ADCS can't go this low -- select 250 as adc_hz union
+   select 500 as adc_hz union
    select 1000 as adc_hz union
    select 2000 as adc_hz union
    select 4000 as adc_hz union

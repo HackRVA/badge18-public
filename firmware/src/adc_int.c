@@ -1,6 +1,7 @@
 #include <plib.h>
 #include "adc.h"
 #include "rf.h"
+#include "timer1_int.h"
 
 // see adc.h for HZ_ enums
 const struct sample_info_t samples_info[] = {
@@ -8,6 +9,7 @@ const struct sample_info_t samples_info[] = {
 // see calc_sample_rate.sh for details
 //#define TESTONEMINUS
 #ifdef TESTONEMINUS
+   {HZ_500,  "0.5 ", 27, 248},
    {HZ_1000,  "1 ", 29, 118},
    {HZ_2000,  "2 ", 25, 60},
    {HZ_4000,  "4 ", 30, 28},
@@ -17,6 +19,7 @@ const struct sample_info_t samples_info[] = {
    {HZ_64000, "64 ", 26,  1},
    {HZ_96000, "96 ", 13,  1}
 #else
+   {HZ_500,  "0.5 ", 28, 249},
    {HZ_1000,  "1 ", 30, 118},
    {HZ_2000,  "2 ", 26, 60},
    {HZ_4000,  "4 ", 31, 28},
@@ -56,7 +59,7 @@ void ADC_init(unsigned char hz_num) // enum {HZ_1000 ... (HZ_LAST-1)}
    AD1CON2bits.OFFCAL = 0; // disable calibration mode
    AD1CON2bits.CSCNA = 1; // scan all analoginputs when auto sampling
    AD1CON2bits.BUFS = 0; // indicates which buffer is being filled
-   AD1CON2bits.SMPI = 7; // interrupt and the end of 8 samples
+   AD1CON2bits.SMPI = 7; // interrupt and the end of 8 samples, 2 of each 4 analog scans
    AD1CON2bits.BUFM = 1; // ** double buffered, one for ADC, one for copy out
    AD1CON2bits.ALTS = 0; // don't alternate between mux A/B for sample. used for differential IO
 
@@ -70,8 +73,31 @@ void ADC_init(unsigned char hz_num) // enum {HZ_1000 ... (HZ_LAST-1)}
    AD1CHSbits.CH0SA = 0b0000; // neg channel select not use with scanning
 
    // scan all flagged analog channels. low to high order into BUF[0-F]
-   // Vss=AN15 (digital ground != analog ground AVss) AN12=mic AN4=touch AN3 == RF
-   AD1CSSLbits.CSSL = 0b1001000000011000; // scan bit mask
+   if (G_led_input_hack) {
+	// RB3=green, RC0 == red, RC1= blue
+	ANSELBbits.ANSB3 = 1; 
+	TRISBbits.TRISB3 = 1; 
+	ANSELCbits.ANSC0 = 1;
+	TRISCbits.TRISC0 = 1; 
+	ANSELCbits.ANSC1 = 1;
+	TRISCbits.TRISC1 = 1; 
+
+	// Vss=AN15 (digital ground != analog ground AVss) AN12=mic AN4=touch AN3 == RF
+	// AN5,6,7 LEDS
+	AD1CSSLbits.CSSL = 0b1001000011100000; // scan bit mask
+   } else {
+	// Vss=AN15 (digital ground != analog ground AVss) AN12=mic AN4=touch AN3 == RF
+	ANSELBbits.ANSB3 = 0; // not analog
+	TRISBbits.TRISB3 = 0; // output
+	ANSELCbits.ANSC0 = 0;
+	TRISCbits.TRISC0 = 0; 
+	ANSELCbits.ANSC1 = 0;
+	TRISCbits.TRISC1 = 0; 
+
+	// Vss=AN15 (digital ground != analog ground AVss) AN12=mic AN4=touch AN3 == RF
+	// AN5=RB3=green, AN6=RC0 == red, AN7=RC1= blue
+	AD1CSSLbits.CSSL = 0b1001000000011000; // scan bit mask
+   }
    
    IPC5bits.AD1IP = 5; // priority 5
    IPC5bits.AD1IS = 0;  // sub pri. 0 // No need for sub bcs no shared interrupts right now

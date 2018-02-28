@@ -406,6 +406,8 @@ void __ISR(_TIMER_4_VECTOR, IPL1SOFT) Timer4Handler(void)
    mT4ClearIntFlag(); // clear the interrupt flag
 }
 
+unsigned char G_led_input_hack=0;
+
 unsigned char G_red_cnt=0;
 unsigned char G_red_pwm=0;
 
@@ -454,6 +456,21 @@ void flare_leds(unsigned char onPWM) {
 
 void doPWM()
 {
+    G_backlight_cnt++;
+    if (G_backlight_cnt < G_backlight)
+        LATCbits.LATC9 = 1;
+    else
+        LATCbits.LATC9 = 0;
+
+    G_flare_cnt++;
+    if (G_flare_cnt < G_flare_pwm)
+        FLARE_LED = 1;
+    else
+        FLARE_LED = 0;
+
+    // LEDs are inputs
+    if (G_led_input_hack) return;
+
     /* red */
     G_red_cnt++;
     if (G_red_cnt < G_red_pwm)
@@ -481,17 +498,6 @@ void doPWM()
 
     // just let it wrap around if (G_blue_cnt == 255) G_blue_cnt = 0;
 
-    G_backlight_cnt++;
-    if (G_backlight_cnt < G_backlight)
-        LATCbits.LATC9 = 1;
-    else
-        LATCbits.LATC9 = 0;
-
-    G_flare_cnt++;
-    if (G_flare_cnt < G_flare_pwm)
-        FLARE_LED = 1;
-    else
-        FLARE_LED = 0;
 }
 
 void backlight(unsigned char bright) {
@@ -505,6 +511,7 @@ void led(unsigned char r, unsigned char g, unsigned char b){
     blue(b);
 }
 
-void micInput()
+void led_input_hack(unsigned char OnOff)
 {
+    G_led_input_hack = OnOff;
 }
