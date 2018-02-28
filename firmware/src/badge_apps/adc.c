@@ -8,6 +8,10 @@
 
 extern char hextab[];
 
+// exercise the ADC
+// peb 20180228
+// todo: a bigger buffer with downscaling
+
 enum adc_state {
     INIT,
     DRAW,
@@ -27,37 +31,62 @@ void adc_task(void* p_arg) {
    for(;;){
         switch(state){
             case INIT:
-		FbBackgroundColor(GREY1);
-		FbClear();
-
-                if(cnt == 5 || BUTTON_PRESSED_AND_CONSUME){
+                if (cnt == 5 || BUTTON_PRESSED_AND_CONSUME){
                     state++;
                     cnt = 0;
                 }
-                FbColor(WHITE);
-		FbMove(10,10);
-
 		// pwm can affect the ADC conversions
 		led(0,0,0);
+
+		if (DOWN_BTN_AND_CONSUME) {
+		   G_led_input_hack = !G_led_input_hack;
+		   state = INIT; // reinit app
+                   cnt = 0;
+		}
 
 		// allow hz change here
 		if (LEFT_BTN_AND_CONSUME) {
 		   hz_num--;
 		   if (hz_num < 0) hz_num = 0;
 		   state = INIT; // reinit app
+                   cnt = 0;
 		}
 
 		if (RIGHT_BTN_AND_CONSUME) {
 		   hz_num++;
 		   if (hz_num == HZ_LAST) hz_num--;
 		   state = INIT; // reinit app
+                   cnt = 0;
 		}
+		ADC_init(hz_num); // current hz_num
+
+
+		FbBackgroundColor(GREY1);
+		FbClear();
+
+                FbColor(WHITE);
+		FbMove(10,10);
+
 		strcpy(title, "kHZ ");
 		strcat(title, samples_info[hz_num].name);
+		FbWriteLine(title);
 
-		ADC_init(hz_num); // slowest
+		FbMove(10,20);
+		strcpy(title, "left/right: HZ ");
+		FbWriteLine(title);
+
+		FbMove(10,30);
+		strcpy(title, "down: mode ");
+		FbWriteLine(title);
+
+		FbMove(10,40);
+		if (G_led_input_hack)
+		   strcpy(title, "LEDS ");
+		else
+		   strcpy(title, "RF Mic touch ");
 
 		FbWriteLine(title);
+
                 FbSwapBuffers();
                 break;
 
@@ -69,17 +98,20 @@ void adc_task(void* p_arg) {
 		   hz_num--;
 		   if (hz_num < 0) hz_num = 0;
 		   state = INIT; // reinit app
+                   cnt = 0;
 		}
 
 		if (RIGHT_BTN_AND_CONSUME) {
 		   hz_num++;
 		   if (hz_num == HZ_LAST) hz_num--;
 		   state = INIT; // reinit app
+                   cnt = 0;
 		}
 
 		if (DOWN_BTN_AND_CONSUME) {
 		   G_led_input_hack = !G_led_input_hack;
 		   state = INIT; // reinit app
+                   cnt = 0;
 		}
 
 		if (ADCbufferCntMark == 0) { // has started filling buffer yet
@@ -159,6 +191,7 @@ void adc_task(void* p_arg) {
 
             case EXIT:
 		state = INIT;
+                cnt = 0;
                 returnToMenus();
                 break;
         }
