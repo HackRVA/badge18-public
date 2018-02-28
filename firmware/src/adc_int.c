@@ -56,7 +56,7 @@ void ADC_init(unsigned char hz_num) // enum {HZ_1000 ... (HZ_LAST-1)}
    AD1CON2bits.OFFCAL = 0; // disable calibration mode
    AD1CON2bits.CSCNA = 1; // scan all analoginputs when auto sampling
    AD1CON2bits.BUFS = 0; // indicates which buffer is being filled
-   AD1CON2bits.SMPI = 5; // interrupt and the end of 6 samples
+   AD1CON2bits.SMPI = 7; // interrupt and the end of 8 samples
    AD1CON2bits.BUFM = 1; // ** double buffered, one for ADC, one for copy out
    AD1CON2bits.ALTS = 0; // don't alternate between mux A/B for sample. used for differential IO
 

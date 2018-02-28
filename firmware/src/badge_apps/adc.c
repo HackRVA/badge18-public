@@ -36,6 +36,21 @@ void adc_task(void* p_arg) {
                 FbColor(WHITE);
 		FbMove(10,10);
 
+		// pwm can affect the ADC conversions
+		led(0,0,0);
+
+		// allow hz change here
+		if (LEFT_BTN_AND_CONSUME) {
+		   hz_num--;
+		   if (hz_num < 0) hz_num = 0;
+		   state = INIT; // reinit app
+		}
+
+		if (RIGHT_BTN_AND_CONSUME) {
+		   hz_num++;
+		   if (hz_num == HZ_LAST) hz_num--;
+		   state = INIT; // reinit app
+		}
 		strcpy(title, "kHZ ");
 		strcat(title, samples_info[hz_num].name);
 
@@ -48,6 +63,7 @@ void adc_task(void* p_arg) {
             case DRAW:
                 if(BUTTON_PRESSED_AND_CONSUME) state++;
 
+		// allow hz change here also
 		if (LEFT_BTN_AND_CONSUME) {
 		   hz_num--;
 		   if (hz_num < 0) hz_num = 0;
@@ -62,9 +78,11 @@ void adc_task(void* p_arg) {
 
 	if (ADCbufferCntMark == 0) { // has started filling buffer yet
 	    if (ADCbufferCnt >= ADC_BUFFER_SIZE ) { // done
-		unsigned short RFmin, RFmax, RFdelta, RFdiv;
-		unsigned short touchMin, touchMax, touchDelta, touchDiv;
-		unsigned short micMin, micMax, micDelta, micDiv;
+		unsigned short RFmin, RFmax, RFdelta, RFdiv, RFLshift, RFRshift;
+		unsigned short touchMin, touchMax, touchDelta, touchDiv, touchLshift, touchRshift;
+		unsigned short micMin, micMax, micDelta, micDiv, micLshift, micRshift;
+		unsigned char x;
+		unsigned char b;
 
 		// find min and maxes
 		RFmin = touchMin = micMin = 0xFFFF;
@@ -73,72 +91,68 @@ void adc_task(void* p_arg) {
 		for (i=0; i < ADC_BUFFER_SIZE; i+=4) {
 			if (ADCbuffer[i] < RFmin) RFmin = ADCbuffer[i];
 			if (ADCbuffer[i] > RFmax) RFmax = ADCbuffer[i];
-		}
-		for (i=1; i < ADC_BUFFER_SIZE; i+=4) {
-			if (ADCbuffer[i] < touchMin) touchMin = ADCbuffer[i];
-			if (ADCbuffer[i] > touchMax) touchMax = ADCbuffer[i];
-		}
-		for (i=2; i < ADC_BUFFER_SIZE; i+=4) {
-			if (ADCbuffer[i] < micMin) { 
-			   if (ADCbuffer[i] != 0) micMin = ADCbuffer[i]; // wtf. ignore false zeros
-			}
-			if (ADCbuffer[i] > micMax) micMax = ADCbuffer[i];
+			if (ADCbuffer[i+1] < touchMin) touchMin = ADCbuffer[i+1];
+			if (ADCbuffer[i+1] > touchMax) touchMax = ADCbuffer[i+1];
+			if (ADCbuffer[i+2] < micMin) micMin = ADCbuffer[i+2];
+			if (ADCbuffer[i+2] > micMax) micMax = ADCbuffer[i+2];
 		}
 		RFdelta = RFmax - RFmin;
 		touchDelta = touchMax - touchMin;
 		micDelta = micMax - micMin;
 
-		RFdiv = RFdelta >> 5; // RFdelta/32
-		RFdiv++;
+//		RFdiv = RFdelta >> 5; // RFdelta/32
+//		RFdiv++;
 
-		touchDiv = touchDelta >> 5;
-		touchDiv++;
+//		touchDiv = touchDelta >> 5;
+//		touchDiv++;
 
-		micDiv = micDelta >> 5;
-		micDiv++;
+//		micDiv = micDelta >> 5;
+//		micDiv++;
+
+		RFRshift = touchRshift = micRshift = 0;
+		RFLshift = touchLshift = micLshift = 0;
+		// find highest bit to for scale down
+		for (b=9; b>=5; b--) {
+		   if (RFdelta & (1<<b))    { if (RFRshift==0)    RFRshift = b-4; };
+		   if (touchDelta & (1<<b)) { if (touchRshift==0) touchRshift = b-4; };
+		   if (micDelta & (1<<b))   { if (micRshift==0)   micRshift = b-4; };
+		}
+		// find highest bit for scale up
+		for (b=4; b>2; b--) {
+		   if (RFdelta & (1<<b))    { if (RFRshift == 0)    RFLshift = 4-b; };
+		   if (touchDelta & (1<<b)) { if (touchRshift == 0) touchLshift = 4-b; };
+		   if (micDelta & (1<<b))   { if (micRshift == 0)   micLshift = 4-b; };
+		}
 
 		// the ADC samples and buffers each pin in sequence, 
 		// need to pic them apart and plot them on their own line
 		// avoid division when posible
-		for (i=0; i < ADC_BUFFER_SIZE; i+=4) { // RF
+		for (i=0,x=0; i < ADC_BUFFER_SIZE; i+=4,x++) { // RF
 			FbColor(B_RED);
-			if (touchDiv > 1)
-			   FbPoint(i/4,  32 - (ADCbuffer[i] - RFmin) / RFdiv);
-			else
-			   FbPoint(i/4,  32 - (ADCbuffer[i] - RFmin));
-		}
+			FbPoint(x,       (((ADCbuffer[i] - RFmin) << RFLshift) >> RFRshift));
 
-		for (i=1; i < ADC_BUFFER_SIZE; i+=4) { // touch
 			FbColor(GREEN);
-			if (touchDiv > 1)
-			   FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin) / touchDiv);
-			else
-			   FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin));
-		}
+			FbPoint(x,  32 + (((ADCbuffer[i+1] - touchMin) << touchLshift) >> touchRshift));
 
-		for (i=2; i < ADC_BUFFER_SIZE; i+=4) { // mic
 			FbColor(YELLOW);
-			if (micDiv > 1)
-			   FbPoint(i/4,  96 - (ADCbuffer[i] - micMin) / micDiv);
-			else
-			   FbPoint(i/4,  96 - (ADCbuffer[i] - micMin));
-		}
+			FbPoint(x,  64 + (((ADCbuffer[i+2] - micMin) << micLshift) >> micRshift));
 
-		for (i=3; i < ADC_BUFFER_SIZE; i+=4) { // AVss
 			FbColor(WHITE);
-			FbPoint(i/4, 128 - (ADCbuffer[i] >> 1));
+			FbPoint(x, 96 + (ADCbuffer[i+3] >> 2));
 		}
 
 		// handshake to empty buffer and start aquiring again
 		ADCbufferCntMark = 1; 
 
 		ADCloopCnt++;
-		if (ADCloopCnt==3) { // clear FB after a bit
-			ADCloopCnt=0;
+		// need to make this controlable from the UI
+//		if (ADCloopCnt==3) { // clear FB after a bit
+//			ADCloopCnt=0;
+//			FbSwapBuffers();
+//		}
+//		else
+//			FbPushBuffer();
 			FbSwapBuffers();
-		}
-		else
-			FbPushBuffer();
 	    }
 	}
 		break;
