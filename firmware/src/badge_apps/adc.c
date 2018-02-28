@@ -16,7 +16,7 @@ enum adc_state {
 void adc_task(void* p_arg) {
    unsigned char cnt=0;
    //const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
-   const TickType_t xDelay = 20 / portTICK_PERIOD_MS;
+   const TickType_t xDelay = 10 / portTICK_PERIOD_MS;
    static unsigned char state = INIT;
    int i, ADCloopCnt=0;
    char title[32];
@@ -48,116 +48,87 @@ void adc_task(void* p_arg) {
             case DRAW:
                 if(BUTTON_PRESSED_AND_CONSUME) state++;
 
-/*
-	if (ADCbufferCntMark == 0) { // ADC to start new buffer
-		FbColor(WHITE);
+		if (LEFT_BTN_AND_CONSUME) {
+		   hz_num--;
+		   if (hz_num < 0) hz_num = 0;
+		   state = INIT; // reinit app
+		}
 
-		FbMove(10,10);
-		unsigned char tmp[] = {
-			hextab[(ADCbuffer[0] >> 8)& 0xF], // pin1 samp1
-			hextab[(ADCbuffer[0]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[1] >> 8)& 0xF], // pin2 samp1
-			hextab[(ADCbuffer[1]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[2] >> 8)& 0xF], // pin3 samp1
-			hextab[(ADCbuffer[2]     )& 0xF],
-			'\0',
-		};
-		FbWriteLine(tmp);
+		if (RIGHT_BTN_AND_CONSUME) {
+		   hz_num++;
+		   if (hz_num == HZ_LAST) hz_num--;
+		   state = INIT; // reinit app
+		}
 
-		FbMove(10,20);
-		unsigned char tmp2[] = {
-			hextab[(ADCbuffer[3] >> 8)& 0xF],
-			hextab[(ADCbuffer[3]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[4] >> 8)& 0xF],
-			hextab[(ADCbuffer[4]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[5] >> 8)& 0xF],
-			hextab[(ADCbuffer[5]     )& 0xF],
-			'\0',
-		};
-		FbWriteLine(tmp2);
+	if (ADCbufferCntMark == 0) { // has started filling buffer yet
+	    if (ADCbufferCnt >= ADC_BUFFER_SIZE ) { // done
+		unsigned short RFmin, RFmax, RFdelta, RFdiv;
+		unsigned short touchMin, touchMax, touchDelta, touchDiv;
+		unsigned short micMin, micMax, micDelta, micDiv;
 
+		// find min and maxes
+		RFmin = touchMin = micMin = 0xFFFF;
+		RFmax = touchMax = micMax = 0x0000;
 
-		FbMove(10,40);
-		unsigned char tmp4[] = {
-			hextab[(ADCbuffer[8] >> 8)& 0xF],
-			hextab[(ADCbuffer[8]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[9] >> 8)& 0xF],
-			hextab[(ADCbuffer[9]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[10] >> 8)& 0xF],
-			hextab[(ADCbuffer[10]     )& 0xF],
-			'\0',
-		};
-		FbWriteLine(tmp4);
+		for (i=0; i < ADC_BUFFER_SIZE; i+=4) {
+			if (ADCbuffer[i] < RFmin) RFmin = ADCbuffer[i];
+			if (ADCbuffer[i] > RFmax) RFmax = ADCbuffer[i];
+		}
+		for (i=1; i < ADC_BUFFER_SIZE; i+=4) {
+			if (ADCbuffer[i] < touchMin) touchMin = ADCbuffer[i];
+			if (ADCbuffer[i] > touchMax) touchMax = ADCbuffer[i];
+		}
+		for (i=2; i < ADC_BUFFER_SIZE; i+=4) {
+			if (ADCbuffer[i] < micMin) { 
+			   if (ADCbuffer[i] != 0) micMin = ADCbuffer[i]; // wtf. ignore false zeros
+			}
+			if (ADCbuffer[i] > micMax) micMax = ADCbuffer[i];
+		}
+		RFdelta = RFmax - RFmin;
+		touchDelta = touchMax - touchMin;
+		micDelta = micMax - micMin;
 
-		FbMove(10,50);
-		unsigned char tmp5[] = {
-			hextab[(ADCbuffer[11] >> 8)& 0xF],
-			hextab[(ADCbuffer[11]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[12] >> 8)& 0xF],
-			hextab[(ADCbuffer[12]     )& 0xF],
-			' ',
-			hextab[(ADCbuffer[13] >> 8)& 0xF],
-			hextab[(ADCbuffer[13]     )& 0xF],
-			'\0',
-		};
-		FbWriteLine(tmp5);
+		RFdiv = RFdelta >> 5; // RFdelta/32
+		RFdiv++;
 
-                FbSwapBuffers();
-*/
+		touchDiv = touchDelta >> 5;
+		touchDiv++;
 
-	if (LEFT_BTN_AND_CONSUME) {
-	   hz_num--;
-	   if (hz_num < 0) hz_num = 0;
-	   state = INIT; // reinit app
-	}
+		micDiv = micDelta >> 5;
+		micDiv++;
 
-	if (RIGHT_BTN_AND_CONSUME) {
-	   hz_num++;
-	   if (hz_num == HZ_LAST) hz_num--;
-	   state = INIT; // reinit app
-	}
-
-	if (ADCbufferCntMark == 0) { // ADC to start new buffer
 		// the ADC samples and buffers each pin in sequence, 
 		// need to pic them apart and plot them on their own line
-		if (ADCbufferCnt >= ADC_BUFFER_SIZE ) { // on last buffer 
-		   for (i=0; i < ADC_BUFFER_SIZE; i++) {
-			if ((i % N_ADC_PINS) == 0) {
-			   FbColor(RED);
-			   FbPoint(i/4,  80 - (ADCbuffer[i] >> 0));
-			}
+		   for (i=0; i < ADC_BUFFER_SIZE; i+=4) { // RF
+			FbColor(RED);
+			FbPoint(i/4,  32 - (ADCbuffer[i] - RFmin) / RFdiv);
+		   }
 
-			if ((i % N_ADC_PINS) == 1) {
-			   FbColor(GREEN);
-			   FbPoint(i/4,  64 - (ADCbuffer[i] >> 0));
-			}
+		   for (i=1; i < ADC_BUFFER_SIZE; i+=4) { // touch
+			FbColor(GREEN);
+			//FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin) / touchDiv);
+			FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin) );
+		   }
 
-			if ((i % N_ADC_PINS) == 2) {
-			   FbColor(B_BLUE);
-			   FbPoint(i/4, 128 - (ADCbuffer[i] >> 0));
-			}
+		   for (i=2; i < ADC_BUFFER_SIZE; i+=4) { // mic
+			FbColor(YELLOW);
+			FbPoint(i/4,  96 - (ADCbuffer[i] - micMin) / micDiv);
+		   }
 
-			if ((i % N_ADC_PINS) == 3) { // Vref
-			   FbColor(WHITE);
-			   FbPoint(i/4, 128 - (ADCbuffer[i] >> 1));
-			}
+		   for (i=3; i < ADC_BUFFER_SIZE; i+=4) { // AVss
+			FbColor(WHITE);
+			FbPoint(i/4, 128 - (ADCbuffer[i] >> 1));
 		   }
 		   ADCbufferCntMark = 1; // handshake to empty buffer and start aquiring again
-		}
-		ADCloopCnt++;
-		if (ADCloopCnt==10) {
-                   ADCloopCnt=0;
-                   FbSwapBuffers();
-		}
-		else
-                   FbPushBuffer();
+
+		   ADCloopCnt++;
+		   if (ADCloopCnt==3) { // clear FB after a bit
+			ADCloopCnt=0;
+			FbSwapBuffers();
+		   }
+		   else
+			FbPushBuffer();
+	    }
 	}
 		break;
 

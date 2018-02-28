@@ -1,20 +1,51 @@
 #!/bin/bash
 
+# snip from "Section 17. 10-bit Analog-to-Digital Converter (ADC)"
+# named: 61104E.pdf
+
+# When the PBCLK is used as the conversion clock source, the ADRC bit = 0, the Tad is the period
+# of the PBCLK after the prescaler ADCS<7:0> bits (AD1CON3<7:0>) are applied.
+# The ADC has a maximum rate at which conversions may be completed. An Analog module clock,
+# Tad , controls the conversion timing. The analog-to-digital conversion requires 12 clock
+# periods (12 Tad ).
+# The period of the ADC conversion clock is software selected using an 8-bit counter. There are
+# 256 possible options for Tad , which are specified by the ADCS<7:0> bits (AD1CON3<7:0>).
+
+
+# install sqlite3 or use mysql/etc. to run this or just see the results down below
 cat << END | sqlite3 -column -header
+-- found in a microchip forum:
+--
 -- #define ADC_HZ (8000)                        // ADC sample rate, Hz (all channels sampled, works over range of 232 Hz to 116 kHz)
 -- #define ADC_CHANNELS    (2)            // number of ADC channels to be read
 -- #define SAMC_VALUE        (31)        // sample time (Tad units)
 -- #define ADCS_VALUE        ((FOSC/((2*12)*(SAMC_VALUE+12)/12)/ADC_HZ/ADC_CHANNELS-1))    // rounds frequency up
 
--- 12 is the absolute min sample time
+-- magic numbers:
+-- 12 is the Tad conversion time: hardware specific time for one ADC conversion to happen
 -- 2 = peripheral bus clock divider from bootload config bits
-select FOSC.*, ADC_HZ.*, CHANNELS.*, SAMC.*,
-	((fosc/((2 * 12)*(samc+12)/12)/adc_hz/chans-1)) as ADCS
+-- the rest of SAMC is used to aquire/sample the signal
+-- ADCS is the clock period calculated to make it happen in the HZ period wanted
+--
+-- if I understand this right, the goal is to get the highest
+-- SAMC (sample time) and the least rounding error on ADCS clock
+-- 
+-- -PEB 
+-- 2/27/2018
+-- 
+
+select FOSC.*, 
+	ADC_HZ.*, 
+	CHANNELS.*, 
+	SAMC.*,
+	((FOSC.fosc/((2 * 12)*(SAMC.samc+12)/12)/ADC_HZ.adc_hz/CHANNELS.chans-1)) as ADCS
 from (
    select 40000000 as fosc
 ) FOSC
 join (
    select 1000 as adc_hz union
+   select 2000 as adc_hz union
+   select 4000 as adc_hz union
    select 8000 as adc_hz union
    select 16000 as adc_hz union
    select 32000 as adc_hz union
@@ -48,13 +79,13 @@ join (
 order by fosc, chans, adc_hz, samc;
 
 -- 
--- if I understand this right, the goal is to get the highest
--- samc (sample time) and the least rounding error on ADCS
--- -PEB
+-- best rounding plucked from table below:
 -- 
--- results:
+-- fosc        adc_hz      chans       samc        ADCS      
 -- ----------  ----------  ----------  ----------  ----------
 -- * 40000000    1000        4           30.0        118.047619
+-- * 40000000    2000        4           29.0        59.9756097
+-- * 40000000    4000        4           31.0        28.0697674
 -- * 40000000    8000        4           27.0        15.0256410
 -- * 40000000    16000       4           27.0        7.01282051
 -- * 40000000    32000       4           27.0        3.00641025
@@ -80,8 +111,44 @@ order by fosc, chans, adc_hz, samc;
 -- 40000000    1000        4           27.0        127.205128
 -- 40000000    1000        4           28.0        124.0     
 -- 40000000    1000        4           29.0        120.951219
--- * 40000000    1000        4           30.0        118.047619
+-- 40000000    1000        4           30.0        118.047619
 -- 40000000    1000        4           31.0        115.279069
+-- 40000000    2000        4           4.0         155.25    
+-- 40000000    2000        4           6.0         137.888888
+-- 40000000    2000        4           8.0         124.0     
+-- 40000000    2000        4           12.0        103.166666
+-- 40000000    2000        4           14.0        95.1538461
+-- 40000000    2000        4           16.0        88.2857142
+-- 40000000    2000        4           18.0        82.3333333
+-- 40000000    2000        4           20.0        77.125    
+-- 40000000    2000        4           22.0        72.5294117
+-- 40000000    2000        4           23.0        70.4285714
+-- 40000000    2000        4           24.0        68.4444444
+-- 40000000    2000        4           25.0        66.5675675
+-- 40000000    2000        4           26.0        64.7894736
+-- 40000000    2000        4           27.0        63.1025641
+-- 40000000    2000        4           28.0        61.5      
+* -- 40000000    2000        4           29.0        59.9756097
+-- 40000000    2000        4           30.0        58.5238095
+-- 40000000    2000        4           31.0        57.1395348
+-- 40000000    4000        4           4.0         77.125    
+-- 40000000    4000        4           6.0         68.4444444
+-- 40000000    4000        4           8.0         61.5      
+-- 40000000    4000        4           12.0        51.0833333
+-- 40000000    4000        4           14.0        47.0769230
+-- 40000000    4000        4           16.0        43.6428571
+-- 40000000    4000        4           18.0        40.6666666
+-- 40000000    4000        4           20.0        38.0625   
+-- 40000000    4000        4           22.0        35.7647058
+-- 40000000    4000        4           23.0        34.7142857
+-- 40000000    4000        4           24.0        33.7222222
+-- 40000000    4000        4           25.0        32.7837837
+-- 40000000    4000        4           26.0        31.8947368
+-- 40000000    4000        4           27.0        31.0512820
+-- 40000000    4000        4           28.0        30.25     
+-- 40000000    4000        4           29.0        29.4878048
+-- 40000000    4000        4           30.0        28.7619047
+-- 40000000    4000        4           31.0        28.0697674
 -- 40000000    8000        4           4.0         38.0625   
 -- 40000000    8000        4           6.0         33.7222222
 -- 40000000    8000        4           8.0         30.25     
@@ -95,7 +162,7 @@ order by fosc, chans, adc_hz, samc;
 -- 40000000    8000        4           24.0        16.3611111
 -- 40000000    8000        4           25.0        15.8918918
 -- 40000000    8000        4           26.0        15.4473684
--- * 40000000    8000        4           27.0        15.0256410
+-- 40000000    8000        4           27.0        15.0256410
 -- 40000000    8000        4           28.0        14.625    
 -- 40000000    8000        4           29.0        14.2439024
 -- 40000000    8000        4           30.0        13.8809523
@@ -113,7 +180,7 @@ order by fosc, chans, adc_hz, samc;
 -- 40000000    16000       4           24.0        7.68055555
 -- 40000000    16000       4           25.0        7.44594594
 -- 40000000    16000       4           26.0        7.22368421
--- * 40000000    16000       4           27.0        7.01282051
+-- 40000000    16000       4           27.0        7.01282051
 -- 40000000    16000       4           28.0        6.8125    
 -- 40000000    16000       4           29.0        6.62195121
 -- 40000000    16000       4           30.0        6.44047619
@@ -131,7 +198,7 @@ order by fosc, chans, adc_hz, samc;
 -- 40000000    32000       4           24.0        3.34027777
 -- 40000000    32000       4           25.0        3.22297297
 -- 40000000    32000       4           26.0        3.11184210
--- * 40000000    32000       4           27.0        3.00641025
+-- 40000000    32000       4           27.0        3.00641025
 -- 40000000    32000       4           28.0        2.90625   
 -- 40000000    32000       4           29.0        2.81097560
 -- 40000000    32000       4           30.0        2.72023809
@@ -149,7 +216,7 @@ order by fosc, chans, adc_hz, samc;
 -- 40000000    64000       4           24.0        1.17013888
 -- 40000000    64000       4           25.0        1.11148648
 -- 40000000    64000       4           26.0        1.05592105
--- * 40000000    64000       4           27.0        1.00320512
+-- 40000000    64000       4           27.0        1.00320512
 -- 40000000    64000       4           28.0        0.953125  
 -- 40000000    64000       4           29.0        0.90548780
 -- 40000000    64000       4           30.0        0.86011904
@@ -158,7 +225,7 @@ order by fosc, chans, adc_hz, samc;
 -- 40000000    96000       4           6.0         1.89351851
 -- 40000000    96000       4           8.0         1.60416666
 -- 40000000    96000       4           12.0        1.17013888
--- * 40000000    96000       4           14.0        1.00320512
+-- 40000000    96000       4           14.0        1.00320512
 -- 40000000    96000       4           16.0        0.86011904
 -- 40000000    96000       4           18.0        0.73611111
 -- 40000000    96000       4           20.0        0.62760416

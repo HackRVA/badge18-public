@@ -3,6 +3,7 @@
 #include "assets.h"
 #include "S6B33.h"
 #include "assetList.h"
+#include "timer1_int.h"
 #include "audio.h" // pin defs
 
 /**
@@ -11,10 +12,6 @@
     paul@killercats.com
     4/2015
 */
-
-extern void red(int val);
-extern void green(int val);
-extern void blue(int val);
 
 /* 
    255 = no asset active
@@ -238,8 +235,9 @@ void doAudio()
    G_duration_cnt++;
 
    if ((G_duration_cnt != G_duration) || G_hold_note) {
-       if (G_freq_cnt == G_freq)  {
-          G_freq_cnt = 0;
+	if (G_freq_cnt == G_freq)  {
+	   phase = !phase;
+           G_freq_cnt = 0;
 	   /* drive alternately */
 	   if (phase) {
 		AUDIO_PHASE1 = 1;
@@ -250,20 +248,39 @@ void doAudio()
 		AUDIO_PHASE2 = 1;
 	   }
 
+//	  phase = !phase;
+	}
+	else {
 	   phase = !phase;
-       }
-       else {
-          AUDIO_PHASE1 = 0; // off
-          AUDIO_PHASE2 = 0; // off
-       }
+	   if (G_freq_cnt == 1) { // end of not
+		if (phase) {
+		   AUDIO_PHASE1 = 1;
+		   AUDIO_PHASE2 = 0;
+		}
+		else {
+		   AUDIO_PHASE1 = 0;
+		   AUDIO_PHASE2 = 1;
+		}
+//          AUDIO_PHASE1 = 0; // off
+//          AUDIO_PHASE2 = 0; // off
+	    }
+	}
    }
    else {
-       G_duration = 0;
+	int delay;
 
-       AUDIO_PHASE1 = 0; // off
-       AUDIO_PHASE2 = 0; // off
+	G_duration = 0;
 
-       if (G_audioAssetId != 255) assetList[G_audioAssetId].datacb(G_audioAssetId, G_audioFrame) ; /* callback routine */
+        for (delay=0; delay<30; delay++) {
+	   AUDIO_PHASE1 = 1; // active breaking on the full bridge
+	   AUDIO_PHASE2 = 1; // active breaking on the full bridge
+	}
+
+	AUDIO_PHASE1 = 0; // off
+	AUDIO_PHASE2 = 0; // off
+	phase = 0;
+
+	if (G_audioAssetId != 255) assetList[G_audioAssetId].datacb(G_audioAssetId, G_audioFrame) ; /* callback routine */
    }
    G_audioFrame++;
 }
@@ -372,9 +389,9 @@ void nextMIDI_cb(unsigned char assetId, int frame)
    G_freq_cnt = 0;
 
    if (frame == 0) {
-	   G_freq = 0;
-	   G_duration = 0;
-	   G_currentNote = 0;
+	  G_freq = 0;
+	  G_duration = 0;
+	  G_currentNote = 0;
    } 
 
    if (G_currentNote < assetList[assetId].x) {
@@ -398,7 +415,7 @@ void nextMIDI_cb(unsigned char assetId, int frame)
    else {
 	G_freq = 0;
 	G_duration = 0;
-	G_currentNote = 0;	  /* reset for next asset */
+	G_currentNote = 0;	 /* reset for next asset */
 	G_audioAssetId = 255; /* clear curent asset */
    }
 }

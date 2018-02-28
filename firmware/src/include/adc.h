@@ -29,6 +29,8 @@ struct sample_info_t {
 
 enum SAMPLE_HZ {
    HZ_1000,
+   HZ_2000,
+   HZ_4000,
    HZ_8000,
    HZ_16000,
    HZ_32000,

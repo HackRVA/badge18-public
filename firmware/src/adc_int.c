@@ -4,39 +4,45 @@
 
 // see adc.h for HZ_ enums
 const struct sample_info_t samples_info[] = {
-   //{HZ_1000,  "1 ", 28, 124}, // also work
+
+// see calc_sample_rate.sh for details
+//#define TESTONEMINUS
+#ifdef TESTONEMINUS
+   {HZ_1000,  "1 ", 29, 118},
+   {HZ_2000,  "2 ", 25, 60},
+   {HZ_4000,  "4 ", 30, 28},
+   {HZ_8000,  "8 ", 26, 15},
+   {HZ_16000, "16 ", 26,  7},
+   {HZ_32000, "32 ", 26,  3},
+   {HZ_64000, "64 ", 26,  1},
+   {HZ_96000, "96 ", 13,  1}
+#else
    {HZ_1000,  "1 ", 30, 118},
+   {HZ_2000,  "2 ", 26, 60},
+   {HZ_4000,  "4 ", 31, 28},
    {HZ_8000,  "8 ", 27, 15},
    {HZ_16000, "16 ", 27,  7},
    {HZ_32000, "32 ", 27,  3},
    {HZ_64000, "64 ", 27,  1},
    {HZ_96000, "96 ", 14,  1}
+#endif
 };
 
+// compiler: because of interrupts, dont optimize and think these don't change
 unsigned int volatile ADCbufferCnt = 0;
 unsigned int volatile ADCbufferCntMark = 0;
 
 // results copied to share with the user app
-volatile unsigned short ADCbuffer[ADC_BUFFER_SIZE+8]; // extra 8 bytes so interrupts have a place to store 
+volatile unsigned short ADCbuffer[ADC_BUFFER_SIZE+8]; // extra 8 bytes so interrupts have a place to store when full
 
-void ADC_init(unsigned char hz_num) // HZ_1000 ... (HZ_LAST-1)
+void ADC_init(unsigned char hz_num) // enum {HZ_1000 ... (HZ_LAST-1)}
 {
    int i;
 
    IEC0bits.AD1IE = 0; // disable int to reconfig
-   AD1CON1bits.ON = 0;   // adc off
+   AD1CON1bits.ON = 0; // adc off
    RF_POWER = 1; // turn on RF
 
-   // MIC_INPUT RC3 / AN12
-   // TRISCbits.TRISC3 = 1; // mic is an analog input
-
-   // RF_IN     RB1 / AN3
-   // TRISBbits.TRISB1 = 1; // RF input is analog
-
-   // touch in  RB2 / AN4
-   // TRISBbits.TRISB2 = 1; // touch pad input
-
-           
    IEC0bits.AD1IE = 0; // disable interrupt
    IFS0bits.AD1IF = 0; // clear flag
 
@@ -55,21 +61,20 @@ void ADC_init(unsigned char hz_num) // HZ_1000 ... (HZ_LAST-1)
    AD1CON2bits.ALTS = 0; // don't alternate between mux A/B for sample. used for differential IO
 
    AD1CON3bits.ADRC = 0; // PBCLK. clock source is FRC or PBCLK
-//   AD1CON3bits.SAMC = 31; // Tad = 1..31
-//   AD1CON3bits.ADCS = 154; // PB * 8 needed for autoconvert. conversion clock select
-   AD1CON3bits.SAMC = samples_info[hz_num].SAMC; // Tad = 1..31
-   AD1CON3bits.ADCS = samples_info[hz_num].ADCS; // PB * 8 needed for autoconvert. conversion clock select
+   AD1CON3bits.SAMC = samples_info[hz_num].SAMC; // see calc_sample_rate.sh
+   AD1CON3bits.ADCS = samples_info[hz_num].ADCS; // see calc_sample_rate.sh
 
    AD1CHSbits.CH0NB = 0; // pos channel select not use with scanning
    AD1CHSbits.CH0SB = 0b0000; // not use with scanning
    AD1CHSbits.CH0NA = 0; // Vr-
    AD1CHSbits.CH0SA = 0b0000; // neg channel select not use with scanning
 
-   // Vref=AN15 AN12=mic AN4=touch AN3 == RF
+   // scan all flagged analog channels. low to high order into BUF[0-F]
+   // Vss=AN15 (digital ground != analog ground AVss) AN12=mic AN4=touch AN3 == RF
    AD1CSSLbits.CSSL = 0b1001000000011000; // scan bit mask
    
-   IPC5bits.AD1IP = 5; // priority 4
-   IPC5bits.AD1IS = 0;  // sub pri. 1
+   IPC5bits.AD1IP = 5; // priority 5
+   IPC5bits.AD1IS = 0;  // sub pri. 0 // No need for sub bcs no shared interrupts right now
 
    AD1CON1bits.ASAM = 1; // ** auto sample
    AD1CON1bits.ON = 1;   // adc on
@@ -83,22 +88,18 @@ void __ISR(_ADC_VECTOR, IPL5SOFT) ADC_handler(void)
 {
    int krap;
 
-//   if (ADCbufferCntMark != 0) {
-//	ADCbufferCntMark = 0; // reset handshake
-//	ADCbufferCnt = 0; // signal to empty
-//   }
-
    if (ADCbufferCnt == ADC_BUFFER_SIZE) {
-	if  (ADCbufferCntMark != 0) {
+	if  (ADCbufferCntMark != 0) { // signal from user that buffer is processed
 	   ADCbufferCntMark = 0;
 	   ADCbufferCnt = 0;
 	}
 	else
-	   ADCbufferCnt -= 8; // reset to last buffer
+	   ADCbufferCnt -= 8; // reset to last buffer. user not done
    }
 
-   // 8-15 are full (and the ADC uses only 10bits)
-   // but have to read them all or the interrupt won't clear see "persistant interrupts"
+   // note: the ADC is only 10bits. top bits are zero
+   // BUFS==1: ADC buffer 8-15 are full. 
+   // but have to read them all or the interrupt won't clear. see "persistant interrupts"
    if (AD1CON2bits.BUFS) {
 	ADCbuffer[ADCbufferCnt++] = ADC1BUF0;
 	ADCbuffer[ADCbufferCnt++] = ADC1BUF1;

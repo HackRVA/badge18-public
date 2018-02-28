@@ -67,6 +67,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "badge_menu.h"
 
 #include "audio.h"
+#include "assets.h"
 #include "mic.h"
 #include "flare_leds.h"
 #include "rf.h"
@@ -419,14 +420,24 @@ void USBDevice_Task(void* p_arg)
                             &com1ReadBuffer, 1,
                             USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
 
-//                        FbClear();
-//                        FbMove(16, 32);
-//                        FbColor(GREEN);
-//                        FbWriteLine("com2: ");
-//                        FbWriteLine(com1ReadBuffer);
-//                        FbSwapBuffers();
+			{ // play on either com port
+			   static unsigned short freq=150;
+			   static unsigned short dur=2000;
 
+			   if (com1ReadBuffer[0] == '<') dur -= 256;
+			   if (com1ReadBuffer[0] == '>') dur += 256;
 
+			   if (com1ReadBuffer[0] == 'q') freq = 512;
+			   if (com1ReadBuffer[0] == 'w') freq = 256;
+			   if (com1ReadBuffer[0] == 'e') freq = 128;
+			   if (com1ReadBuffer[0] == 'r') freq = 64;
+			   if (com1ReadBuffer[0] == 't') freq = 32;
+			   if (com1ReadBuffer[0] == 'y') freq = 16;
+			   if (com1ReadBuffer[0] == 'u') freq = 8;
+			   if (com1ReadBuffer[0] == 'i') freq = 4;
+			   if (com1ReadBuffer[0] == 'j') freq = 2; // this sounds a mechanically bad 
+			   setNote(freq, dur);
+			}
                         break;
                     case USBDEVICETASK_READDONECOM2_EVENT:
                         /* Send the received data to COM1 */
@@ -434,15 +445,25 @@ void USBDevice_Task(void* p_arg)
                             &com2ReadBuffer, 1,
                             USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
 
-//                        FbClear();
-//                        FbMove(16, 48);
-//                        FbColor(RED);
-//                        FbWriteLine("com1: ");
-//                        FbWriteLine(com2ReadBuffer);
-//                        FbSwapBuffers();
+			{ // play on either com port
+			   static unsigned short freq=150;
+			   static unsigned short dur=2000;
 
+			   if (com1ReadBuffer[0] == '<') dur -= 256;
+			   if (com1ReadBuffer[0] == '>') dur += 256;
 
-                         break;
+			   if (com1ReadBuffer[0] == 'q') freq = 512;
+			   if (com1ReadBuffer[0] == 'w') freq = 256;
+			   if (com1ReadBuffer[0] == 'e') freq = 128;
+			   if (com1ReadBuffer[0] == 'r') freq = 64;
+			   if (com1ReadBuffer[0] == 't') freq = 32;
+			   if (com1ReadBuffer[0] == 'y') freq = 16;
+			   if (com1ReadBuffer[0] == 'u') freq = 8;
+			   if (com1ReadBuffer[0] == 'i') freq = 4;
+			   if (com1ReadBuffer[0] == 'j') freq = 2; // this sounds a mechanically bad 
+			   setNote(freq, dur);
+			}
+                        break;
                     case USBDEVICETASK_WRITEDONECOM1_EVENT:
                         /* Schedule a CDC read on COM2 */
                         USB_DEVICE_CDC_Read(1,&COM2Read_Handle,
