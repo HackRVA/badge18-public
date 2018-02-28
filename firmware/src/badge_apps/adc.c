@@ -99,34 +99,45 @@ void adc_task(void* p_arg) {
 
 		// the ADC samples and buffers each pin in sequence, 
 		// need to pic them apart and plot them on their own line
-		   for (i=0; i < ADC_BUFFER_SIZE; i+=4) { // RF
-			FbColor(RED);
-			FbPoint(i/4,  32 - (ADCbuffer[i] - RFmin) / RFdiv);
-		   }
+		// avoid division when posible
+		for (i=0; i < ADC_BUFFER_SIZE; i+=4) { // RF
+			FbColor(B_RED);
+			if (touchDiv > 1)
+			   FbPoint(i/4,  32 - (ADCbuffer[i] - RFmin) / RFdiv);
+			else
+			   FbPoint(i/4,  32 - (ADCbuffer[i] - RFmin));
+		}
 
-		   for (i=1; i < ADC_BUFFER_SIZE; i+=4) { // touch
+		for (i=1; i < ADC_BUFFER_SIZE; i+=4) { // touch
 			FbColor(GREEN);
-			//FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin) / touchDiv);
-			FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin) );
-		   }
+			if (touchDiv > 1)
+			   FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin) / touchDiv);
+			else
+			   FbPoint(i/4,  64 - (ADCbuffer[i] - touchMin));
+		}
 
-		   for (i=2; i < ADC_BUFFER_SIZE; i+=4) { // mic
+		for (i=2; i < ADC_BUFFER_SIZE; i+=4) { // mic
 			FbColor(YELLOW);
-			FbPoint(i/4,  96 - (ADCbuffer[i] - micMin) / micDiv);
-		   }
+			if (micDiv > 1)
+			   FbPoint(i/4,  96 - (ADCbuffer[i] - micMin) / micDiv);
+			else
+			   FbPoint(i/4,  96 - (ADCbuffer[i] - micMin));
+		}
 
-		   for (i=3; i < ADC_BUFFER_SIZE; i+=4) { // AVss
+		for (i=3; i < ADC_BUFFER_SIZE; i+=4) { // AVss
 			FbColor(WHITE);
 			FbPoint(i/4, 128 - (ADCbuffer[i] >> 1));
-		   }
-		   ADCbufferCntMark = 1; // handshake to empty buffer and start aquiring again
+		}
 
-		   ADCloopCnt++;
-		   if (ADCloopCnt==3) { // clear FB after a bit
+		// handshake to empty buffer and start aquiring again
+		ADCbufferCntMark = 1; 
+
+		ADCloopCnt++;
+		if (ADCloopCnt==3) { // clear FB after a bit
 			ADCloopCnt=0;
 			FbSwapBuffers();
-		   }
-		   else
+		}
+		else
 			FbPushBuffer();
 	    }
 	}
