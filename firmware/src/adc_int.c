@@ -99,7 +99,7 @@ void ADC_init(unsigned char hz_num) // enum {HZ_1000 ... (HZ_LAST-1)}
 	AD1CSSLbits.CSSL = 0b1001000000011000; // scan bit mask
    }
    
-   IPC5bits.AD1IP = 5; // priority 5
+   IPC5bits.AD1IP = 4; // priority 4
    IPC5bits.AD1IS = 0;  // sub pri. 0 // No need for sub bcs no shared interrupts right now
 
    AD1CON1bits.ASAM = 1; // ** auto sample
@@ -110,7 +110,7 @@ void ADC_init(unsigned char hz_num) // enum {HZ_1000 ... (HZ_LAST-1)}
 
 // {IPL4}SOFT == overwritten registers are shadow by software. 
 // Some pic32 have shadow regs. for interrupts for speed purposes
-void __ISR(_ADC_VECTOR, IPL5SOFT) ADC_handler(void)
+void __ISR(_ADC_VECTOR, IPL4SOFT) ADC_handler(void)
 {
    int krap;
 

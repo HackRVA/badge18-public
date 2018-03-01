@@ -518,6 +518,8 @@ struct menu_t main_m[] = {
 //#define QC_FIRST
 //#define DO_BOOT_SPLASH
 //#define DEBUG_PRINT_TO_CDC
+
+// speed up flashing
 enum badge_idle_state{
     AWAKE,
     ENTER_SLEEP,
@@ -527,7 +529,10 @@ enum badge_idle_state{
     WAKEUP
 };
 
+#define NOSCREENSAVER
+#ifndef NOSCREENSAVER
 extern unsigned char stop_screensaver;
+#endif
 
 void menu_and_manage_task(void *p_arg){
 
@@ -539,7 +544,9 @@ void menu_and_manage_task(void *p_arg){
     struct menu_t *prev_selected_menu = NULL;
     unsigned char idle_state = AWAKE;
     //led(100, 0, 0);
+#ifndef NOSCREENSAVER
     stop_screensaver = 0;
+#endif
     
     G_currMenu = main_m;
     G_selectedMenu = &main_m[0];
@@ -592,6 +599,7 @@ void menu_and_manage_task(void *p_arg){
 	fcnt++;
 //	flare_leds(fcnt >> 6);
         switch(idle_state){
+#ifndef NOSCREENSAVER
             case AWAKE:
                 // If enough time has past, turn off stuff and go to low power state
                 if(TIME_SINCE_LAST_INPUT > TIME_BEFORE_SLEEP && xHandle == NULL){
@@ -678,6 +686,7 @@ void menu_and_manage_task(void *p_arg){
                     idle_state = ENTER_SLEEP;
                 }
                 break;
+#endif
             case WAKEUP:
                 // turn on backlight and go to awake mode
                 backlight(G_sysData.backlight);

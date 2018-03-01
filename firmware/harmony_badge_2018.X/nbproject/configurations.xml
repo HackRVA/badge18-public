@@ -37,11 +37,7 @@
         <itemPath>../src/include/timer1_int.h</itemPath>
         <itemPath>../src/include/flash.h</itemPath>
         <itemPath>../src/include/settings.h</itemPath>
-        <itemPath>../src/include/flash_test.h</itemPath>
-        <itemPath>../src/include/badgeybird_img.h</itemPath>
-        <itemPath>../src/include/binvad.h</itemPath>
         <itemPath>../src/include/debug.h</itemPath>
-        <itemPath>../src/include/lander.h</itemPath>
       </logicalFolder>
       <logicalFolder name="bsp" displayName="bsp" projectFiles="true">
       </logicalFolder>
@@ -167,21 +163,8 @@
                    projectFiles="true">
       <logicalFolder name="app" displayName="app" projectFiles="true">
         <logicalFolder name="f2" displayName="badge_apps" projectFiles="true">
-          <itemPath>../src/badge_apps/hello_world_app.c</itemPath>
-          <itemPath>../src/badge_apps/badgey_bird.c</itemPath>
-          <itemPath>../src/badge_apps/badgelandia.c</itemPath>
-          <itemPath>../src/badge_apps/screensaver.c</itemPath>
-          <itemPath>../src/badge_apps/groundwar.c</itemPath>
-          <itemPath>../src/badge_apps/boot_splash.c</itemPath>
           <itemPath>../src/badge_apps/blinkenlights.c</itemPath>
           <itemPath>../src/badge_apps/conductor.c</itemPath>
-          <itemPath>../src/badge_apps/dice_roll.c</itemPath>
-          <itemPath>../src/badge_apps/flash_test.c</itemPath>
-          <itemPath>../src/badge_apps/badge_tutorial.c</itemPath>
-          <itemPath>../src/badge_apps/star_shooter.c</itemPath>
-          <itemPath>../src/badge_apps/udraw.c</itemPath>
-          <itemPath>../src/badge_apps/administrator.c</itemPath>
-          <itemPath>../src/badge_apps/lander.c</itemPath>
           <itemPath>../src/badge_apps/adc.c</itemPath>
         </logicalFolder>
         <logicalFolder name="f1" displayName="system_config" projectFiles="true">
@@ -217,7 +200,6 @@
         <itemPath>../src/assets.c</itemPath>
         <itemPath>../src/fb.c</itemPath>
         <itemPath>../src/S6B33.c</itemPath>
-        <itemPath>../src/rgb_led.c</itemPath>
         <itemPath>../src/badge_menu.c</itemPath>
         <itemPath>../src/buttons.c</itemPath>
         <itemPath>../src/utils.c</itemPath>

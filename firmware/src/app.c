@@ -427,15 +427,16 @@ void USBDevice_Task(void* p_arg)
 			   if (com1ReadBuffer[0] == '<') dur -= 256;
 			   if (com1ReadBuffer[0] == '>') dur += 256;
 
-			   if (com1ReadBuffer[0] == 'q') freq = 512;
-			   if (com1ReadBuffer[0] == 'w') freq = 256;
-			   if (com1ReadBuffer[0] == 'e') freq = 128;
-			   if (com1ReadBuffer[0] == 'r') freq = 64;
-			   if (com1ReadBuffer[0] == 't') freq = 32;
-			   if (com1ReadBuffer[0] == 'y') freq = 16;
-			   if (com1ReadBuffer[0] == 'u') freq = 8;
-			   if (com1ReadBuffer[0] == 'i') freq = 4;
-			   if (com1ReadBuffer[0] == 'j') freq = 2; // this sounds a mechanically bad 
+			   if (com1ReadBuffer[0] == 'q') freq = 1024;
+			   if (com1ReadBuffer[0] == 'w') freq = 512;
+			   if (com1ReadBuffer[0] == 'e') freq = 256;
+			   if (com1ReadBuffer[0] == 'r') freq = 128;
+			   if (com1ReadBuffer[0] == 't') freq = 64;
+			   if (com1ReadBuffer[0] == 'y') freq = 32;
+			   if (com1ReadBuffer[0] == 'u') freq = 16;
+			   if (com1ReadBuffer[0] == 'i') freq = 8;
+			   if (com1ReadBuffer[0] == 'o') freq = 4;
+			   if (com1ReadBuffer[0] == 'p') freq = 2; // this sounds a mechanically bad 
 			   setNote(freq, dur);
 			}
                         break;
@@ -452,15 +453,16 @@ void USBDevice_Task(void* p_arg)
 			   if (com1ReadBuffer[0] == '<') dur -= 256;
 			   if (com1ReadBuffer[0] == '>') dur += 256;
 
-			   if (com1ReadBuffer[0] == 'q') freq = 512;
-			   if (com1ReadBuffer[0] == 'w') freq = 256;
-			   if (com1ReadBuffer[0] == 'e') freq = 128;
-			   if (com1ReadBuffer[0] == 'r') freq = 64;
-			   if (com1ReadBuffer[0] == 't') freq = 32;
-			   if (com1ReadBuffer[0] == 'y') freq = 16;
-			   if (com1ReadBuffer[0] == 'u') freq = 8;
-			   if (com1ReadBuffer[0] == 'i') freq = 4;
-			   if (com1ReadBuffer[0] == 'j') freq = 2; // this sounds a mechanically bad 
+			   if (com1ReadBuffer[0] == 'q') freq = 1024;
+			   if (com1ReadBuffer[0] == 'w') freq = 512;
+			   if (com1ReadBuffer[0] == 'e') freq = 256;
+			   if (com1ReadBuffer[0] == 'r') freq = 128;
+			   if (com1ReadBuffer[0] == 't') freq = 64;
+			   if (com1ReadBuffer[0] == 'y') freq = 32;
+			   if (com1ReadBuffer[0] == 'u') freq = 16;
+			   if (com1ReadBuffer[0] == 'i') freq = 8;
+			   if (com1ReadBuffer[0] == 'o') freq = 4;
+			   if (com1ReadBuffer[0] == 'p') freq = 2; // this sounds a mechanically bad 
 			   setNote(freq, dur);
 			}
                         break;
@@ -847,7 +849,7 @@ void APP_Tasks ( void )
     }
     setNote(100, 1024);
     // Wait for for things (USB) to be ready? easier debugging
-    vTaskDelay(2000 / portTICK_PERIOD_MS);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
     led(0,0,0);
 
     ADC_init(0); // slowest sample rate

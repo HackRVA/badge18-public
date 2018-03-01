@@ -31,7 +31,7 @@ void adc_task(void* p_arg) {
    for(;;){
         switch(state){
             case INIT:
-                if (cnt == 5 || BUTTON_PRESSED_AND_CONSUME){
+                if (cnt == 10 || BUTTON_PRESSED_AND_CONSUME){ // delay to read
                     state++;
                     cnt = 0;
                 }
@@ -150,6 +150,8 @@ void adc_task(void* p_arg) {
 			   if (micDelta & (1<<b))   { if (micRshift==0)   micRshift = b-4; };
 			}
 			// find highest bit for scale up
+			// if the levels are really low (b<=2) this just amplifies noise
+			// the dev version has better filtering on AVss 
 			for (b=4; b>2; b--) {
 			   if (RFdelta & (1<<b))    { if (RFRshift == 0)    RFLshift = 4-b; };
 			   if (touchDelta & (1<<b)) { if (touchRshift == 0) touchLshift = 4-b; };

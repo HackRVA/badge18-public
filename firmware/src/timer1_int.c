@@ -14,6 +14,17 @@
     4/2015
 */
 
+/*
+    2018 reworked high -> low priority
+
+    priority 6 = external int 1. IR recv. started
+    priority 5 = timer2 IR send/recv
+    priority 4 = ADC analog/digital converter
+    priority 3 = timer4 audio PWM
+    priority 2 = timer3 LED PWM
+
+*/
+
 // timer4 is PWM and audio and has priority 1 (low)
 // timer2 is IR send and has priority 2
 // ADC priority 5
@@ -21,37 +32,36 @@
 
 
 
-#define SYS_FREQ 			(40000000L)
+#define SYS_FREQ 		(40000000L)
 
-#define TOGGLES_PER_SEC		38000
-#define T2_TICK       		(SYS_FREQ/TOGGLES_PER_SEC)
-#define T2_TICK_DIV2       	(SYS_FREQ/TOGGLES_PER_SEC/2)
+#define IR_TOGGLES		38000
+#define T2_TICK       		(SYS_FREQ/IR_TOGGLES)
 
-/* for touchPad and screen compositing*/
-/* changing this number will definitely change up touchpad timings */
-#define TOUCH_TOGGLES       120
-#define T3_TICK       		(SYS_FREQ/TOUCH_TOGGLES)
+#define LED_TOGGLES		200
+#define T3_TICK       		(SYS_FREQ/LED_TOGGLES)
 
-/* same as IR for audio though */
-#define T4_TICK       		(SYS_FREQ/TOGGLES_PER_SEC)
+/* audio timer4*/
+#define AUDIO_TOGGLES		38000
+#define T4_TICK       		(SYS_FREQ/AUDIO_TOGGLES)
 
-void doPWM();
+void doLED_PWM();
 
 void timerInit(void)
 {
-    // IR send has priority 2
+    // IR input pin input uses priority 4 
+    // and flags receive timer2 to start
+
+    // timer2 = IR send
     OpenTimer2(T2_ON | T2_SOURCE_INT, T2_TICK);
-    ConfigIntTimer2(T2_INT_ON | T2_INT_PRIOR_2);
+    ConfigIntTimer2(T2_INT_ON | T2_INT_PRIOR_5);
 
-// unused
-//    OpenTimer3(T3_ON | T3_SOURCE_INT, T3_TICK);
-//    // set up the timer interrupt with a priority of 3
-//    ConfigIntTimer3(T3_INT_ON | T3_INT_PRIOR_3);
+    // timer3 = led
+    OpenTimer3(T3_ON | T3_SOURCE_INT, T3_TICK);
+    ConfigIntTimer3(T3_INT_ON | T3_INT_PRIOR_2);
 
-    // audio and PWM priority 1 lowest
+    // timer4 = audio
     OpenTimer4(T4_ON | T4_SOURCE_INT, T4_TICK);
-    // set up the timer interrupt with a priority of 1
-    ConfigIntTimer4(T4_INT_ON | T4_INT_PRIOR_1);
+    ConfigIntTimer4(T4_INT_ON | T4_INT_PRIOR_3);
 
     // enable multi-vector interrupts
     INTEnableSystemMultiVectoredInt();
@@ -98,6 +108,11 @@ unsigned char G_lastHalf = 0;
 unsigned char G_halfCount = 0;
 
 /* 
+  IR send/receive timer code
+
+  if (G_IRrecv) then do receive (triggered by ext int)
+  else if (G_IRsend) do send
+
   this code is based on RC5 timing from badge 2013
   almost certainly doesnt work for RC5 with a 38khz receiver
 
@@ -106,7 +121,7 @@ unsigned char G_halfCount = 0;
   max 2000 short burst/second
   with burst > 70 cycle needs game of 1.2 * burst len
 */
-void __ISR(_TIMER_2_VECTOR, IPL2SOFT) Timer2Handler(void)
+void __ISR(_TIMER_2_VECTOR, IPL5SOFT) Timer2Handler(void)
 {
    void do_audio();
    void do_leds();
@@ -115,7 +130,6 @@ void __ISR(_TIMER_2_VECTOR, IPL2SOFT) Timer2Handler(void)
    static unsigned char lowHalf = 1;
    static unsigned char highHalf = 1;
 
-   // LATBbits.LATB8 == DBG pin shake sensor near LCD pins
    // each timer interrupt is 1/38khz
    if (G_IRrecv == 1) {
 	if (G_bitCnt > 31) {
@@ -383,27 +397,18 @@ void __ISR( _EXTERNAL_1_VECTOR, IPL6SOFT) Int1Interrupt(void)
    IFS0bits.INT1IF = 0;
 }
 
-//void __ISR(_TIMER_3_VECTOR, IP35SOFT) Timer3Handler(void)
-//{
-//   mT3ClearIntFlag(); // clear the interrupt flag
-//   micInput();
-//}
-
-// audio interrupt priority 1 lowest
-void __ISR(_TIMER_4_VECTOR, IPL1SOFT) Timer4Handler(void)
+// audio higher than LED
+void __ISR(_TIMER_4_VECTOR, IPL3SOFT) Timer4Handler(void)
 {
-   // charge touch
-//   TRISBbits.TRISB2 = 0;
-//   LATBbits.LATB2 = 1;
-//   LATBbits.LATB2 = 1;
-//   LATBbits.LATB2 = 1;
-//   LATBbits.LATB2 = 1;
-//   LATBbits.LATB2 = 0;
-//   TRISBbits.TRISB2 = 1;
-
    doAudio();
-   doPWM();
    mT4ClearIntFlag(); // clear the interrupt flag
+}
+
+// LED PWM lowest
+void __ISR(_TIMER_3_VECTOR, IPL2SOFT) Timer3Handler(void)
+{
+   doLED_PWM();
+   mT3ClearIntFlag(); // clear the interrupt flag
 }
 
 unsigned char G_led_input_hack=0;
@@ -454,7 +459,7 @@ void flare_leds(unsigned char onPWM) {
     G_flare_cnt = 0;
 }
 
-void doPWM()
+void doLED_PWM()
 {
     G_backlight_cnt++;
     if (G_backlight_cnt < G_backlight)
