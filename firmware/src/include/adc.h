@@ -14,9 +14,10 @@
 #define N_ADC_PINS 4
 
 // one LCD scanline
-#define ADC_BYTES_PER_SAMPLE N_ADC_PINS
 #define ADC_SAMPLES_PER_LINE 128
-#define ADC_BUFFER_SIZE (ADC_SAMPLES_PER_LINE * ADC_BYTES_PER_SAMPLE)
+
+// one scanline
+#define ADC_BUFFER_SIZE (ADC_SAMPLES_PER_LINE * N_ADC_PINS)
 
 void ADC_init(unsigned char sample_rate);
 

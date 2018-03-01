@@ -84,7 +84,7 @@ void ADC_init(unsigned char hz_num) // enum {HZ_1000 ... (HZ_LAST-1)}
 
 	// Vss=AN15 (digital ground != analog ground AVss) AN12=mic AN4=touch AN3 == RF
 	// AN5,6,7 LEDS
-	AD1CSSLbits.CSSL = 0b1001000011100000; // scan bit mask
+	AD1CSSLbits.CSSL = 0b1000000011100000; // scan bit mask
    } else {
 	// Vss=AN15 (digital ground != analog ground AVss) AN12=mic AN4=touch AN3 == RF
 	ANSELBbits.ANSB3 = 0; // not analog

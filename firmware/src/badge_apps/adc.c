@@ -21,11 +21,11 @@ enum adc_state {
 void adc_task(void* p_arg) {
    unsigned char cnt=0;
    //const TickType_t xDelay = 50 / portTICK_PERIOD_MS;
-   const TickType_t xDelay = 10 / portTICK_PERIOD_MS;
+   const TickType_t xDelay = 2 / portTICK_PERIOD_MS; // not nice
    static unsigned char state = INIT;
    int i, ADCloopCnt=0;
    char title[32];
-   int hz_num=0;
+   static int hz_num=0;
 
 
    for(;;){
@@ -115,7 +115,7 @@ void adc_task(void* p_arg) {
 		}
 
 		if (ADCbufferCntMark == 0) { // has started filling buffer yet
-		    if (ADCbufferCnt >= ADC_BUFFER_SIZE ) { // done
+		    if (ADCbufferCnt >= ADC_BUFFER_SIZE ) { // ADC has filled
 			unsigned short RFmin, RFmax, RFdelta, RFdiv, RFLshift, RFRshift;
 			unsigned short touchMin, touchMax, touchDelta, touchDiv, touchLshift, touchRshift;
 			unsigned short micMin, micMax, micDelta, micDiv, micLshift, micRshift;
@@ -134,6 +134,7 @@ void adc_task(void* p_arg) {
 				if (ADCbuffer[i+1] > touchMax) touchMax = ADCbuffer[i+1];
 				if (ADCbuffer[i+2] < micMin) micMin = ADCbuffer[i+2];
 				if (ADCbuffer[i+2] > micMax) micMax = ADCbuffer[i+2];
+				// skiping 4th sample==Vss
 			}
 
 			RFdelta = RFmax - RFmin;
@@ -168,7 +169,7 @@ void adc_task(void* p_arg) {
 				FbColor(YELLOW);
 				FbPoint(x,  72 + (((ADCbuffer[i+2] - micMin) << micLshift) >> micRshift));
 	
-// dont bother unless curious
+// Vss==dont bother unless curious
 //				FbColor(WHITE);
 //				FbPoint(x, 96 + (ADCbuffer[i+3] >> 2));
 			}
@@ -176,8 +177,8 @@ void adc_task(void* p_arg) {
 			// handshake to empty buffer and start aquiring again
 			ADCbufferCntMark = 1; 
 	
-			ADCloopCnt++;
-			// need to make this controlable from the UI
+//			ADCloopCnt++;
+//			// need to make this controlable from the UI
 //			if (ADCloopCnt==3) { // clear FB after a bit
 //				ADCloopCnt=0;
 //				FbSwapBuffers();
