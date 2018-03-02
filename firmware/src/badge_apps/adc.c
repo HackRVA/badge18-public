@@ -26,20 +26,31 @@ void adc_task(void* p_arg) {
    int i, ADCloopCnt=0;
    char title[32];
    static int hz_num=0;
+   static int analog_src_num=0;
 
 
    for(;;){
         switch(state){
             case INIT:
                 if (cnt == 10 || BUTTON_PRESSED_AND_CONSUME){ // delay to read
-                    state++;
-                    cnt = 0;
+		   ADC_init(analog_src_num, hz_num); // init w/ current hz_num
+                   state++;
+                   cnt = 0;
                 }
-		// pwm can affect the ADC conversions
+		// pwm creates ADC noise
 		led(0,0,0);
+		backlight(255); // no backlight PWM either
+
+		if (UP_BTN_AND_CONSUME) { // changes mask
+		   analog_src_num--;
+		   if (analog_src_num<0) analog_src_num=0; 
+		   state = INIT; // reinit app
+                   cnt = 0;
+		}
 
 		if (DOWN_BTN_AND_CONSUME) {
-		   G_led_input_hack = !G_led_input_hack;
+		   analog_src_num++;
+		   if (analog_src_num == AN_LAST) analog_src_num--;
 		   state = INIT; // reinit app
                    cnt = 0;
 		}
@@ -58,8 +69,6 @@ void adc_task(void* p_arg) {
 		   state = INIT; // reinit app
                    cnt = 0;
 		}
-		ADC_init(hz_num); // current hz_num
-
 
 		FbBackgroundColor(GREY1);
 		FbClear();
@@ -76,14 +85,11 @@ void adc_task(void* p_arg) {
 		FbWriteLine(title);
 
 		FbMove(10,30);
-		strcpy(title, "down: mode ");
+		strcpy(title, "up/down: mode ");
 		FbWriteLine(title);
 
 		FbMove(10,40);
-		if (G_led_input_hack)
-		   strcpy(title, "LEDS ");
-		else
-		   strcpy(title, "RF Mic touch ");
+		strcpy(title, analog_info[analog_src_num].name);
 
 		FbWriteLine(title);
 
@@ -142,7 +148,6 @@ void adc_task(void* p_arg) {
 			micDelta = micMax - micMin;
 
 			RFRshift = touchRshift = micRshift = 0;
-			RFLshift = touchLshift = micLshift = 0;
 			// find highest bit to for scale down
 			for (b=9; b>=5; b--) {
 			   if (RFdelta & (1<<b))    { if (RFRshift==0)    RFRshift = b-4; };
@@ -150,9 +155,10 @@ void adc_task(void* p_arg) {
 			   if (micDelta & (1<<b))   { if (micRshift==0)   micRshift = b-4; };
 			}
 			// find highest bit for scale up
-			// if the levels are really low (b<=2) this just amplifies noise
+			// if the levels are really low (b<=1) this just amplifies noise
 			// the dev version has better filtering on AVss 
-			for (b=4; b>2; b--) {
+			RFLshift = touchLshift = micLshift = 0;
+			for (b=4; b>1; b--) {
 			   if (RFdelta & (1<<b))    { if (RFRshift == 0)    RFLshift = 4-b; };
 			   if (touchDelta & (1<<b)) { if (touchRshift == 0) touchLshift = 4-b; };
 			   if (micDelta & (1<<b))   { if (micRshift == 0)   micLshift = 4-b; };
@@ -161,19 +167,27 @@ void adc_task(void* p_arg) {
 			// the ADC samples and buffers each pin in sequence, 
 			// need to pic them apart and plot them on their own line
 			// avoid division when posible
-			for (i=0,x=0; i < ADC_BUFFER_SIZE; i+=4,x++) { // RF
+			for (i=0,x=0; i < ADC_BUFFER_SIZE; i+=(ADC_BUFFER_SIZE>>7),x++) { // RF 4=128 buf, 8 = 256 buffer
+			   // don't display if no signal
+//			   if ((RFLshift != 0) | (RFRshift != 0)) { 
 				FbColor(B_RED);
 				FbPoint(x,   8 +   (((ADCbuffer[i] - RFmin) << RFLshift) >> RFRshift));
+//			   }
 	
+			   // don't display if no signal
+//			   if ((touchLshift != 0) | (touchRshift != 0)) { 
 				FbColor(GREEN);
 				FbPoint(x,  40 + (((ADCbuffer[i+1] - touchMin) << touchLshift) >> touchRshift));
+//			   }
 	
+//			   if ((micLshift != 0) | (micRshift != 0)) { 
 				FbColor(YELLOW);
 				FbPoint(x,  72 + (((ADCbuffer[i+2] - micMin) << micLshift) >> micRshift));
+//			   }
 	
-// Vss==dont bother unless curious
-//				FbColor(WHITE);
-//				FbPoint(x, 96 + (ADCbuffer[i+3] >> 2));
+			   // Vss==dont bother unless curious
+			   FbColor(WHITE);
+			   FbPoint(x, 96 + (ADCbuffer[i+3] >> 1));
 			}
 	
 			// handshake to empty buffer and start aquiring again

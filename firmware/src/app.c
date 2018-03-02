@@ -667,7 +667,7 @@ void APP_Initialize ( void )
     flashInit();
     //flashErasePage();
     
-    G_sysData.backlight = 224;
+    G_sysData.backlight = 255;
     G_sysData.ledBrightness = 2;
 }
 

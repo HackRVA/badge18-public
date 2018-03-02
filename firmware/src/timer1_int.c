@@ -462,7 +462,7 @@ void flare_leds(unsigned char onPWM) {
 void doLED_PWM()
 {
     G_backlight_cnt++;
-    if (G_backlight_cnt < G_backlight)
+    if (G_backlight_cnt <= G_backlight)
         LATCbits.LATC9 = 1;
     else
         LATCbits.LATC9 = 0;
