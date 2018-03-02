@@ -107,6 +107,8 @@ unsigned char G_firstHalf = 0;
 unsigned char G_lastHalf = 0;
 unsigned char G_halfCount = 0;
 
+unsigned char G_no_LED_PWM = 0;
+
 /* 
   IR send/receive timer code
 
@@ -411,8 +413,6 @@ void __ISR(_TIMER_3_VECTOR, IPL2SOFT) Timer3Handler(void)
    mT3ClearIntFlag(); // clear the interrupt flag
 }
 
-unsigned char G_led_input_hack=0;
-
 unsigned char G_red_cnt=0;
 unsigned char G_red_pwm=0;
 
@@ -461,6 +461,8 @@ void flare_leds(unsigned char onPWM) {
 
 void doLED_PWM()
 {
+    if (G_no_LED_PWM) return;
+
     G_backlight_cnt++;
     if (G_backlight_cnt <= G_backlight)
         LATCbits.LATC9 = 1;
@@ -468,17 +470,14 @@ void doLED_PWM()
         LATCbits.LATC9 = 0;
 
     G_flare_cnt++;
-    if (G_flare_cnt < G_flare_pwm)
+    if (G_flare_cnt <= G_flare_pwm)
         FLARE_LED = 1;
     else
         FLARE_LED = 0;
 
-    // LEDs are inputs
-    if (G_led_input_hack) return;
-
     /* red */
     G_red_cnt++;
-    if (G_red_cnt < G_red_pwm)
+    if (G_red_cnt <= G_red_pwm)
         LATCbits.LATC0 = 1;
     else
         LATCbits.LATC0 = 0;
@@ -487,7 +486,7 @@ void doLED_PWM()
 
     /* Green */
     G_green_cnt++;
-    if (G_green_cnt < G_green_pwm)
+    if (G_green_cnt <= G_green_pwm)
         LATBbits.LATB3 = 1;
     else
         LATBbits.LATB3 = 0;
@@ -496,7 +495,7 @@ void doLED_PWM()
 
     /* Blue */
     G_blue_cnt++;
-    if (G_blue_cnt < G_blue_pwm)
+    if (G_blue_cnt <= G_blue_pwm)
         LATCbits.LATC1 = 1;
     else
         LATCbits.LATC1 = 0;
@@ -514,9 +513,4 @@ void led(unsigned char r, unsigned char g, unsigned char b){
     red(r);
     green(g);
     blue(b);
-}
-
-void led_input_hack(unsigned char OnOff)
-{
-    G_led_input_hack = OnOff;
 }

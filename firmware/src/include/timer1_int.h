@@ -11,6 +11,7 @@ void timerInit();
 void beginNote(unsigned short freq);
 void endNote();
 
-extern unsigned char G_led_input_hack;
+extern unsigned char G_no_LED_PWM ;
+
 #endif
 

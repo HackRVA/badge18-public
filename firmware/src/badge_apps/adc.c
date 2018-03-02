@@ -32,15 +32,14 @@ void adc_task(void* p_arg) {
    for(;;){
         switch(state){
             case INIT:
+		// pwm creates ADC noise
+		G_no_LED_PWM = 1;
+
                 if (cnt == 10 || BUTTON_PRESSED_AND_CONSUME){ // delay to read
 		   ADC_init(analog_src_num, hz_num); // init w/ current hz_num
                    state++;
                    cnt = 0;
                 }
-		// pwm creates ADC noise
-		led(0,0,0);
-		backlight(255); // no backlight PWM either
-
 		if (UP_BTN_AND_CONSUME) { // changes mask
 		   analog_src_num--;
 		   if (analog_src_num<0) analog_src_num=0; 
@@ -114,8 +113,16 @@ void adc_task(void* p_arg) {
                    cnt = 0;
 		}
 
+		if (UP_BTN_AND_CONSUME) { // changes mask
+		   analog_src_num--;
+		   if (analog_src_num<0) analog_src_num=0; 
+		   state = INIT; // reinit app
+                   cnt = 0;
+		}
+
 		if (DOWN_BTN_AND_CONSUME) {
-		   G_led_input_hack = !G_led_input_hack;
+		   analog_src_num++;
+		   if (analog_src_num == AN_LAST) analog_src_num--;
 		   state = INIT; // reinit app
                    cnt = 0;
 		}
@@ -209,6 +216,7 @@ void adc_task(void* p_arg) {
             case EXIT:
 		state = INIT;
                 cnt = 0;
+		G_no_LED_PWM = 0;
                 returnToMenus();
                 break;
         }
