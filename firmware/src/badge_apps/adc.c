@@ -129,72 +129,72 @@ void adc_task(void* p_arg) {
 
 		if (ADCbufferCntMark == 0) { // has started filling buffer yet
 		    if (ADCbufferCnt >= ADC_BUFFER_SIZE ) { // ADC has filled
-			unsigned short RFmin, RFmax, RFdelta, RFdiv, RFLshift, RFRshift;
-			unsigned short touchMin, touchMax, touchDelta, touchDiv, touchLshift, touchRshift;
-			unsigned short micMin, micMax, micDelta, micDiv, micLshift, micRshift;
-			unsigned char x;
-			unsigned char b;
+			unsigned short min[4], max[4], delta[4], Lshift[4], Rshift[4];
+			unsigned char b, s, x, y;
 
-			// find min and maxes
-			RFmin = touchMin = micMin = 0xFFFF;
-			RFmax = touchMax = micMax = 0x0000;
-
-			// RF, touch and mic change names to r/g/b when G_led_input_hack is enabled
-			for (i=0; i < ADC_BUFFER_SIZE; i+=4) {
-				if (ADCbuffer[i] < RFmin) RFmin = ADCbuffer[i];
-				if (ADCbuffer[i] > RFmax) RFmax = ADCbuffer[i];
-				if (ADCbuffer[i+1] < touchMin) touchMin = ADCbuffer[i+1];
-				if (ADCbuffer[i+1] > touchMax) touchMax = ADCbuffer[i+1];
-				if (ADCbuffer[i+2] < micMin) micMin = ADCbuffer[i+2];
-				if (ADCbuffer[i+2] > micMax) micMax = ADCbuffer[i+2];
-				// skiping 4th sample==Vss
+			// init min and maxes
+			for (s=0; s<4; s++) {
+			   min[s] = 0xFFFF;
+			   max[s] = 0x0000;
+			   Rshift[s] = 0;
+			   Lshift[s] = 0;
 			}
 
-			RFdelta = RFmax - RFmin;
-			touchDelta = touchMax - touchMin;
-			micDelta = micMax - micMin;
+			// find min/max for channels
+			for (i=0; i < ADC_BUFFER_SIZE; i+=4) {
+			   for (s=0; s<4; s++) {
+				if (ADCbuffer[i+s] < min[s]) min[s] = ADCbuffer[i+s];
+				if (ADCbuffer[i+s] > max[s]) max[s] = ADCbuffer[i+s];
+			    }
+			}
 
-			RFRshift = touchRshift = micRshift = 0;
+			for (s=0; s<4; s++) {
+			   delta[s] = max[s] - min[s];
+			}
+
 			// find highest bit to for scale down
 			for (b=9; b>=5; b--) {
-			   if (RFdelta & (1<<b))    { if (RFRshift==0)    RFRshift = b-4; };
-			   if (touchDelta & (1<<b)) { if (touchRshift==0) touchRshift = b-4; };
-			   if (micDelta & (1<<b))   { if (micRshift==0)   micRshift = b-4; };
+			   for (s=0; s<4; s++) {
+			      if (delta[s] & (1<<b))    { if (Rshift[s]==0)    Rshift[s] = b-4; };
+			   }
 			}
 			// find highest bit for scale up
 			// if the levels are really low (b<=1) this just amplifies noise
 			// the dev version has better filtering on AVss 
-			RFLshift = touchLshift = micLshift = 0;
 			for (b=4; b>1; b--) {
-			   if (RFdelta & (1<<b))    { if (RFRshift == 0)    RFLshift = 4-b; };
-			   if (touchDelta & (1<<b)) { if (touchRshift == 0) touchLshift = 4-b; };
-			   if (micDelta & (1<<b))   { if (micRshift == 0)   micLshift = 4-b; };
+			   for (s=0; s<4; s++) {
+			      if (delta[s] & (1<<b)) { 
+				if ((Rshift[s]==0) & (Lshift[s] == 0)) Lshift[s] = 4-b;
+			      }
+			   }
 			}
 
 			// the ADC samples and buffers each pin in sequence, 
 			// need to pic them apart and plot them on their own line
 			// avoid division when posible
-			for (i=0,x=0; i < ADC_BUFFER_SIZE; i+=(ADC_BUFFER_SIZE>>7),x++) { // RF 4=128 buf, 8 = 256 buffer
-			   // don't display if no signal
-//			   if ((RFLshift != 0) | (RFRshift != 0)) { 
-				FbColor(B_RED);
-				FbPoint(x,   8 +   (((ADCbuffer[i] - RFmin) << RFLshift) >> RFRshift));
-//			   }
-	
-			   // don't display if no signal
-//			   if ((touchLshift != 0) | (touchRshift != 0)) { 
-				FbColor(GREEN);
-				FbPoint(x,  40 + (((ADCbuffer[i+1] - touchMin) << touchLshift) >> touchRshift));
-//			   }
-	
-//			   if ((micLshift != 0) | (micRshift != 0)) { 
-				FbColor(YELLOW);
-				FbPoint(x,  72 + (((ADCbuffer[i+2] - micMin) << micLshift) >> micRshift));
-//			   }
-	
-			   // Vss==dont bother unless curious
-			   FbColor(WHITE);
-			   FbPoint(x, 96 + (ADCbuffer[i+3] >> 1));
+			//for (i=0,x=0; i < ADC_BUFFER_SIZE; i+=(ADC_BUFFER_SIZE>>7),x++) { // RF 4=128 buf, 8 = 256 buffer
+			for (i=0,x=0; i < ADC_BUFFER_SIZE; i+=4,x++) { // RF 4=128 buf, 8 = 256 buffer
+			   for (s=0; s<4; s++) {
+				if (s==0) {
+				   y = 8;
+				   FbColor(B_RED);
+				}
+
+				if (s==1) {
+				   y = 40;
+				   FbColor(GREEN);
+				}
+
+				if (s==2) {
+				   y = 72;
+				   FbColor(GREEN);
+				}
+				if (s==3) {
+				   y = 96;
+				   FbColor(YELLOW);
+				}
+				FbPoint(x,   y +   (((ADCbuffer[i+s] - min[s]) << Lshift[s]) >> Rshift[s]));
+			   }
 			}
 	
 			// handshake to empty buffer and start aquiring again
