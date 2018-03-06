@@ -1,5 +1,5 @@
 PROGRAMMER_BIN=./pic32usb
-HEX_PATH='../harmony_badge_2017.X/dist/pic32mx_usb_badge_int_dyn/production/harmony_badge_2017.X.production.hex'
+HEX_PATH='../harmony_badge_2018.X/dist/pic32mx_usb_badge_int_dyn/production/harmony_badge_2018.X.production.hex'
 
 if [ ! -f "$HEX_PATH" ]; then
     echo "Hex not found!"

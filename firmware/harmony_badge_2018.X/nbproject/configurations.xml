@@ -298,14 +298,6 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
-  <sourceRootList>
-    <Elem>../src</Elem>
-    <Elem>../src/system_config/pic32mx_usb_badge_int_dyn</Elem>
-    <Elem>../src/pic32mx_usb_badge_int_dyn</Elem>
-    <Elem>../../../../../microchip/harmony/v1_09</Elem>
-    <Elem>../../microchip/harmony/v1_09</Elem>
-    <Elem>../microchip/harmony/v1_09</Elem>
-  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="pic32mx_usb_badge_int_dyn" type="2">
@@ -322,24 +314,6 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibProjectItem>
-              <makeArtifact PL="../../../microchip/harmony/v1_09/build/framework/peripheral/mplab_pic32.X"
-                            CT="3"
-                            CN="default"
-                            AC="true"
-                            BL="true"
-                            WD="../../../microchip/harmony/v1_09/build/framework/peripheral/mplab_pic32.X"
-                            BC="${MAKE}  -f Makefile CONF=default"
-                            DBC="${MAKE}  -f Makefile CONF=default TYPE_IMAGE=DEBUG_RUN"
-                            CC="rm -rf &quot;build/default&quot; &quot;dist/default&quot;"
-                            OP="dist/default/production/mplab_pic32.X.a"
-                            DOP="dist/default/debug/mplab_pic32.X.a"
-                            FL="dist/default/production/mplab_pic32.X.a"
-                            PD="dist/default/production/mplab_pic32.X."
-                            DD="dist/default/debug/mplab_pic32.X.">
-              </makeArtifact>
-            </linkerLibProjectItem>
-            <linkerLibFileItem>../../../microchip/harmony/v1_09/bin/framework/peripheral/PIC32MX270F256D_peripherals.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>
@@ -369,8 +343,7 @@
         <property key="enable-symbols" value="false"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories"
-                  value="../src/system_config;../src;../src/pic32mx_usb_badge_int_dyn;../../../../microchip/harmony/v1_09/framework;../src/system_config/pic32mx_usb_badge_int_dyn/framework;../../../../microchip/harmony/v1_09/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX;../../../../microchip/harmony/v1_09/third_party/rtos/FreeRTOS/Source/include;../src/system_config/pic32mx_usb_badge_int_dyn;../../../microchip/harmony/v1_09/framework;../../../microchip/harmony/v1_09/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MX;../../../microchip/harmony/v1_09/third_party/rtos/FreeRTOS/Source/include"/>
+        <property key="extra-include-directories" value=""/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -383,6 +356,7 @@
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="toplevel-reordering" value=""/>
+        <property key="unaligned-access" value=""/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
@@ -436,6 +410,7 @@
         <property key="kseg-origin" value=""/>
         <property key="linker-symbols" value=""/>
         <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
+        <property key="no-device-startup-code" value="false"/>
         <property key="no-startup-files" value="false"/>
         <property key="oXC32ld-extra-opts" value=""/>
         <property key="optimization-level" value=""/>
@@ -473,6 +448,7 @@
         <property key="rtti" value="true"/>
         <property key="strict-ansi" value="false"/>
         <property key="toplevel-reordering" value=""/>
+        <property key="unaligned-access" value=""/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
@@ -481,6 +457,9 @@
         <property key="common-include-directories" value="../src/include;../src/assets"/>
         <property key="gp-relative-option" value=""/>
         <property key="legacy-libc" value="false"/>
+        <property key="mdtcm" value=""/>
+        <property key="mitcm" value=""/>
+        <property key="mstacktcm" value="false"/>
         <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
