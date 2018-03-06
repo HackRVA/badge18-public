@@ -187,11 +187,11 @@ void adc_task(void* p_arg) {
 
 				if (s==2) {
 				   y = 72;
-				   FbColor(GREEN);
+				   FbColor(B_BLUE);
 				}
 				if (s==3) {
 				   y = 96;
-				   FbColor(YELLOW);
+				   FbColor(WHITE);
 				}
 				FbPoint(x,   y +   (((ADCbuffer[i+s] - min[s]) << Lshift[s]) >> Rshift[s]));
 			   }

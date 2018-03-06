@@ -37,8 +37,8 @@ const struct sample_info_t samples_info[] = {
 };
 
 // compiler: because of interrupts, dont optimize and think these don't change
-unsigned int volatile ADCbufferCnt = 0;
-unsigned int volatile ADCbufferCntMark = 0;
+volatile unsigned int ADCbufferCnt = 0;
+volatile unsigned int ADCbufferCntMark = 0;
 
 // results copied to share with the user app
 volatile unsigned short ADCbuffer[ADC_BUFFER_SIZE+8]; // extra 8 bytes so interrupts have a place to store when full
