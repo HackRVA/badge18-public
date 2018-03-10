@@ -106,6 +106,7 @@
 
 #pragma config FVBUSONIO = OFF		// PEB 20170409 need this for up button
 #pragma config OSCIOFNC = OFF           // PEB 20180306 CLKO Output Signal Active on the OSCO Pin (Disabled)
+#pragma config FSOSCEN = OFF            // Secondary Oscillator Enable (Disabled)
 
 #if defined(__PIC32MX1XX_2XX__)
     // For PIC32MX1xx, PIC32MX2xx devices the output divisor is set to 2 to produce max 40MHz clock.
