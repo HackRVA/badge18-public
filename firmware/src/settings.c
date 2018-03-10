@@ -8,8 +8,6 @@
 #include "ir.h"
 #include "fb.h"
 
-extern rtccTime G_time;
-extern rtccDate G_date;
 extern unsigned short pinged;
 extern unsigned short ping_responded;
 void ping_cb(){

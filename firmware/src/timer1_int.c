@@ -107,8 +107,6 @@ unsigned char G_firstHalf = 0;
 unsigned char G_lastHalf = 0;
 unsigned char G_halfCount = 0;
 
-unsigned char G_no_LED_PWM = 0;
-
 /* 
   IR send/receive timer code
 
@@ -430,6 +428,12 @@ unsigned char G_bright=0;
 unsigned char G_backlight=255;
 unsigned char G_backlight_cnt=0;
 
+unsigned char G_no_LED_PWM = 0;
+
+
+void no_LED_PWM(unsigned char trueFalse) {
+   G_no_LED_PWM = trueFalse;
+}
 
 void led_brightness(unsigned char bright) {
    G_bright = bright;

@@ -145,7 +145,7 @@ void genericMenu(struct menu_t *L_menu, MENU_STYLE style) {
         }
         // L_selectedMenu = display_menu(L_currMenu, L_selectedMenu);
     } else if (UP_BTN_AND_CONSUME) /* handle slider/soft button clicks */ {
-        //setNote(109, 2048); /* f */
+        setNote(109, 2048); /* f */
 
         /* make sure not on first menu item */
         if (L_selectedMenu > L_currMenu) {
@@ -289,35 +289,6 @@ struct menu_t *display_menu(struct menu_t *menu,
             menu++;
     }// END WHILE
 
-//    if (G_menuStack[G_menuCnt].currMenu == settings_m) { /* need a setting to enable/disable */
-//        unsigned char time[16], date[16], out[32];
-//        extern rtccTime G_time;
-//        extern rtccDate G_date;
-//        getRTCC();
-//        time[0] = ((G_time.hour >> 4) & 0xF) + 48;
-//        time[1] =  (G_time.hour       & 0xF) + 48;
-//        time[2] = ':';
-//        time[3] = ((G_time.min >> 4)  & 0xF) + 48;
-//        time[4] =  (G_time.min        & 0xF) + 48;
-//        time[5] = ' ';
-//        time[6] = 0;
-//
-//        date[0] = ((G_date.mon >> 4) & 0xF) + 48;
-//        date[1] =  (G_date.mon       & 0xF) + 48;
-//        date[2] = '-';
-//        date[3] = ((G_date.mday >> 4) & 0xF) + 48;
-//        date[4] =  (G_date.mday       & 0xF) + 48;
-//        date[5] = '-';
-//        date[6] = ((G_date.year >> 4) & 0xF) + 48;
-//        date[7] =  (G_date.year       & 0xF) + 48;
-//        date[8] = 0;
-//        if (menu->attrib & VERT_ITEM)
-//            cursor_y += (CHAR_HEIGHT + 2 * SCAN_BLANK);
-//
-//        strcpy(out, time);
-//        strcat(out, date);
-//
-//
 //        if (!(menu->attrib & HORIZ_ITEM))
 //            cursor_x = MENU_LEFT;
 //

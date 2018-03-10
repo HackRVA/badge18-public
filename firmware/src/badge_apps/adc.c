@@ -33,7 +33,7 @@ void adc_task(void* p_arg) {
         switch(state){
             case INIT:
 		// pwm creates ADC noise
-		G_no_LED_PWM = 1;
+		no_LED_PWM(1);
 
                 if (cnt == 10 || BUTTON_PRESSED_AND_CONSUME){ // delay to read
 		   ADC_init(analog_src_num, hz_num); // init w/ current hz_num
@@ -69,7 +69,7 @@ void adc_task(void* p_arg) {
                    cnt = 0;
 		}
 
-		FbBackgroundColor(GREY1);
+		FbBackgroundColor(BLACK);
 		FbClear();
 
                 FbColor(WHITE);
@@ -161,7 +161,7 @@ void adc_task(void* p_arg) {
 			// find highest bit for scale up
 			// if the levels are really low (b<=1) this just amplifies noise
 			// the dev version has better filtering on AVss 
-			for (b=4; b>1; b--) {
+			for (b=4; b>2; b--) {
 			   for (s=0; s<4; s++) {
 			      if (delta[s] & (1<<b)) { 
 				if ((Rshift[s]==0) & (Lshift[s] == 0)) Lshift[s] = 4-b;
@@ -214,9 +214,10 @@ void adc_task(void* p_arg) {
 		break;
 
             case EXIT:
+		FbBackgroundColor(GREY1);
 		state = INIT;
                 cnt = 0;
-		G_no_LED_PWM = 0;
+		no_LED_PWM(0);
                 returnToMenus();
                 break;
         }

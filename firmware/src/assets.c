@@ -271,7 +271,7 @@ void doAudio()
 
 	G_duration = 0;
 
-	for (delay=0; delay<30; delay++) {
+	for (delay=0; delay<5; delay++) {
 	   AUDIO_PHASE1 = 1; // active breaking on the full bridge
 	   AUDIO_PHASE2 = 1; // active breaking on the full bridge
 	}

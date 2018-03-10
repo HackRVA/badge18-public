@@ -25,6 +25,7 @@ const struct analog_src_t analog_info[] = {
 
 // see adc.h for HZ_ enums
 const struct sample_info_t samples_info[] = {
+   {150,  "0.15 "},
    {500,  "0.5 "},
    {1000,  "1 "},
    {2000,  "2 "},
@@ -33,7 +34,10 @@ const struct sample_info_t samples_info[] = {
    {16000, "16 "},
    {32000, "32 "},
    {64000, "64 "},
-   {96000, "96 "}
+   {96000, "96 "},
+   {100000, "100 "},
+   {125000, "125 "},
+   {250000, "250 "}
 };
 
 // compiler: because of interrupts, dont optimize and think these don't change
@@ -183,8 +187,60 @@ void __ISR(_ADC_VECTOR, IPL4SOFT) ADC_handler(void)
    AD1CON1bits.ASAM = 1; // re-enable auto sampling
 }
 
-#define FOSC 40000000.0
+struct adc_table_t {
+   int perchanKHZ;
+   unsigned char chans;
+   unsigned char samp;
+   unsigned char ADCSbits;
+};
 
+const struct adc_table_t adc_table[] = {
+  {     150, 1, 255, 249}, 
+  {     150, 2, 190, 164}, 
+  {     150, 4, 153, 100}, 
+  {     500, 1, 238, 79}, 
+  {     500, 2, 238, 39}, 
+  {     500, 4, 238, 19}, 
+  {    1000, 1, 238, 39}, 
+  {    1000, 2, 238, 19}, 
+  {    1000, 4, 238, 9}, 
+  {    2000, 1, 238, 19}, 
+  {    2000, 2, 238, 9}, 
+  {    2000, 4, 238, 4}, 
+  {    4000, 1, 238, 9}, 
+  {    4000, 2, 238, 4}, 
+  {    4000, 4, 113, 4}, 
+  {    8000, 1, 238, 4}, 
+  {    8000, 2, 113, 4}, 
+  {    8000, 4, 144, 1}, 
+  {   16000, 1, 113, 4}, 
+  {   16000, 2, 144, 1}, 
+  {   16000, 4, 144, 0}, 
+  {   32000, 1, 144, 1}, 
+  {   32000, 2, 144, 0}, 
+  {   32000, 4, 66, 0}, 
+  {   64000, 1, 144, 0}, 
+  {   64000, 2, 66, 0}, 
+  {   64000, 4, 27, 0}, 
+  {   96000, 1, 92, 0}, 
+  {   96000, 2, 40, 0}, 
+  {   96000, 4, 14, 0}, 
+  {  100000, 1, 88, 0}, 
+  {  100000, 2, 38, 0}, 
+  {  100000, 4, 13, 0}, 
+  {  125000, 1, 68, 0}, 
+  {  125000, 2, 28, 0}, 
+  {  125000, 4, 8, 0}, 
+  {  250000, 1, 28, 0}, 
+  {  250000, 2, 8, 0}, 
+  {  250000, 4, 1, 0}, 
+//  {  500000, 1, 8, 0}, 
+//  {  500000, 2, 1, 0}, 
+//  { 1000000, 1, 1, 0},
+  {       0, 0, 0, 0},
+};
+
+#ifdef OLDWAY
 unsigned char calc_adcs(unsigned char chans,  int hz, unsigned char *samc_out) {
    float adcs;
    unsigned char samc;
@@ -205,3 +261,15 @@ unsigned char calc_adcs(unsigned char chans,  int hz, unsigned char *samc_out) {
    *samc_out = samc;
    return (unsigned char)adcs;
 }
+#else
+unsigned char calc_adcs(unsigned char chans,  int hz, unsigned char *samc_out) {
+   unsigned char i;
+
+   for (i=0; adc_table[i].perchanKHZ != 0; i++) {
+	if ((adc_table[i].perchanKHZ == hz) & (adc_table[i].chans == chans)) break;
+   }
+
+   *samc_out = adc_table[i].samp;
+   return adc_table[i].ADCSbits;
+}
+#endif

@@ -5,11 +5,6 @@
 #include "ir.h"
 #include "debug.h"
 
-//extern rtccTime G_time ;
-//extern rtccDate G_date ;
-
-rtccTime G_time ;
-rtccDate G_date ;
 unsigned short G_peerBadgeId=0;
 
 unsigned char IRpacketInCurr = 0;
@@ -156,28 +151,16 @@ void ir_led(struct IRpacket_t p)
 
 void ir_time(struct IRpacket_t p)
 {
-    G_time.min = (p.data & 0xFF);
-    G_time.hour = (p.data >> 8) & 0xFF;
-    RtccSetTimeDate(G_time.l, G_date.l);
-
     DEBUGSTRLVL(DNOISE, "ir_time");
 }
 
 void ir_date_YYMM(struct IRpacket_t p)
 {
-    G_date.mon = (p.data & 0xFF);
-    G_date.year = (p.data >> 8) & 0xFF;
-    RtccSetTimeDate(G_time.l, G_date.l);
-
     DEBUGSTRLVL(DNOISE, "ir_date_YYMM");
 }
 
 void ir_date_DDAMPM(struct IRpacket_t p)
 {
-    G_date.mday = (p.data & 0xFF);
-    G_date.wday = 0;
-    RtccSetTimeDate(G_time.l, G_date.l);
-
     DEBUGSTRLVL(DNOISE, "ir_date_DDMAMPM");
 }
 
