@@ -1,0 +1,1328 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADCSbits	adc_int.c	/^   unsigned char ADCSbits;$/;"	m	struct:adc_table_t	file:
+ADCSbits	test.c	/^   unsigned char ADCSbits;$/;"	m	struct:adc_table_t	file:
+ADC_BUFFER_SIZE	include/adc.h	50;"	d
+ADC_H	include/adc.h	7;"	d
+ADC_SAMPLES_PER_LINE	include/adc.h	47;"	d
+ADC_init	adc_int.c	/^void ADC_init(unsigned char analog_src_num, unsigned char hz_num) \/\/ enum {HZ_500 ... (HZ_LAST-1)}$/;"	f
+ADCbuffer	adc_int.c	/^volatile unsigned short ADCbuffer[ADC_BUFFER_SIZE+8]; \/\/ extra 8 bytes so interrupts have a place to store when full$/;"	v
+ADCbufferCnt	adc_int.c	/^volatile unsigned int ADCbufferCnt = 0;$/;"	v
+ADCbufferCntMark	adc_int.c	/^volatile unsigned int ADCbufferCntMark = 0;$/;"	v
+ADDRESSING_MODE	S6B33.c	58;"	d	file:
+ADD_TO_MASK	include/buttons.h	41;"	d
+ADMIN_ANGRY	include/ir.h	18;"	d
+ADMIN_GOCRAY	include/ir.h	17;"	d
+ADMIN_SETID	include/ir.h	19;"	d
+ADMIN_SILENCE	include/ir.h	16;"	d
+ALL_BTN_MASK	include/buttons.h	33;"	d
+ALL_TOUCH_MASK	include/buttons.h	38;"	d
+AN3	buttons.c	91;"	d	file:
+ANALOG_SOURCES	include/adc.h	/^enum ANALOG_SOURCES {$/;"	g
+ANY_DPAD	badge_apps/dice_roll.c	127;"	d	file:
+AN_BLUE	include/adc.h	/^   AN_BLUE,$/;"	e	enum:ANALOG_SOURCES
+AN_BLUE_MASK	include/adc.h	32;"	d
+AN_GREEN	include/adc.h	/^   AN_GREEN,$/;"	e	enum:ANALOG_SOURCES
+AN_GREEN_MASK	include/adc.h	34;"	d
+AN_LAST	include/adc.h	/^   AN_LAST$/;"	e	enum:ANALOG_SOURCES
+AN_MIC	include/adc.h	/^   AN_MIC,$/;"	e	enum:ANALOG_SOURCES
+AN_MIC_MASK	include/adc.h	31;"	d
+AN_MIC_TOUCH	include/adc.h	/^   AN_MIC_TOUCH,$/;"	e	enum:ANALOG_SOURCES
+AN_MIC_TOUCH_RF	include/adc.h	/^   AN_MIC_TOUCH_RF,$/;"	e	enum:ANALOG_SOURCES
+AN_RED	include/adc.h	/^   AN_RED,$/;"	e	enum:ANALOG_SOURCES
+AN_RED_GREEN_BLUE	include/adc.h	/^   AN_RED_GREEN_BLUE,$/;"	e	enum:ANALOG_SOURCES
+AN_RED_MASK	include/adc.h	33;"	d
+AN_RF	include/adc.h	/^   AN_RF,$/;"	e	enum:ANALOG_SOURCES
+AN_RF_MASK	include/adc.h	36;"	d
+AN_TOUCH	include/adc.h	/^   AN_TOUCH,$/;"	e	enum:ANALOG_SOURCES
+AN_TOUCH_MASK	include/adc.h	35;"	d
+AN_VSS	include/adc.h	/^   AN_VSS,$/;"	e	enum:ANALOG_SOURCES
+AN_VSS_MASK	include/adc.h	30;"	d
+ANmask	include/adc.h	/^   unsigned short ANmask; \/\/ single or combo bit mask from below$/;"	m	struct:analog_src_t
+APP_COM_PORT_OBJECT	app.h	/^}APP_COM_PORT_OBJECT;$/;"	t	typeref:struct:__anon1
+APP_DATA	app.h	/^} APP_DATA;$/;"	t	typeref:struct:__anon2
+APP_Initialize	app.c	/^void APP_Initialize ( void )$/;"	f
+APP_MAKE_BUFFER_DMA_READY	app.h	94;"	d
+APP_MAKE_BUFFER_DMA_READY	app.h	96;"	d
+APP_READ_BUFFER_SIZE	app.h	89;"	d
+APP_Tasks	app.c	/^void APP_Tasks ( void )$/;"	f
+APP_USBDeviceCDCEventHandler	app.c	/^USB_DEVICE_CDC_EVENT_RESPONSE APP_USBDeviceCDCEventHandler$/;"	f
+APP_USBDeviceEventHandler	app.c	/^void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * pData,$/;"	f
+APP_USB_LED_1	app.h	99;"	d
+APP_USB_LED_2	app.h	100;"	d
+APP_USB_LED_3	app.h	101;"	d
+APP_WRITE_BUFFER_SIZE	app.h	91;"	d
+AREA_SCROLL_MODE	S6B33.c	75;"	d	file:
+AUDIO	include/assetList.h	/^    AUDIO,$/;"	e	enum:__anon4
+AUDIO_H	include/audio.h	6;"	d
+AUDIO_PHASE1	include/adc.h	84;"	d
+AUDIO_PHASE1	include/audio.h	12;"	d
+AUDIO_PHASE2	include/adc.h	85;"	d
+AUDIO_PHASE2	include/audio.h	13;"	d
+AUDIO_TOGGLES	timer1_int.c	44;"	d	file:
+AWAKE	badge_menu.c	/^    AWAKE,$/;"	e	enum:badge_idle_state	file:
+BACK	include/badge_menu.h	/^    BACK, \/**< return to previous menu *\/$/;"	e	enum:type
+BADGEYBIRD_BITS	include/badgeybird_img.h	3;"	d
+BADGEYBIRD_CMAP	include/badgeybird_img.h	6;"	d
+BADGEYBIRD_DATA	include/badgeybird_img.h	7;"	d
+BADGEYBIRD_HEIGHT	include/badgeybird_img.h	5;"	d
+BADGEYBIRD_WIDTH	include/badgeybird_img.h	4;"	d
+BADGEYB_INIT	badge_apps/badgey_bird.c	/^    BADGEYB_INIT,$/;"	e	enum:__anon11	file:
+BADGEYB_LOAD	badge_apps/badgey_bird.c	/^    BADGEYB_LOAD,$/;"	e	enum:__anon11	file:
+BADGEYB_RUN	badge_apps/badgey_bird.c	/^    BADGEYB_RUN,$/;"	e	enum:__anon11	file:
+BADGEYB_SHOW_MENU	badge_apps/badgey_bird.c	/^    BADGEYB_SHOW_MENU$/;"	e	enum:__anon11	file:
+BADGEY_BIRD_BIRD_HEIGHT	badge_apps/badgey_bird.c	52;"	d	file:
+BADGEY_BIRD_BIRD_WIDTH	badge_apps/badgey_bird.c	51;"	d	file:
+BADGEY_BIRD_FLAP_ACC	badge_apps/badgey_bird.c	58;"	d	file:
+BADGEY_BIRD_GRAV	badge_apps/badgey_bird.c	59;"	d	file:
+BADGEY_BIRD_MAX_PIPES	badge_apps/badgey_bird.c	60;"	d	file:
+BADGEY_BIRD_OPENING_SIZE	badge_apps/badgey_bird.c	55;"	d	file:
+BADGEY_BIRD_PIPE_SPEED	badge_apps/badgey_bird.c	56;"	d	file:
+BADGEY_BIRD_PIPE_WIDTH	badge_apps/badgey_bird.c	54;"	d	file:
+BADGEY_BIRD_POS_X	badge_apps/badgey_bird.c	48;"	d	file:
+BADGEY_BIRD_REMOVE_PIPE_X	badge_apps/badgey_bird.c	96;"	d	file:
+BADGEY_BIRD_SCORE_POS_X	badge_apps/badgey_bird.c	265;"	d	file:
+BADGEY_BIRD_SCORE_POS_Y	badge_apps/badgey_bird.c	266;"	d	file:
+BADGEY_BIRD_START_HEIGHT	badge_apps/badgey_bird.c	47;"	d	file:
+BADGE_2018	buttons.c	74;"	d	file:
+BADGE_APPS_H	include/badge_apps.h	12;"	d
+BADGE_MENU_H	include/badge_menu.h	2;"	d
+BADINVAD_BITS	include/binvad.h	13;"	d
+BADINVAD_BITS	include/binvad.h	4;"	d
+BADINVAD_CMAP	include/binvad.h	16;"	d
+BADINVAD_CMAP	include/binvad.h	7;"	d
+BADINVAD_DATA	include/binvad.h	17;"	d
+BADINVAD_DATA	include/binvad.h	8;"	d
+BADINVAD_HEIGHT	include/binvad.h	15;"	d
+BADINVAD_HEIGHT	include/binvad.h	6;"	d
+BADINVAD_WIDTH	include/binvad.h	14;"	d
+BADINVAD_WIDTH	include/binvad.h	5;"	d
+BARS	LCDcolor.c	130;"	d	file:
+BB_pipe_state	badge_apps/badgey_bird.c	/^struct BB_pipe_state{$/;"	s	file:
+BCAST_ONLY	badge_apps/blinkenlights.c	/^    BCAST_ONLY,$/;"	e	enum:__anon13	file:
+BCAST_ONLY	badge_apps/conductor.c	/^    BCAST_ONLY,$/;"	e	enum:__anon15	file:
+BG_ID_MASK	badge_apps/udraw.c	17;"	d	file:
+BG_ID_OUT	badge_apps/udraw.c	18;"	d	file:
+BGcolor	include/fb.h	/^   unsigned short BGcolor;$/;"	m	struct:framebuffer_t
+BIAS_SET	S6B33.c	48;"	d	file:
+BI_sprite_height	include/binvad.h	12;"	d
+BI_sprite_height	include/binvad.h	3;"	d
+BI_sprite_width	include/binvad.h	11;"	d
+BI_sprite_width	include/binvad.h	2;"	d
+BLACK	include/colors.h	25;"	d
+BLANK	include/badge_menu.h	/^    BLANK$/;"	e	enum:__anon5
+BLUE	include/colors.h	12;"	d
+BLUE_BG	include/badge_menu.h	5;"	d
+BLUE_PALETTE	S6B33.c	64;"	d	file:
+BL_INCR_AMNT	badge_apps/blinkenlights.c	10;"	d	file:
+BUFFER	fb.c	30;"	d	file:
+BUILDING	badge_apps/groundwar.c	/^    BUILDING$/;"	e	enum:groundwar_game_state	file:
+BUTTONS_H	include/buttons.h	9;"	d
+BUTTON_PRESSED_AND_CONSUME	include/buttons.h	48;"	d
+BW_cmap	assetList.c	/^const static char BW_cmap[2][3] = {$/;"	v	file:
+B_BLUE	include/colors.h	14;"	d
+B_GREEN	include/colors.h	17;"	d
+B_RED	include/colors.h	21;"	d
+CHAR_HEIGHT	badge_menu.c	48;"	d	file:
+CHAR_WIDTH	badge_menu.c	47;"	d	file:
+CHECK_THEN_ADD_TO_MASK	include/buttons.h	43;"	d
+CIRCLE	badge_apps/groundwar.c	/^    CIRCLE,$/;"	e	enum:groundwar_minion_type	file:
+CIRCLE_GRUNT_HP	badge_apps/groundwar.c	24;"	d	file:
+CIRCLE_GRUNT_SPEED	badge_apps/groundwar.c	23;"	d	file:
+CONFIG_BLUE	badge_apps/blinkenlights.c	/^    CONFIG_BLUE,$/;"	e	enum:__anon12	file:
+CONFIG_BOTTOM	badge_apps/conductor.c	/^    CONFIG_BOTTOM,$/;"	e	enum:__anon14	file:
+CONFIG_GREEN	badge_apps/blinkenlights.c	/^    CONFIG_GREEN,$/;"	e	enum:__anon12	file:
+CONFIG_LEFT	badge_apps/conductor.c	/^    CONFIG_LEFT,$/;"	e	enum:__anon14	file:
+CONFIG_RED	badge_apps/blinkenlights.c	/^    CONFIG_RED,$/;"	e	enum:__anon12	file:
+CONFIG_RIGHT	badge_apps/conductor.c	/^    CONFIG_RIGHT,$/;"	e	enum:__anon14	file:
+CONFIG_TOP	badge_apps/conductor.c	/^    CONFIG_TOP,$/;"	e	enum:__anon14	file:
+CONTRAST_CONTROL1	S6B33.c	52;"	d	file:
+CONTRAST_CONTROL2	S6B33.c	53;"	d	file:
+COS	include/utils.h	12;"	d
+COUNT_OF_NEIGHBORS	badge_apps/screensaver.c	411;"	d	file:
+CYAN	include/colors.h	33;"	d
+DATAID	flash.c	198;"	d	file:
+DATA_FORMAT_4K_RGBX	S6B33.c	78;"	d	file:
+DATA_FORMAT_4K_XRGB	S6B33.c	77;"	d	file:
+DCDC_AMP_ONOFF	S6B33.c	50;"	d	file:
+DCDC_CLOCK_DIV	S6B33.c	49;"	d	file:
+DCDC_SELECT	S6B33.c	47;"	d	file:
+DDRAM_BURST_OFF	S6B33.c	56;"	d	file:
+DDRAM_BURST_ON	S6B33.c	57;"	d	file:
+DEBOUNCE_CNT	badge_apps/badgelandia.c	134;"	d	file:
+DEBUGCHAR	include/debug.h	25;"	d
+DEBUGCHAR	include/debug.h	29;"	d
+DEBUGPRINT	include/debug.h	21;"	d
+DEBUGSTR	include/debug.h	24;"	d
+DEBUGSTR	include/debug.h	28;"	d
+DEBUGSTRLVL	include/debug.h	23;"	d
+DEBUGSTRLVL	include/debug.h	27;"	d
+DECR_NEIGHBORS	badge_apps/screensaver.c	413;"	d	file:
+DEFAULT_BIT	include/badge_menu.h	/^    DEFAULT_BIT,$/;"	e	enum:attrib_bits
+DEFAULT_BTN_DBC	include/buttons.h	45;"	d
+DEFAULT_ITEM	include/badge_menu.h	21;"	d
+DEFAULT_TOUCH_DBC	include/buttons.h	75;"	d
+DEFENSES_TARGET_IDX	badge_apps/groundwar.c	260;"	d	file:
+DEFENSE_NOT_TARGETING	badge_apps/groundwar.c	107;"	d	file:
+DELETE_MASK	badge_apps/udraw.c	26;"	d	file:
+DERROR	include/debug.h	/^   DERROR,$/;"	e	enum:__anon7
+DICE_SQUARE_SIZE	badge_apps/dice_roll.c	16;"	d	file:
+DICE_X	badge_apps/dice_roll.c	18;"	d	file:
+DICE_Y	badge_apps/dice_roll.c	19;"	d	file:
+DISPLAY_OFF	S6B33.c	69;"	d	file:
+DISPLAY_ON	S6B33.c	70;"	d	file:
+DNOISE	include/debug.h	/^   DNOISE=0,$/;"	e	enum:__anon7
+DNOTICE	include/debug.h	/^   DNOTICE,$/;"	e	enum:__anon7
+DOT	badge_apps/groundwar.c	/^    DOT,$/;"	e	enum:groundwar_minion_type	file:
+DOT_SQUARE_SIZE	badge_apps/dice_roll.c	17;"	d	file:
+DOWN_BTN	include/buttons.h	62;"	d
+DOWN_BTN_AND_CONSUME	include/buttons.h	50;"	d
+DOWN_BTN_HOLD	include/buttons.h	57;"	d
+DOWN_BTN_MASK	include/buttons.h	30;"	d
+DOWN_TOUCH	include/buttons.h	84;"	d
+DOWN_TOUCH_AND_CONSUME	include/buttons.h	76;"	d
+DOWN_TOUCH_HOLD	include/buttons.h	80;"	d
+DOWN_TOUCH_MASK	include/buttons.h	37;"	d
+DRAG_UPDATE_RATE	include/lander.h	15;"	d
+DRAW	badge_apps/adc.c	/^    DRAW,$/;"	e	enum:adc_state	file:
+DRAW	badge_apps/groundwar.c	/^    DRAW,$/;"	e	enum:groundwar_state	file:
+DRAW_BLACK	badge_apps/udraw.c	/^    DRAW_BLACK,$/;"	e	enum:__anon20	file:
+DRAW_BLUE	badge_apps/udraw.c	/^    DRAW_BLUE,$/;"	e	enum:__anon20	file:
+DRAW_CYAN	badge_apps/udraw.c	/^    DRAW_CYAN,$/;"	e	enum:__anon20	file:
+DRAW_DROP_DOWN_LEFT	badge_apps/udraw.c	/^    DRAW_DROP_DOWN_LEFT,$/;"	e	enum:__anon21	file:
+DRAW_DROP_DOWN_OFF	badge_apps/udraw.c	/^    DRAW_DROP_DOWN_OFF,$/;"	e	enum:__anon21	file:
+DRAW_DROP_DOWN_RIGHT	badge_apps/udraw.c	/^    DRAW_DROP_DOWN_RIGHT,$/;"	e	enum:__anon21	file:
+DRAW_EXIT	badge_apps/udraw.c	/^    DRAW_EXIT,$/;"	e	enum:__anon22	file:
+DRAW_GET_INPUT	badge_apps/udraw.c	/^    DRAW_GET_INPUT,$/;"	e	enum:__anon22	file:
+DRAW_GREEN	badge_apps/udraw.c	/^    DRAW_GREEN,$/;"	e	enum:__anon20	file:
+DRAW_INIT	badge_apps/udraw.c	/^    DRAW_INIT,$/;"	e	enum:__anon22	file:
+DRAW_OFF	badge_apps/udraw.c	/^    DRAW_OFF,$/;"	e	enum:__anon19	file:
+DRAW_ON	badge_apps/udraw.c	/^    DRAW_ON,$/;"	e	enum:__anon19	file:
+DRAW_PROCESS	badge_apps/udraw.c	/^    DRAW_PROCESS,$/;"	e	enum:__anon22	file:
+DRAW_PURPLE	badge_apps/udraw.c	/^    DRAW_PURPLE,$/;"	e	enum:__anon20	file:
+DRAW_RED	badge_apps/udraw.c	/^    DRAW_RED,$/;"	e	enum:__anon20	file:
+DRAW_RENDER	badge_apps/udraw.c	/^    DRAW_RENDER,$/;"	e	enum:__anon22	file:
+DRAW_WHITE	badge_apps/udraw.c	/^    DRAW_WHITE,$/;"	e	enum:__anon20	file:
+DRAW_YELLOW	badge_apps/udraw.c	/^    DRAW_YELLOW,$/;"	e	enum:__anon20	file:
+DRBOB_BITS	include/drbob.h	2;"	d
+DRBOB_BITS	include/drbob.h	9;"	d
+DRBOB_CMAP	include/drbob.h	12;"	d
+DRBOB_CMAP	include/drbob.h	5;"	d
+DRBOB_DATA	include/drbob.h	13;"	d
+DRBOB_DATA	include/drbob.h	6;"	d
+DRBOB_HEIGHT	include/drbob.h	11;"	d
+DRBOB_HEIGHT	include/drbob.h	4;"	d
+DRBOB_MENU_STYLE	include/badge_menu.h	/^    DRBOB_MENU_STYLE,$/;"	e	enum:__anon5
+DRBOB_WIDTH	include/drbob.h	10;"	d
+DRBOB_WIDTH	include/drbob.h	3;"	d
+DRIVER_OUTPUT_MODE	S6B33.c	46;"	d	file:
+DWARN	include/debug.h	/^   DWARN,$/;"	e	enum:__anon7
+D_BLUE	include/colors.h	13;"	d
+D_GREEN	include/colors.h	18;"	d
+D_PAD_COMPLETE	badge_apps/badge_tutorial.c	/^    D_PAD_COMPLETE,$/;"	e	enum:tutorial_state	file:
+D_PAD_PROMPT	badge_apps/badge_tutorial.c	/^    D_PAD_PROMPT,$/;"	e	enum:tutorial_state	file:
+D_RED	include/colors.h	22;"	d
+EMPTY_MASK	badge_apps/udraw.c	22;"	d	file:
+ENTER_SLEEP	badge_menu.c	/^    ENTER_SLEEP,$/;"	e	enum:badge_idle_state	file:
+ENTRY_MODE	S6B33.c	65;"	d	file:
+EXIT	badge_apps/adc.c	/^    EXIT$/;"	e	enum:adc_state	file:
+EXIT	badge_apps/badge_tutorial.c	/^    EXIT$/;"	e	enum:tutorial_state	file:
+EXIT	badge_apps/boot_splash.c	/^    EXIT$/;"	e	enum:boot_splash_state	file:
+EXIT	badge_apps/dice_roll.c	/^    EXIT$/;"	e	enum:boot_splash_state	file:
+EXIT	badge_apps/groundwar.c	/^    EXIT$/;"	e	enum:groundwar_state	file:
+FALSE	badge_apps/star_shooter.c	8;"	d	file:
+FBSIZE	fb.c	27;"	d	file:
+FB_BACKGROUND_COLOR	include/fb.h	/^    FB_BACKGROUND_COLOR,	\/* 16 bit background fill color *\/$/;"	e	enum:__anon8
+FB_CLEAR	include/fb.h	/^    FB_CLEAR,			\/* reset LCD *\/$/;"	e	enum:__anon8
+FB_COLOR	include/fb.h	/^    FB_COLOR,			\/* 16 bit color *\/$/;"	e	enum:__anon8
+FB_MOVE	include/fb.h	/^    FB_MOVE, 			\/* (x 8bit, y 8bit) where the next stuff goes *\/$/;"	e	enum:__anon8
+FB_TRANSPARENT_MASK	include/fb.h	/^    FB_TRANSPARENT_MASK,	\/* 16 bit transparent\/key\/mask color *\/$/;"	e	enum:__anon8
+FB_UNUSED	include/fb.h	/^    FB_UNUSED=0,		\/* unused *\/$/;"	e	enum:__anon8
+FIRST_PKT	badge_apps/udraw.c	16;"	d	file:
+FLARE_H	include/flare_leds.h	6;"	d
+FLARE_LED	include/flare_leds.h	9;"	d
+FLASHSIZE	include/flash.h	31;"	d
+FLASH_TEST_APP_ID	badge_apps/flash_test.c	21;"	d	file:
+FONT	include/assetList.h	/^        FONT=0,$/;"	e	enum:__anon3
+FRAME_FREQ_CONTROL	S6B33.c	61;"	d	file:
+FUEL_BAR_FILL_COLOR	badge_apps/lander.c	500;"	d	file:
+FUEL_BAR_OUTLINE_COLOR	badge_apps/lander.c	499;"	d	file:
+FUEL_CAN_AMOUNT	badge_apps/lander.c	21;"	d	file:
+FUEL_CAN_COLOR	badge_apps/lander.c	521;"	d	file:
+FUEL_DIV	badge_apps/lander.c	23;"	d	file:
+FUEL_USAGE	badge_apps/lander.c	24;"	d	file:
+FUNCTION	include/badge_menu.h	/^    FUNCTION, \/**< c function *\/$/;"	e	enum:type
+FbBackgroundColor	fb.c	/^void FbBackgroundColor(unsigned short color)$/;"	f
+FbCharacter	fb.c	/^void FbCharacter(unsigned char charin)$/;"	f
+FbClear	fb.c	/^void FbClear()$/;"	f
+FbColor	fb.c	/^void FbColor(unsigned short color)$/;"	f
+FbDrawVectors	fb.c	/^void FbDrawVectors(short points[][2],$/;"	f
+FbFilledRectangle	fb.c	/^void FbFilledRectangle(unsigned char width, unsigned char height)$/;"	f
+FbHorizontalLine	fb.c	/^void FbHorizontalLine(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2)$/;"	f
+FbImage	fb.c	/^void FbImage(unsigned char assetId, unsigned char seqNum)$/;"	f
+FbImage1bit	fb.c	/^void FbImage1bit(unsigned char assetId, unsigned char seqNum)$/;"	f
+FbImage2bit	fb.c	/^void FbImage2bit(unsigned char assetId, unsigned char seqNum)$/;"	f
+FbImage4bit	fb.c	/^void FbImage4bit(unsigned char assetId, unsigned char seqNum)$/;"	f
+FbImage8bit	fb.c	/^void FbImage8bit(unsigned char assetId, unsigned char seqNum)$/;"	f
+FbInit	fb.c	/^void FbInit() {$/;"	f
+FbLine	fb.c	/^void FbLine(unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1)$/;"	f
+FbMove	fb.c	/^void FbMove(unsigned char x, unsigned char y)$/;"	f
+FbPoint	fb.c	/^void FbPoint(unsigned char x, unsigned char y)$/;"	f
+FbPolygonFromPoints	fb.c	/^void FbPolygonFromPoints(short points[][2],$/;"	f
+FbPushBuffer	fb.c	/^void FbPushBuffer()$/;"	f
+FbPushRegion	fb.c	/^void FbPushRegion(unsigned int x, unsigned int y, $/;"	f
+FbRectangle	fb.c	/^void FbRectangle(unsigned char width, unsigned char height)$/;"	f
+FbSwapBuffers	fb.c	/^void FbSwapBuffers()$/;"	f
+FbTransparency	fb.c	/^void FbTransparency(unsigned short transparencyMask)$/;"	f
+FbTransparentIndex	fb.c	/^void FbTransparentIndex(unsigned short color)$/;"	f
+FbVerticalLine	fb.c	/^void FbVerticalLine(unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2)$/;"	f
+FbWriteLine	fb.c	/^void FbWriteLine(unsigned char *string)$/;"	f
+GAME_OVER	badge_apps/groundwar.c	/^    GAME_OVER,$/;"	e	enum:groundwar_state	file:
+GOON_ROTATION_DELTA	badge_apps/badgelandia.c	145;"	d	file:
+GRAV_UPDATE_RATE	include/lander.h	16;"	d
+GREEN	include/colors.h	16;"	d
+GREEN_BG	include/badge_menu.h	4;"	d
+GREEN_PALETTE	S6B33.c	63;"	d	file:
+GREY1	include/colors.h	26;"	d
+GREY16	include/colors.h	30;"	d
+GREY2	include/colors.h	27;"	d
+GREY4	include/colors.h	28;"	d
+GREY8	include/colors.h	29;"	d
+GRID_CELL_DIM	badge_apps/screensaver.c	408;"	d	file:
+GRID_DIM	badge_apps/screensaver.c	409;"	d	file:
+G_DCDCselect	S6B33.c	/^unsigned char G_DCDCselect = 0b00000000; \/* step up multplier 1, 1.5 and 2 *\/$/;"	v
+G_Fb	fb.c	/^struct framebuffer_t G_Fb;$/;"	v	typeref:struct:framebuffer_t
+G_IRerror	timer1_int.c	/^unsigned char G_IRerror = 0;$/;"	v
+G_IRrecv	timer1_int.c	/^unsigned int G_IRrecv = 0;$/;"	v
+G_IRrecvVal	timer1_int.c	/^unsigned int G_IRrecvVal = 0;$/;"	v
+G_IRsend	timer1_int.c	/^unsigned int G_IRsend = 0;$/;"	v
+G_IRsendVal	timer1_int.c	/^unsigned int G_IRsendVal = 0;$/;"	v
+G_addressMode	S6B33.c	/^unsigned char G_addressMode = 0b00011101; \/* 0b0001 1101 65536 colors default GSM=00 DSG=1 SGF=1 SGP=10 SGM=1  *\/$/;"	v
+G_audioAssetId	assets.c	/^unsigned char G_audioAssetId = 255;$/;"	v
+G_audioFrame	assets.c	/^unsigned int G_audioFrame = 0; \/**< persistent current "frame" of audio, like a "frame" of video *\/$/;"	v
+G_backlight	timer1_int.c	/^unsigned char G_backlight=255;$/;"	v
+G_backlight_cnt	timer1_int.c	/^unsigned char G_backlight_cnt=0;$/;"	v
+G_bias	S6B33.c	/^unsigned char G_bias  = 0b00000000; \/* 0x00 = 1\/4  0x11 = 1\/5 0x22 = 1\/6 0x33 = 1\/7 *\/$/;"	v
+G_bitCnt	timer1_int.c	/^unsigned char G_bitCnt = 0;$/;"	v
+G_blue_cnt	timer1_int.c	/^unsigned char G_blue_cnt=0;$/;"	v
+G_blue_pwm	timer1_int.c	/^unsigned char G_blue_pwm=0;$/;"	v
+G_bright	timer1_int.c	/^unsigned char G_bright=0;$/;"	v
+G_button_cnt	buttons.c	/^unsigned char G_button_cnt = 0;$/;"	v
+G_clockDiv	S6B33.c	/^unsigned char G_clockDiv = 0b00010001; \/* default = fose\/32 & fose\/64  normal and partial modes each *\/$/;"	v
+G_contrast1	S6B33.c	/^unsigned char G_contrast1 = 0b00110100; \/* 52 = 0x34 48 = hex 0x30 *\/$/;"	v
+G_contrast2	S6B33.c	/^unsigned char G_contrast2 = 0b00110100; \/* 52 = 0x34 48 = hex 0x30 *\/$/;"	v
+G_currMenu	badge_menu.c	/^struct menu_t *G_currMenu = NULL; \/* init *\/$/;"	v	typeref:struct:menu_t
+G_currentNote	assets.c	/^unsigned short G_currentNote=0;$/;"	v
+G_debugBuffer	debug.c	/^unsigned char G_debugBuffer[MAXDEBUGBUFFER+8];$/;"	v
+G_debugBufferFilled	debug.c	/^int G_debugBufferFilled=0;$/;"	v
+G_debugLevel	debug.c	/^int G_debugLevel=0;$/;"	v
+G_displayPattern	S6B33.c	/^unsigned char G_displayPattern = 0b00000000; \/* 0 = normal, 1 = inverted, 2&3 read datasheet *\/$/;"	v
+G_down_button_cnt	buttons.c	/^unsigned char G_down_button_cnt = 0;$/;"	v
+G_down_touch_cnt	buttons.c	/^unsigned char G_down_touch_cnt = 0;$/;"	v
+G_duration	assets.c	/^unsigned short G_duration = 0;$/;"	v
+G_duration_cnt	assets.c	/^unsigned short G_duration_cnt = 0;$/;"	v
+G_entropy_pool	buttons.c	/^unsigned int G_entropy_pool = 961748927;$/;"	v
+G_entry	S6B33.c	/^unsigned char G_entry = 0b10000000; \/* 0x80 *\/$/;"	v
+G_firstHalf	timer1_int.c	/^unsigned char G_firstHalf = 0;$/;"	v
+G_flare_cnt	timer1_int.c	/^unsigned char G_flare_cnt=0;$/;"	v
+G_flare_pwm	timer1_int.c	/^unsigned char G_flare_pwm=0;$/;"	v
+G_flashAddr	flash.c	/^unsigned int *G_flashAddr = 0x0; $/;"	v
+G_flashstart	flash.c	/^const unsigned char G_flashstart[2048] = {0x00, 0x00};$/;"	v
+G_flashstart	flash.c	/^unsigned char G_flashstart[2048] = {0xFF, 0xFF};$/;"	v
+G_freq	assets.c	/^unsigned short G_freq = 0;$/;"	v
+G_freq_cnt	assets.c	/^unsigned short G_freq_cnt = 0;$/;"	v
+G_green_cnt	timer1_int.c	/^unsigned char G_green_cnt=0;$/;"	v
+G_green_pwm	timer1_int.c	/^unsigned char G_green_pwm=0;$/;"	v
+G_halfCount	timer1_int.c	/^unsigned char G_halfCount = 0;$/;"	v
+G_hold_note	assets.c	/^unsigned char G_hold_note = 0;$/;"	v
+G_lastHalf	timer1_int.c	/^unsigned char G_lastHalf = 0;$/;"	v
+G_left_button_cnt	buttons.c	/^unsigned char G_left_button_cnt = 0;$/;"	v
+G_menuCnt	badge_menu.c	/^static unsigned char G_menuCnt=0; \/\/ index for G_menuStack$/;"	v	file:
+G_menuStack	badge_menu.c	/^struct menuStack_t G_menuStack[MAX_MENU_DEPTH] = { {0,0} }; \/\/ track user traversing menus$/;"	v	typeref:struct:menuStack_t
+G_middle_touch_cnt	buttons.c	/^unsigned char G_middle_touch_cnt = 0;$/;"	v
+G_mute	assets.c	/^unsigned short G_mute = 0;$/;"	v
+G_no_LED_PWM	timer1_int.c	/^unsigned char G_no_LED_PWM = 0;$/;"	v
+G_outputMode	S6B33.c	/^unsigned char G_outputMode = 0b00000110; \/* 0x02 lines=132 SDIR=0 SWP=1 CDIR=0 *\/$/;"	v
+G_peerBadgeId	ir.c	/^unsigned short G_peerBadgeId=0;$/;"	v
+G_pressed_button	buttons.c	/^unsigned char G_pressed_button = 0;$/;"	v
+G_red_cnt	timer1_int.c	/^unsigned char G_red_cnt=0;$/;"	v
+G_red_pwm	timer1_int.c	/^unsigned char G_red_pwm=0;$/;"	v
+G_right_button_cnt	buttons.c	/^unsigned char G_right_button_cnt = 0;$/;"	v
+G_rowVector	S6B33.c	/^unsigned char G_rowVector = 0b00001110; \/* default row vector type=Diagonal INC=111 V=0-----*\/ $/;"	v
+G_selectedMenu	badge_menu.c	/^struct menu_t *G_selectedMenu = NULL; \/* item the cursor is on *\/$/;"	v	typeref:struct:menu_t
+G_sysData	app.c	/^struct sysData_t G_sysData;$/;"	v	typeref:struct:sysData_t
+G_touch_pct	buttons.c	/^char G_touch_pct = 0;$/;"	v
+G_up_button_cnt	buttons.c	/^unsigned char G_up_button_cnt = 0;$/;"	v
+G_up_touch_cnt	buttons.c	/^unsigned char G_up_touch_cnt = 0;$/;"	v
+G_videoAssetId	assets.c	/^unsigned char G_videoAssetId = 255;$/;"	v
+G_videoFrame	assets.c	/^unsigned int G_videoFrame = 0;$/;"	v
+HACKRVA	badge_apps/boot_splash.c	/^    HACKRVA,$/;"	e	enum:boot_splash_state	file:
+HACKRVA4_BITS	include/hackrva4bit.h	2;"	d
+HACKRVA4_BITS	include/hackrva4bit.h	9;"	d
+HACKRVA4_CMAP	include/hackrva4bit.h	12;"	d
+HACKRVA4_CMAP	include/hackrva4bit.h	5;"	d
+HACKRVA4_DATA	include/hackrva4bit.h	13;"	d
+HACKRVA4_DATA	include/hackrva4bit.h	6;"	d
+HACKRVA4_HEIGHT	include/hackrva4bit.h	11;"	d
+HACKRVA4_HEIGHT	include/hackrva4bit.h	4;"	d
+HACKRVA4_WIDTH	include/hackrva4bit.h	10;"	d
+HACKRVA4_WIDTH	include/hackrva4bit.h	3;"	d
+HIDDEN_BIT	include/badge_menu.h	/^    HIDDEN_BIT,  \/**< Don't display this menu item *\/$/;"	e	enum:attrib_bits
+HIDDEN_ITEM	include/badge_menu.h	22;"	d
+HIGH_RESET	badge_apps/badgelandia.c	237;"	d	file:
+HOLD_MOVE_CNT	badge_apps/groundwar.c	508;"	d	file:
+HORIZ_BIT	include/badge_menu.h	/^    HORIZ_BIT,$/;"	e	enum:attrib_bits
+HORIZ_ITEM	include/badge_menu.h	19;"	d
+HZ_1000	include/adc.h	/^   HZ_1000,$/;"	e	enum:SAMPLE_HZ
+HZ_100000	include/adc.h	/^   HZ_100000,$/;"	e	enum:SAMPLE_HZ
+HZ_125000	include/adc.h	/^   HZ_125000,$/;"	e	enum:SAMPLE_HZ
+HZ_150	include/adc.h	/^   HZ_150,$/;"	e	enum:SAMPLE_HZ
+HZ_16000	include/adc.h	/^   HZ_16000,$/;"	e	enum:SAMPLE_HZ
+HZ_2000	include/adc.h	/^   HZ_2000,$/;"	e	enum:SAMPLE_HZ
+HZ_250000	include/adc.h	/^   HZ_250000,$/;"	e	enum:SAMPLE_HZ
+HZ_32000	include/adc.h	/^   HZ_32000,$/;"	e	enum:SAMPLE_HZ
+HZ_4000	include/adc.h	/^   HZ_4000,$/;"	e	enum:SAMPLE_HZ
+HZ_500	include/adc.h	/^   HZ_500,$/;"	e	enum:SAMPLE_HZ
+HZ_64000	include/adc.h	/^   HZ_64000,$/;"	e	enum:SAMPLE_HZ
+HZ_8000	include/adc.h	/^   HZ_8000,$/;"	e	enum:SAMPLE_HZ
+HZ_96000	include/adc.h	/^   HZ_96000,$/;"	e	enum:SAMPLE_HZ
+HZ_LAST	include/adc.h	/^   HZ_LAST$/;"	e	enum:SAMPLE_HZ
+IB1	utils.c	12;"	d	file:
+IB18	utils.c	15;"	d	file:
+IB2	utils.c	13;"	d	file:
+IB5	utils.c	14;"	d	file:
+INCR_NEIGHBORS	badge_apps/screensaver.c	412;"	d	file:
+INIT	badge_apps/adc.c	/^    INIT,$/;"	e	enum:adc_state	file:
+INIT	badge_apps/blinkenlights.c	/^    INIT,$/;"	e	enum:__anon12	file:
+INIT	badge_apps/boot_splash.c	/^    INIT,$/;"	e	enum:boot_splash_state	file:
+INIT	badge_apps/conductor.c	/^    INIT,$/;"	e	enum:__anon14	file:
+INIT	badge_apps/dice_roll.c	/^    INIT,$/;"	e	enum:boot_splash_state	file:
+INIT	badge_apps/lander.c	/^    INIT,$/;"	e	enum:__anon16	file:
+INIT_LEVEL	badge_apps/groundwar.c	/^    INIT_LEVEL,$/;"	e	enum:groundwar_state	file:
+INIT_LEVEL	badge_apps/lander.c	/^    INIT_LEVEL,$/;"	e	enum:__anon16	file:
+INIT_WAVE	badge_apps/groundwar.c	/^    INIT_WAVE,$/;"	e	enum:groundwar_state	file:
+IN_MASK	include/buttons.h	40;"	d
+IO	badge_apps/groundwar.c	/^    IO,$/;"	e	enum:groundwar_state	file:
+IRPair	ir.c	/^void IRPair()$/;"	f
+IR_ACHIEVEMENTS	include/ir.h	/^	IR_ACHIEVEMENTS,   \/* ? *\/$/;"	e	enum:__anon10
+IR_APP0	include/ir.h	/^	IR_APP0,$/;"	e	enum:__anon10
+IR_APP1	include/ir.h	/^	IR_APP1,$/;"	e	enum:__anon10
+IR_APP2	include/ir.h	/^	IR_APP2,$/;"	e	enum:__anon10
+IR_APP3	include/ir.h	/^	IR_APP3,$/;"	e	enum:__anon10
+IR_APP4	include/ir.h	/^	IR_APP4,$/;"	e	enum:__anon10
+IR_APP5	include/ir.h	/^	IR_APP5,$/;"	e	enum:__anon10
+IR_APP6	include/ir.h	/^	IR_APP6,$/;"	e	enum:__anon10
+IR_APP7	include/ir.h	/^	IR_APP7,$/;"	e	enum:__anon10
+IR_ASSET	include/ir.h	/^	IR_ASSET,		\/* set current asset *\/$/;"	e	enum:__anon10
+IR_BACKLIGHT	include/ir.h	/^	IR_BACKLIGHT,	\/* backlight brightness *\/$/;"	e	enum:__anon10
+IR_BADGEID	include/ir.h	/^	IR_BADGEID,	\/* send to ALL == 0b1111111111\/1023\/0x3F *\/$/;"	e	enum:__anon10
+IR_CODE	include/ir.h	/^	IR_CODE,		\/* code to jump to *\/$/;"	e	enum:__anon10
+IR_DATEDDAMPM	include/ir.h	/^	IR_DATEDDAMPM,	\/* date *\/$/;"	e	enum:__anon10
+IR_DATEYYMM	include/ir.h	/^	IR_DATEYYMM,	\/* date *\/$/;"	e	enum:__anon10
+IR_DRAW_UNLOCKABLE	include/ir.h	/^        IR_DRAW_UNLOCKABLE,$/;"	e	enum:__anon10
+IR_ERROR	include/ir.h	/^	IR_ERROR,$/;"	e	enum:__anon10
+IR_FORTHCODE	include/ir.h	/^	IR_FORTHCODE,	\/* forth code to run *\/$/;"	e	enum:__anon10
+IR_LASTADRESS	include/ir.h	/^	IR_LASTADRESS,$/;"	e	enum:__anon10
+IR_LED	include/ir.h	/^	IR_LED,	\/* led brightness *\/$/;"	e	enum:__anon10
+IR_LIVEAUDIO	include/ir.h	/^	IR_LIVEAUDIO,	\/* stream play to piezo *\/$/;"	e	enum:__anon10
+IR_LIVELED	include/ir.h	/^	IR_LIVELED,	\/* stream rgb to LED *\/$/;"	e	enum:__anon10
+IR_LIVETEXT	include/ir.h	/^	IR_LIVETEXT,	\/* stream text screen *\/$/;"	e	enum:__anon10
+IR_NAME	include/ir.h	/^	IR_NAME,		\/* lenght == 32? *\/$/;"	e	enum:__anon10
+IR_PING	include/ir.h	/^        IR_PING,$/;"	e	enum:__anon10
+IR_READ	include/ir.h	/^   IR_READ,$/;"	e	enum:__anon9
+IR_SCREENSAVER	include/ir.h	/^	IR_SCREENSAVER,	\/* dunno brightness *\/$/;"	e	enum:__anon10
+IR_SEKRITS	include/ir.h	/^	IR_SEKRITS,	\/* not sure, individual per game? *\/$/;"	e	enum:__anon10
+IR_TIME	include/ir.h	/^	IR_TIME,	\/* time *\/$/;"	e	enum:__anon10
+IR_TOGGLES	timer1_int.c	37;"	d	file:
+IR_UDRAW	include/ir.h	/^    IR_UDRAW,$/;"	e	enum:__anon10
+IR_WRITE	include/ir.h	/^   IR_WRITE$/;"	e	enum:__anon9
+IRcallback_t	include/ir.h	/^struct IRcallback_t {$/;"	s
+IRcallbacks	ir.c	/^struct IRcallback_t IRcallbacks[] = {$/;"	v	typeref:struct:IRcallback_t
+IRhandler	ir.c	/^void IRhandler() $/;"	f
+IRpacketInCurr	ir.c	/^unsigned char IRpacketInCurr = 0;$/;"	v
+IRpacketInNext	ir.c	/^unsigned char IRpacketInNext = 0;$/;"	v
+IRpacketOutCurr	ir.c	/^unsigned char IRpacketOutCurr = 0;$/;"	v
+IRpacketOutNext	ir.c	/^unsigned char IRpacketOutNext = 0;$/;"	v
+IRpacket_t	include/ir.h	/^struct IRpacket_t {$/;"	s
+IRpacket_u	include/ir.h	/^union IRpacket_u {$/;"	u
+IRpacketsIn	ir.c	/^union IRpacket_u IRpacketsIn[MAXPACKETQUEUE];$/;"	v	typeref:union:IRpacket_u
+IRpacketsOut	ir.c	/^union IRpacket_u IRpacketsOut[MAXPACKETQUEUE];$/;"	v	typeref:union:IRpacket_u
+IRqueueSend	ir.c	/^void IRqueueSend(union IRpacket_u pkt) $/;"	f
+IS_LAST_LEVEL	include/lander.h	58;"	d
+LANDER_BODY_HEIGHT	include/lander.h	8;"	d
+LANDER_BODY_WIDTH	include/lander.h	9;"	d
+LANDER_HEIGHT	include/lander.h	11;"	d
+LANDER_SHOW_MENU	badge_apps/lander.c	/^    LANDER_SHOW_MENU,$/;"	e	enum:__anon16	file:
+LANDER_WIDTH	include/lander.h	13;"	d
+LARGE	badge_apps/groundwar.c	/^    LARGE,$/;"	e	enum:groundwar_defense_type	file:
+LASTASSET	include/assetList.h	/^    LASTASSET,$/;"	e	enum:__anon3
+LAST_BIT	include/badge_menu.h	/^    LAST_BIT,$/;"	e	enum:attrib_bits
+LAST_COORD	badge_apps/screensaver.c	410;"	d	file:
+LAST_ITEM	include/badge_menu.h	23;"	d
+LAUNCH_APP	badge_menu.c	486;"	d	file:
+LCDBacklight	LCDcolor.c	/^void LCDBacklight(int val)$/;"	f
+LCDBars	LCDcolor.c	/^void LCDBars()$/;"	f
+LCDDelay	LCDcolor.c	/^void LCDDelay()$/;"	f
+LCDInitPins	LCDcolor.c	/^void LCDInitPins(void) {$/;"	f
+LCDLogo	LCDcolor.c	/^void LCDLogo(void) {$/;"	f
+LCDReset	LCDcolor.c	/^void LCDReset(void) {$/;"	f
+LCD_COMMAND	S6B33.c	13;"	d	file:
+LCD_DATA	S6B33.c	14;"	d	file:
+LCD_XSIZE	fb.c	23;"	d	file:
+LCD_YSIZE	fb.c	24;"	d	file:
+LCDblack	LCDcolor.c	/^void LCDblack()$/;"	f
+LCDblue	LCDcolor.c	/^void LCDblue()$/;"	f
+LCDbuffer	fb.c	/^unsigned short LCDbuffer[FBSIZE] ;$/;"	v
+LCDcolor	LCDcolor.c	/^void LCDcolor(unsigned short pixel)$/;"	f
+LCDcolor_h	include/LCDcolor.h	5;"	d
+LCDgreen	LCDcolor.c	/^void LCDgreen()$/;"	f
+LCDline	LCDcolor.c	/^void LCDline(int x0, int y0, int x1, int y1, unsigned short color) {\/\/do not use unless line is diagonal$/;"	f
+LCDputPixel	LCDcolor.c	/^void LCDputPixel(unsigned char x,\/\/places one pixel$/;"	f
+LCDred	LCDcolor.c	/^void LCDred()$/;"	f
+LCDwhite	LCDcolor.c	/^void LCDwhite()$/;"	f
+LED_LVL	badge_apps/hello_world_app.c	16;"	d	file:
+LED_TOGGLES	timer1_int.c	40;"	d	file:
+LEDlightList_m	settings.c	/^const struct menu_t LEDlightList_m[] = {$/;"	v	typeref:struct:menu_t
+LEDlight_cb	settings.c	/^void LEDlight_cb(struct menu_t *h) {$/;"	f
+LEDlight_m	settings.c	/^struct menu_t LEDlight_m[] = {$/;"	v	typeref:struct:menu_t
+LEFT_BTN	include/buttons.h	64;"	d
+LEFT_BTN_AND_CONSUME	include/buttons.h	52;"	d
+LEFT_BTN_HOLD	include/buttons.h	59;"	d
+LEFT_BTN_MASK	include/buttons.h	31;"	d
+LOCAL_AND_BCAST	badge_apps/blinkenlights.c	/^    LOCAL_AND_BCAST$/;"	e	enum:__anon13	file:
+LOCAL_AND_BCAST	badge_apps/conductor.c	/^    LOCAL_AND_BCAST$/;"	e	enum:__anon15	file:
+LOCAL_ONLY	badge_apps/blinkenlights.c	/^    LOCAL_ONLY,$/;"	e	enum:__anon13	file:
+LOCAL_ONLY	badge_apps/conductor.c	/^    LOCAL_ONLY,$/;"	e	enum:__anon15	file:
+LOW_POWER_SLEEP	badge_menu.c	/^    LOW_POWER_SLEEP,$/;"	e	enum:badge_idle_state	file:
+LOW_RESET	badge_apps/badgelandia.c	238;"	d	file:
+MAGENTA	include/colors.h	35;"	d
+MAIN_BUTTON_COMPLETE	badge_apps/badge_tutorial.c	/^    MAIN_BUTTON_COMPLETE,$/;"	e	enum:tutorial_state	file:
+MAIN_BUTTON_PROMPT	badge_apps/badge_tutorial.c	/^    MAIN_BUTTON_PROMPT,$/;"	e	enum:tutorial_state	file:
+MAIN_MENU_BKG_COLOR	badge_menu.c	37;"	d	file:
+MAIN_MENU_SCRATCH_HEIGHT	badge_menu.c	41;"	d	file:
+MAIN_MENU_SCRATCH_WIDTH	badge_menu.c	40;"	d	file:
+MAIN_MENU_SCRATCH_X	badge_menu.c	38;"	d	file:
+MAIN_MENU_SCRATCH_Y	badge_menu.c	39;"	d	file:
+MAIN_MENU_STYLE	include/badge_menu.h	/^    MAIN_MENU_STYLE,$/;"	e	enum:__anon5
+MAIN_MENU_WITH_TIME_DATE_STYLE	include/badge_menu.h	/^    MAIN_MENU_WITH_TIME_DATE_STYLE,$/;"	e	enum:__anon5
+MASK	badge_apps/udraw.c	25;"	d	file:
+MASK	utils.c	17;"	d	file:
+MASK_1	badge_apps/udraw.c	24;"	d	file:
+MAXDEBUGBUFFER	include/debug.h	19;"	d
+MAXDEBUGBUFFER	include/debug.h	32;"	d
+MAXPACKETQUEUE	include/ir.h	28;"	d
+MAX_ADC_PINS	include/adc.h	44;"	d
+MAX_DEFENSE_STRUCTURES	badge_apps/groundwar.c	106;"	d	file:
+MAX_MENU_DEPTH	badge_menu.c	30;"	d	file:
+MAX_TORP	badge_apps/star_shooter.c	12;"	d	file:
+MEDIUM	badge_apps/groundwar.c	/^    MEDIUM,$/;"	e	enum:groundwar_defense_type	file:
+MENU	include/badge_menu.h	/^    MENU, \/**< sub menu type *\/$/;"	e	enum:type
+MENUING	badge_apps/groundwar.c	/^    MENUING,$/;"	e	enum:groundwar_game_state	file:
+MENU_EXPLAINATION	badge_apps/badge_tutorial.c	/^    MENU_EXPLAINATION,$/;"	e	enum:tutorial_state	file:
+MENU_LEFT	badge_menu.c	46;"	d	file:
+MENU_STYLE	include/badge_menu.h	/^} MENU_STYLE;$/;"	t	typeref:enum:__anon5
+MIC_H	include/mic.h	6;"	d
+MIC_IN	include/mic.h	8;"	d
+MIDDLE_TOUCH	include/buttons.h	85;"	d
+MIDDLE_TOUCH_AND_CONSUME	include/buttons.h	77;"	d
+MIDDLE_TOUCH_HOLD	include/buttons.h	81;"	d
+MIDDLE_TOUCH_MASK	include/buttons.h	36;"	d
+MIDI	include/assetList.h	/^    MIDI,$/;"	e	enum:__anon4
+MORE	include/badge_menu.h	/^    MORE = 0, \/**< if the menu is too long to fit *\/$/;"	e	enum:type
+NEXT_WAVE	badge_apps/groundwar.c	/^    NEXT_WAVE,$/;"	e	enum:groundwar_state	file:
+NOP	S6B33.c	44;"	d	file:
+NOPE	utils.c	161;"	d	file:
+NOSCREENSAVER	badge_menu.c	503;"	d	file:
+NULL	badge_menu.c	5;"	d	file:
+NULL	schedule.c	3;"	d	file:
+NUM_DEFENSE_TYPES	badge_apps/groundwar.c	83;"	d	file:
+NUM_MINIONS	badge_apps/groundwar.c	139;"	d	file:
+NUM_MINION_TYPES	badge_apps/groundwar.c	45;"	d	file:
+NUM_POLYS	badge_apps/screensaver.c	366;"	d	file:
+NUM_SCREEN_SAVERS	badge_apps/screensaver.c	602;"	d	file:
+NUM_WAVES	badge_apps/groundwar.c	46;"	d	file:
+NUM_WORD_THINGS	badge_apps/boot_splash.c	39;"	d	file:
+NVMErasePage	flash.c	/^void NVMErasePage(unsigned int *addr)$/;"	f
+NVMReadWord	flash.c	/^unsigned int NVMReadWord(unsigned int *addr) $/;"	f
+NVMWriteWord	flash.c	/^void NVMWriteWord(unsigned int *addr, unsigned int word) $/;"	f
+NVread	flash.c	/^unsigned char NVread(unsigned char appId, unsigned char dataId, unsigned char *data, unsigned char dataSize)$/;"	f
+NVwrite	flash.c	/^unsigned char NVwrite(unsigned char appId, unsigned char dataId, unsigned char *data, unsigned char dataSize)$/;"	f
+N_GOONS	badge_apps/badgelandia.c	144;"	d	file:
+N_LINE_INVERSION	S6B33.c	60;"	d	file:
+N_STARS	badge_apps/star_shooter.c	11;"	d	file:
+OSCILLATION_MODE	S6B33.c	45;"	d	file:
+OTP_MODEOFF	S6B33.c	79;"	d	file:
+PACKRGB	include/colors.h	5;"	d
+PAGESIZE	badge_menu.c	75;"	d	file:
+PARTIAL_DISPLAY_MODE	S6B33.c	72;"	d	file:
+PARTIAL_END_LINE	S6B33.c	74;"	d	file:
+PARTIAL_START_LINE	S6B33.c	73;"	d	file:
+PI	include/utils.h	13;"	d
+PICTURE1BIT	include/assetList.h	/^    PICTURE1BIT,$/;"	e	enum:__anon4
+PICTURE2BIT	include/assetList.h	/^    PICTURE2BIT,$/;"	e	enum:__anon4
+PICTURE4BIT	include/assetList.h	/^    PICTURE4BIT,$/;"	e	enum:__anon4
+PICTURE8BIT	include/assetList.h	/^    PICTURE8BIT,$/;"	e	enum:__anon4
+PING_PAIR_CONFIRM	include/ir.h	25;"	d
+PING_PAIR_REQUEST	include/ir.h	24;"	d
+PING_REQUEST	include/ir.h	21;"	d
+PING_RESPONSE	include/ir.h	22;"	d
+PIN_A0	S6B33.c	21;"	d	file:
+PIN_A0	S6B33.c	33;"	d	file:
+PIN_BACKLIGHT	S6B33.c	19;"	d	file:
+PIN_BACKLIGHT	S6B33.c	31;"	d	file:
+PIN_DC	S6B33.c	25;"	d	file:
+PIN_DC	S6B33.c	37;"	d	file:
+PIN_SCE	S6B33.c	27;"	d	file:
+PIN_SCE	S6B33.c	39;"	d	file:
+PIN_SCLK	S6B33.c	23;"	d	file:
+PIN_SCLK	S6B33.c	35;"	d	file:
+PIN_SDA	S6B33.c	22;"	d	file:
+PIN_SDA	S6B33.c	34;"	d	file:
+PIN_SDIN	S6B33.c	26;"	d	file:
+PIN_SDIN	S6B33.c	38;"	d	file:
+PIN__CS	S6B33.c	24;"	d	file:
+PIN__CS	S6B33.c	36;"	d	file:
+PIN__RESET	S6B33.c	20;"	d	file:
+PIN__RESET	S6B33.c	32;"	d	file:
+PIXEL_GRUNT_HP	badge_apps/groundwar.c	27;"	d	file:
+PIXEL_GRUNT_SPEED	badge_apps/groundwar.c	26;"	d	file:
+PIX_BYTES	badge_apps/udraw.c	30;"	d	file:
+PIX_NUM	badge_apps/udraw.c	29;"	d	file:
+PIX_NUM_WIDE	badge_apps/udraw.c	/^typedef uint32_t PIX_NUM_WIDE;          \/\/number of writable pixels wide in bits$/;"	t	file:
+PIX_WIDTH	badge_apps/udraw.c	32;"	d	file:
+PROMPT	badge_apps/boot_splash.c	/^    PROMPT,$/;"	e	enum:boot_splash_state	file:
+QC_IR	ir.c	/^unsigned char QC_IR = 0;$/;"	v
+RAM_SKIP_AREA	S6B33.c	68;"	d	file:
+RAND_NUM	badge_apps/groundwar.c	141;"	d	file:
+RAND_NUM	badge_apps/groundwar.c	144;"	d	file:
+RED	include/colors.h	20;"	d
+RED_BG	include/badge_menu.h	3;"	d
+RED_PALETTE	S6B33.c	62;"	d	file:
+REMOVE_FROM_MASK	include/buttons.h	42;"	d
+RF_H	include/rf.h	6;"	d
+RF_IN	include/rf.h	9;"	d
+RF_POWER	include/rf.h	8;"	d
+RGBPACKED	badge_menu.c	52;"	d	file:
+RGBPACKED	include/colors.h	4;"	d
+RGB_LED_H	include/rgb_led.h	9;"	d
+RIGHT_BTN	include/buttons.h	65;"	d
+RIGHT_BTN_AND_CONSUME	include/buttons.h	53;"	d
+RIGHT_BTN_HOLD	include/buttons.h	60;"	d
+RIGHT_BTN_MASK	include/buttons.h	32;"	d
+ROLL	badge_apps/dice_roll.c	/^    ROLL,$/;"	e	enum:boot_splash_state	file:
+ROW_VECTOR_MODE	S6B33.c	59;"	d	file:
+RUN	badge_apps/lander.c	/^    RUN$/;"	e	enum:__anon16	file:
+RUN_BLINKENLIGHTS	badge_apps/blinkenlights.c	/^    RUN_BLINKENLIGHTS$/;"	e	enum:__anon12	file:
+RUN_CONDUCTOR	badge_apps/conductor.c	/^    RUN_CONDUCTOR$/;"	e	enum:__anon14	file:
+RVASEC	badge_apps/boot_splash.c	/^    RVASEC,$/;"	e	enum:boot_splash_state	file:
+RVASEC2016_BITS	include/rvasec2016.h	3;"	d
+RVASEC2016_CMAP	include/rvasec2016.h	6;"	d
+RVASEC2016_DATA	include/rvasec2016.h	7;"	d
+RVASEC2016_HEIGHT	include/rvasec2016.h	5;"	d
+RVASEC2016_WIDTH	include/rvasec2016.h	4;"	d
+S6B33_bias	S6B33.c	/^void S6B33_bias(unsigned char data)$/;"	f
+S6B33_contrast	S6B33.c	/^void S6B33_contrast(unsigned char data)$/;"	f
+S6B33_flip	S6B33.c	/^void S6B33_flip()$/;"	f
+S6B33_h	include/S6B33.h	5;"	d
+S6B33_init_device	S6B33.c	/^void S6B33_init_device(void)$/;"	f
+S6B33_pixel	S6B33.c	/^void S6B33_pixel(unsigned short pixel)$/;"	f
+S6B33_rect	S6B33.c	/^void S6B33_rect(int x, int y, int width, int height)$/;"	f
+S6B33_send_command	S6B33.c	/^void S6B33_send_command(unsigned char data) {$/;"	f
+S6B33_send_data	S6B33.c	/^void S6B33_send_data(unsigned short data) {$/;"	f
+S6Delay	S6B33.c	/^void S6Delay()$/;"	f
+SAMPLE_HZ	include/adc.h	/^enum SAMPLE_HZ {$/;"	g
+SCAN_BLANK	badge_menu.c	49;"	d	file:
+SCREENSAVER	badge_menu.c	/^    SCREENSAVER,$/;"	e	enum:badge_idle_state	file:
+SCREEN_WIDTH	badge_apps/udraw.c	31;"	d	file:
+SCROLL_START_LINE	S6B33.c	76;"	d	file:
+SETTINGS_H	include/settings.h	9;"	d
+SET_HIGH_BIT	badge_apps/udraw.c	19;"	d	file:
+SET_LVL_WAVE_DIST	badge_apps/groundwar.c	585;"	d	file:
+SET_PT_XY	badge_apps/badgelandia.c	115;"	d	file:
+SET_RAND	badge_apps/star_shooter.c	10;"	d	file:
+SHAKE	badge_apps/dice_roll.c	/^    SHAKE,$/;"	e	enum:boot_splash_state	file:
+SHELL_LAUNCH	badge_apps/boot_splash.c	/^    SHELL_LAUNCH,$/;"	e	enum:boot_splash_state	file:
+SHOW	badge_apps/dice_roll.c	/^    SHOW,$/;"	e	enum:boot_splash_state	file:
+SHOW_MENU	badge_apps/blinkenlights.c	/^    SHOW_MENU,$/;"	e	enum:__anon12	file:
+SHOW_MENU	badge_apps/conductor.c	/^    SHOW_MENU,$/;"	e	enum:__anon14	file:
+SIN	include/utils.h	11;"	d
+SKIP_BIT	include/badge_menu.h	/^    SKIP_BIT,    \/**< skip when scrolling *\/$/;"	e	enum:attrib_bits
+SKIP_ITEM	include/badge_menu.h	20;"	d
+SLEEP	badge_apps/groundwar.c	/^    SLEEP,$/;"	e	enum:groundwar_state	file:
+SLIDER_COMPLETE	badge_apps/badge_tutorial.c	/^    SLIDER_COMPLETE,$/;"	e	enum:tutorial_state	file:
+SLIDER_PROMPT	badge_apps/badge_tutorial.c	/^    SLIDER_PROMPT,$/;"	e	enum:tutorial_state	file:
+SMALL	badge_apps/groundwar.c	/^    SMALL,$/;"	e	enum:groundwar_defense_type	file:
+SMENU	include/badge_menu.h	/^	SMENU \/\/ Special case for schedule movement$/;"	e	enum:type
+SOLO_BTN_MASK	include/buttons.h	28;"	d
+SPECTATING	badge_apps/groundwar.c	/^    SPECTATING,$/;"	e	enum:groundwar_game_state	file:
+SPEC_DISPLAY_PATTERN	S6B33.c	71;"	d	file:
+SPLASH_SHIFT_DOWN	badge_apps/boot_splash.c	29;"	d	file:
+SPLASH_SHIFT_DOWN	badge_apps/dice_roll.c	128;"	d	file:
+SQUARE	badge_apps/groundwar.c	/^    SQUARE,$/;"	e	enum:groundwar_minion_type	file:
+SS_AI	badge_apps/star_shooter.c	/^    SS_AI,$/;"	e	enum:__anon18	file:
+SS_BATTLE	badge_apps/star_shooter.c	/^    SS_BATTLE,$/;"	e	enum:__anon17	file:
+SS_CRUISE	badge_apps/star_shooter.c	/^    SS_CRUISE,$/;"	e	enum:__anon17	file:
+SS_GAME_OVER	badge_apps/star_shooter.c	/^    SS_GAME_OVER,$/;"	e	enum:__anon17	file:
+SS_NEW_LEVEL	badge_apps/star_shooter.c	/^    SS_NEW_LEVEL,$/;"	e	enum:__anon17	file:
+SS_PLAYER	badge_apps/star_shooter.c	/^    SS_PLAYER,$/;"	e	enum:__anon18	file:
+STANDBY_OFF	S6B33.c	54;"	d	file:
+STANDBY_ON	S6B33.c	55;"	d	file:
+STARTING_FUEL	badge_apps/lander.c	20;"	d	file:
+STEP	badge_apps/groundwar.c	/^    STEP,$/;"	e	enum:groundwar_state	file:
+SYSID	flash.c	197;"	d	file:
+SYS_FREQ	timer1_int.c	35;"	d	file:
+T2_TICK	timer1_int.c	38;"	d	file:
+T3_TICK	timer1_int.c	41;"	d	file:
+T4_TICK	timer1_int.c	45;"	d	file:
+TASK	include/badge_menu.h	/^    TASK, \/\/ FreeRTOS Task$/;"	e	enum:type
+TASK_UNDER_TEST	app.c	782;"	d	file:
+TEMP_COMPENSATION	S6B33.c	51;"	d	file:
+TEXT	include/badge_menu.h	/^    TEXT, \/**< text to display *\/$/;"	e	enum:type
+TEXTRECT_OFFSET	badge_menu.c	50;"	d	file:
+THRUSTER_COOL_DOWN	badge_apps/badgelandia.c	153;"	d	file:
+TIME_BEFORE_SLEEP	badge_menu.c	484;"	d	file:
+TIME_BETWEEN_SCREENSAVER	badge_menu.c	483;"	d	file:
+TIME_SINCE_LAST_INPUT	include/buttons.h	88;"	d
+TOUCH_PCT_CALC	buttons.c	103;"	d	file:
+TOUCH_PCT_CALC	buttons.c	109;"	d	file:
+TOUCH_PCT_CALC	buttons.c	97;"	d	file:
+TRIANGLE	badge_apps/groundwar.c	/^    TRIANGLE,$/;"	e	enum:groundwar_minion_type	file:
+TRIANGLE_GRUNT_HP	badge_apps/groundwar.c	30;"	d	file:
+TRIANGLE_GRUNT_SPEED	badge_apps/groundwar.c	29;"	d	file:
+TRUE	badge_apps/star_shooter.c	9;"	d	file:
+TUNNEL_COLOR	badge_apps/screensaver.c	255;"	d	file:
+TWO_PI	include/fb.h	34;"	d
+TWO_PI	include/utils.h	14;"	d
+UNPACKB	include/colors.h	9;"	d
+UNPACKG	include/colors.h	8;"	d
+UNPACKR	include/colors.h	7;"	d
+UNUSED_DEFENSE	badge_apps/groundwar.c	/^    UNUSED_DEFENSE$/;"	e	enum:groundwar_defense_type	file:
+UNUSED_MINION	badge_apps/groundwar.c	/^    UNUSED_MINION$/;"	e	enum:groundwar_minion_type	file:
+UP_BTN	include/buttons.h	63;"	d
+UP_BTN_AND_CONSUME	include/buttons.h	51;"	d
+UP_BTN_HOLD	include/buttons.h	58;"	d
+UP_BTN_MASK	include/buttons.h	29;"	d
+UP_TOUCH	include/buttons.h	86;"	d
+UP_TOUCH_AND_CONSUME	include/buttons.h	78;"	d
+UP_TOUCH_HOLD	include/buttons.h	82;"	d
+UP_TOUCH_MASK	include/buttons.h	35;"	d
+USBDEVICETASK_ATTACHUSB_STATE	app.h	114;"	d
+USBDEVICETASK_OPENUSB_STATE	app.h	113;"	d
+USBDEVICETASK_PRIO	app.h	74;"	d
+USBDEVICETASK_PROCESSUSBEVENTS_STATE	app.h	115;"	d
+USBDEVICETASK_READDONECOM1_EVENT	app.h	119;"	d
+USBDEVICETASK_READDONECOM2_EVENT	app.h	120;"	d
+USBDEVICETASK_SIZE	app.h	81;"	d
+USBDEVICETASK_USBCONFIGURED_EVENT	app.h	118;"	d
+USBDEVICETASK_USBPOWERED_EVENT	app.h	117;"	d
+USBDEVICETASK_WRITEDONECOM1_EVENT	app.h	121;"	d
+USBDEVICETASK_WRITEDONECOM2_EVENT	app.h	122;"	d
+USBDEVICETASK_WRITE_BUFFER_TO_COM1	app.c	326;"	d	file:
+USBDeviceTask_EventQueue_Handle	app.c	/^QueueHandle_t USBDeviceTask_EventQueue_Handle;$/;"	v
+USBDevice_Task	app.c	/^void USBDevice_Task(void* p_arg)$/;"	f
+UTILS_H	include/utils.h	9;"	d
+VERT_BIT	include/badge_menu.h	/^    VERT_BIT = 9,$/;"	e	enum:attrib_bits
+VERT_ITEM	include/badge_menu.h	18;"	d
+WAIT_FOR_SCREENSAVER	badge_menu.c	/^    WAIT_FOR_SCREENSAVER,$/;"	e	enum:badge_idle_state	file:
+WAKEUP	badge_menu.c	/^    WAKEUP$/;"	e	enum:badge_idle_state	file:
+WAVES_DISTRIBUTION	badge_apps/groundwar.c	147;"	d	file:
+WHITE	include/colors.h	31;"	d
+WHITE_MASK	badge_apps/udraw.c	23;"	d	file:
+WHITE_ON_BLACK	include/badge_menu.h	/^    WHITE_ON_BLACK,$/;"	e	enum:__anon5
+WORLD_HEIGHT	badge_apps/badgelandia.c	20;"	d	file:
+WORLD_WIDTH	badge_apps/badgelandia.c	21;"	d	file:
+WriteBuffer	app.c	/^uint8_t APP_MAKE_BUFFER_DMA_READY WriteBuffer[APP_WRITE_BUFFER_SIZE] ;$/;"	v
+X_ADDR_AREA	S6B33.c	66;"	d	file:
+Y1	buttons.c	100;"	d	file:
+Y1	buttons.c	106;"	d	file:
+Y1	buttons.c	94;"	d	file:
+Y2	buttons.c	101;"	d	file:
+Y2	buttons.c	107;"	d	file:
+Y2	buttons.c	95;"	d	file:
+Y3	buttons.c	102;"	d	file:
+Y3	buttons.c	108;"	d	file:
+Y3	buttons.c	96;"	d	file:
+YELLOW	include/colors.h	34;"	d
+Y_ADDR_AREA	S6B33.c	67;"	d	file:
+_APP_H	app.h	47;"	d
+_FLASH_TEST_H	include/flash_test.h	19;"	d
+_X	utils.c	100;"	d	file:
+_Y	utils.c	101;"	d	file:
+__ISR	adc_int.c	/^void __ISR(_ADC_VECTOR, IPL4SOFT) ADC_handler(void)$/;"	f
+__ISR	timer1_int.c	/^void __ISR( _EXTERNAL_1_VECTOR, IPL6SOFT) Int1Interrupt(void)$/;"	f
+__ISR	timer1_int.c	/^void __ISR(_TIMER_2_VECTOR, IPL5SOFT) Timer2Handler(void)$/;"	f
+__ISR	timer1_int.c	/^void __ISR(_TIMER_3_VECTOR, IPL2SOFT) Timer3Handler(void)$/;"	f
+__ISR	timer1_int.c	/^void __ISR(_TIMER_4_VECTOR, IPL3SOFT) Timer4Handler(void)$/;"	f
+_cursor	badge_apps/udraw.c	/^struct _cursor {                        \/\/cursor position$/;"	s	file:
+_draw_state	badge_apps/udraw.c	/^struct _draw_state {$/;"	s	file:
+_game	badge_apps/star_shooter.c	/^struct _game {$/;"	s	file:
+_image_buffer	badge_apps/udraw.c	/^struct _image_buffer {                  \/\/image buffer bit masks$/;"	s	file:
+_ss_asteroid	badge_apps/star_shooter.c	/^struct _ss_asteroid {$/;"	s	file:
+_ss_player	badge_apps/star_shooter.c	/^struct _ss_player {$/;"	s	file:
+_ss_stars	badge_apps/star_shooter.c	/^struct _ss_stars {$/;"	s	file:
+_ss_torp_map	badge_apps/star_shooter.c	/^struct _ss_torp_map {$/;"	s	file:
+about_the_bird	badge_apps/screensaver.c	/^void about_the_bird(void* p_arg){$/;"	f
+acc_x	include/lander.h	/^    char acc_x, acc_y;$/;"	m	struct:object_state
+acc_y	include/lander.h	/^    char acc_x, acc_y;$/;"	m	struct:object_state
+accel	badge_apps/badgelandia.c	/^    unsigned char accel, max_speed;$/;"	m	struct:badgelandia_basic_ship_t	file:
+achievements	include/flash.h	/^   char achievements[8];$/;"	m	struct:sysData_t
+adc_state	badge_apps/adc.c	/^enum adc_state {$/;"	g	file:
+adc_table	adc_int.c	/^const struct adc_table_t adc_table[] = {$/;"	v	typeref:struct:adc_table_t
+adc_table	test.c	/^const struct adc_table_t adc_table[] = {$/;"	v	typeref:struct:adc_table_t
+adc_table_t	adc_int.c	/^struct adc_table_t {$/;"	s	file:
+adc_table_t	test.c	/^struct adc_table_t {$/;"	s	file:
+adc_task	badge_apps/adc.c	/^void adc_task(void* p_arg) {$/;"	f
+add_fuel	badge_apps/lander.c	/^void add_fuel(unsigned char fuel_amount){$/;"	f
+address	include/ir.h	/^       unsigned  address:5;$/;"	m	struct:IRpacket_t
+ai_x	badge_apps/star_shooter.c	/^    unsigned char ai_x[MAX_TORP];$/;"	m	struct:_ss_torp_map	file:
+ai_y	badge_apps/star_shooter.c	/^    unsigned char ai_y[MAX_TORP];$/;"	m	struct:_ss_torp_map	file:
+alien	include/lander.h	/^    object_state ship, pad, alien, fuel_can;$/;"	m	struct:lander_game_state_t
+analog_info	adc_int.c	/^const struct analog_src_t analog_info[] = {$/;"	v	typeref:struct:analog_src_t
+analog_src_t	include/adc.h	/^struct analog_src_t {$/;"	s
+analog_src_t	include/adc.h	/^} analog_src_t;$/;"	v	typeref:struct:analog_src_t
+appCOMPortObjects	app.h	/^    APP_COM_PORT_OBJECT appCOMPortObjects[2];$/;"	m	struct:__anon2
+appData	app.c	/^APP_DATA appData;$/;"	v
+appId	include/flash.h	/^    unsigned char appId;$/;"	m	struct:flashHeader_t
+asset	include/assetList.h	/^struct asset {$/;"	s
+assetId	include/assetList.h	/^    unsigned char assetId; \/**< number (enum) used to reference object *\/$/;"	m	struct:asset
+assetList	assetList.c	/^const struct asset assetList[] = {$/;"	v	typeref:struct:asset
+assetList_h	include/assetList.h	5;"	d
+assets_h	include/assets.h	2;"	d
+asteroid	badge_apps/star_shooter.c	/^    struct _ss_asteroid asteroid;$/;"	m	struct:_ss_stars	typeref:struct:_ss_stars::_ss_asteroid	file:
+attrib	include/badge_menu.h	/^    unsigned short attrib; \/**< set of attribute bits for menu item *\/$/;"	m	struct:menu_t
+attrib_bits	include/badge_menu.h	/^enum attrib_bits {$/;"	g
+available_thruster_mask	badge_apps/badgelandia.c	/^    unsigned char available_thruster_mask;$/;"	m	struct:badgelandia_basic_inventory_t	file:
+available_weapons_mask	badge_apps/badgelandia.c	/^    unsigned char available_weapons_mask;$/;"	m	struct:badgelandia_basic_inventory_t	file:
+b	include/flash.h	/^    char b[4];		\/* byte access *\/$/;"	m	union:flashWord_u
+backlight	include/flash.h	/^   char backlight;      \/* 1 byte *\/$/;"	m	struct:sysData_t
+backlight	timer1_int.c	/^void backlight(unsigned char bright) {$/;"	f
+backlightList_m	settings.c	/^const struct menu_t backlightList_m[] = {$/;"	v	typeref:struct:menu_t
+backlight_cb	settings.c	/^void backlight_cb(struct menu_t *h) {$/;"	f
+backlight_m	settings.c	/^struct menu_t backlight_m[] = {$/;"	v	typeref:struct:menu_t
+badgeId	include/flash.h	/^   unsigned short badgeId; \/* 2 bytes == our badge Id *\/$/;"	m	struct:sysData_t
+badgeId	include/ir.h	/^       unsigned  badgeId:9;$/;"	m	struct:IRpacket_t
+badge_idle_state	badge_menu.c	/^enum badge_idle_state{$/;"	g	file:
+badge_itoa	utils.c	/^void badge_itoa(int value, unsigned char buffer[])$/;"	f
+badge_lander_state	badge_apps/lander.c	/^char badge_lander_state = LANDER_SHOW_MENU;$/;"	v
+badge_lander_task	badge_apps/lander.c	/^void badge_lander_task(void *p_arg)$/;"	f
+badge_tutorial_task	badge_apps/badge_tutorial.c	/^void badge_tutorial_task(void* p_arg)$/;"	f
+badgelandia_basic_inventory_t	badge_apps/badgelandia.c	/^struct badgelandia_basic_inventory_t {$/;"	s	file:
+badgelandia_basic_object_t	badge_apps/badgelandia.c	/^struct badgelandia_basic_object_t {$/;"	s	file:
+badgelandia_basic_ship_t	badge_apps/badgelandia.c	/^struct badgelandia_basic_ship_t {$/;"	s	file:
+badgelandia_goon_t	badge_apps/badgelandia.c	/^struct badgelandia_goon_t {$/;"	s	file:
+badgelandia_growth	badge_apps/badgelandia.c	/^void badgelandia_growth(){$/;"	f
+badgelandia_player_t	badge_apps/badgelandia.c	/^struct badgelandia_player_t {$/;"	s	file:
+badgelandia_task	badge_apps/badgelandia.c	/^void badgelandia_task(void* p_arg){$/;"	f
+badgey_bird_active_pipe_cnt	badge_apps/badgey_bird.c	/^unsigned char badgey_bird_active_pipe_cnt = 0;$/;"	v
+badgey_bird_add_active_pipe	badge_apps/badgey_bird.c	/^void badgey_bird_add_active_pipe(){$/;"	f
+badgey_bird_draw_bird	badge_apps/badgey_bird.c	/^void badgey_bird_draw_bird(){$/;"	f
+badgey_bird_draw_current_score	badge_apps/badgey_bird.c	/^void badgey_bird_draw_current_score(){$/;"	f
+badgey_bird_draw_landing_page	badge_apps/badgey_bird.c	/^void badgey_bird_draw_landing_page(){$/;"	f
+badgey_bird_draw_pipe	badge_apps/badgey_bird.c	/^void badgey_bird_draw_pipe(struct BB_pipe_state pipe_t){$/;"	f
+badgey_bird_draw_pipes	badge_apps/badgey_bird.c	/^void badgey_bird_draw_pipes(){$/;"	f
+badgey_bird_init	badge_apps/badgey_bird.c	/^void badgey_bird_init(){$/;"	f
+badgey_bird_is_alive	badge_apps/badgey_bird.c	/^char badgey_bird_is_alive(){$/;"	f
+badgey_bird_menu_exit	badge_apps/badgey_bird.c	/^void badgey_bird_menu_exit(){$/;"	f
+badgey_bird_menu_play	badge_apps/badgey_bird.c	/^void badgey_bird_menu_play(){$/;"	f
+badgey_bird_pipes	badge_apps/badgey_bird.c	/^struct BB_pipe_state badgey_bird_pipes[BADGEY_BIRD_MAX_PIPES];$/;"	v	typeref:struct:BB_pipe_state
+badgey_bird_render	badge_apps/badgey_bird.c	/^void badgey_bird_render(){$/;"	f
+badgey_bird_score	badge_apps/badgey_bird.c	/^unsigned char badgey_bird_score = 0;$/;"	v
+badgey_bird_state	badge_apps/badgey_bird.c	/^unsigned char badgey_bird_state = BADGEYB_SHOW_MENU;\/\/BADGEYB_INIT;$/;"	v
+badgey_bird_task	badge_apps/badgey_bird.c	/^void badgey_bird_task(void* p_arg){$/;"	f
+badgey_bird_task_real	badge_apps/badgey_bird.c	/^void badgey_bird_task_real(void* p_arg){$/;"	f
+badgey_bird_top_score	badge_apps/badgey_bird.c	/^unsigned char badgey_bird_top_score = 0;$/;"	v
+badgey_bird_update	badge_apps/badgey_bird.c	/^void badgey_bird_update(){$/;"	f
+badgey_bird_update_pipes	badge_apps/badgey_bird.c	/^void badgey_bird_update_pipes(){$/;"	f
+bb_most_right_pipe_x	badge_apps/badgey_bird.c	/^unsigned char bb_most_right_pipe_x = 0;$/;"	v
+beginNote	assets.c	/^void beginNote(unsigned short freq){$/;"	f
+bird_acc_y	badge_apps/badgey_bird.c	/^unsigned char bird_acc_y = 0;$/;"	v
+bird_pos_x	badge_apps/badgey_bird.c	/^const unsigned char bird_pos_x = BADGEY_BIRD_POS_X;$/;"	v
+bird_pos_y	badge_apps/badgey_bird.c	/^unsigned char bird_pos_y = 50;$/;"	v
+bird_vel_y	badge_apps/badgey_bird.c	/^unsigned char bird_vel_y = 0;$/;"	v
+bits16	badge_apps/udraw.c	/^    uint16_t bits16;$/;"	m	union:half_pkt	file:
+bits8	badge_apps/udraw.c	/^    struct short_halfs bits8;           \/\/union for breaking up packet data$/;"	m	union:half_pkt	typeref:struct:half_pkt::short_halfs	file:
+bl_blue	badge_apps/blinkenlights.c	/^unsigned char bl_red = 50, bl_green = 40, bl_blue = 0;$/;"	v
+bl_clear_colors	badge_apps/blinkenlights.c	/^void bl_clear_colors()$/;"	f
+bl_green	badge_apps/blinkenlights.c	/^unsigned char bl_red = 50, bl_green = 40, bl_blue = 0;$/;"	v
+bl_mode	badge_apps/blinkenlights.c	/^char bl_mode = LOCAL_ONLY;$/;"	v
+bl_populate_menu	badge_apps/blinkenlights.c	/^void bl_populate_menu()$/;"	f
+bl_red	badge_apps/blinkenlights.c	/^unsigned char bl_red = 50, bl_green = 40, bl_blue = 0;$/;"	v
+bl_state	badge_apps/blinkenlights.c	/^char bl_state = INIT;$/;"	v
+blinkenlights_config_m	badge_apps/blinkenlights.c	/^struct menu_t blinkenlights_config_m[] = {$/;"	v	typeref:struct:menu_t
+blinkenlights_task	badge_apps/blinkenlights.c	/^void blinkenlights_task(void *args)$/;"	f
+blue	badge_apps/udraw.c	/^    PIX_NUM_WIDE blue[PIX_NUM];         \/\/uint32 pixel wide blue mask[32 element tall]$/;"	m	struct:_image_buffer	file:
+blue	timer1_int.c	/^void blue(unsigned char onPWM) {$/;"	f
+boot_splash_state	badge_apps/boot_splash.c	/^enum boot_splash_state {$/;"	g	file:
+boot_splash_state	badge_apps/dice_roll.c	/^enum boot_splash_state {$/;"	g	file:
+boot_splash_task	badge_apps/boot_splash.c	/^void boot_splash_task(void* p_arg) {$/;"	f
+bottom_note	badge_apps/conductor.c	/^unsigned short bottom_note = 154;$/;"	v
+breakData	app.h	/^    uint16_t breakData;$/;"	m	struct:__anon1
+buffer	flash.c	/^char buffer[128];$/;"	v
+buffer	include/fb.h	/^   unsigned short *buffer;$/;"	m	struct:framebuffer_t
+button_task	buttons.c	/^void button_task(void* p_arg)$/;"	f
+buzzer_config_cb	settings.c	/^void buzzer_config_cb()$/;"	f
+buzzer_config_m	settings.c	/^struct menu_t buzzer_config_m[] = {$/;"	v	typeref:struct:menu_t
+buzzer_m	settings.c	/^struct menu_t buzzer_m[] = {$/;"	v	typeref:struct:menu_t
+bytes	badge_apps/udraw.c	/^    uint8_t bytes[4];$/;"	m	union:line_byte_index	file:
+calc_adcs	adc_int.c	/^unsigned char calc_adcs(unsigned char chans,  int hz, unsigned char *samc_out) {$/;"	f
+calc_adcs	test.c	/^unsigned char calc_adcs(unsigned char chans,  int hz, unsigned char *samc_out) {$/;"	f
+carzy_tunnel_animator	badge_apps/screensaver.c	/^void carzy_tunnel_animator(void* p_arg){$/;"	f
+cdcInstance	app.h	/^    USB_DEVICE_CDC_INDEX cdcInstance;$/;"	m	struct:__anon1
+cdc_write_buffer_lock	app.c	/^SemaphoreHandle_t cdc_write_buffer_lock;$/;"	v
+cdc_write_requester	app.c	/^static TaskHandle_t cdc_write_requester = NULL;$/;"	v	file:
+changed	include/fb.h	/^   unsigned short changed;$/;"	m	struct:framebuffer_t
+chans	adc_int.c	/^   unsigned char chans;$/;"	m	struct:adc_table_t	file:
+chans	include/adc.h	/^   unsigned chans;  \/\/ # channels if a combo$/;"	m	struct:analog_src_t
+chans	test.c	/^   unsigned char chans;$/;"	m	struct:adc_table_t	file:
+check_box_collision	utils.c	/^unsigned char check_box_collision(unsigned char x1, unsigned char y1,$/;"	f
+check_range_overlap	utils.c	/^unsigned char check_range_overlap(unsigned char p1, unsigned char o1,$/;"	f
+clear_buttons	buttons.c	/^void clear_buttons(){$/;"	f
+color	badge_apps/udraw.c	/^    unsigned char color;                \/\/current draw color$/;"	m	struct:_draw_state	file:
+color	include/fb.h	/^   unsigned short color;$/;"	m	struct:framebuffer_t
+colors_h	include/colors.h	2;"	d
+com1ReadBuffer	app.c	/^uint8_t APP_MAKE_BUFFER_DMA_READY com1ReadBuffer[APP_READ_BUFFER_SIZE] ;$/;"	v
+com2ReadBuffer	app.c	/^uint8_t APP_MAKE_BUFFER_DMA_READY com2ReadBuffer[APP_READ_BUFFER_SIZE];$/;"	v
+command	include/ir.h	/^       unsigned  command:1;$/;"	m	struct:IRpacket_t
+con_mode	badge_apps/conductor.c	/^char con_mode = LOCAL_ONLY;$/;"	v
+con_state	badge_apps/conductor.c	/^char con_state = INIT;$/;"	v
+conductor_config_m	badge_apps/conductor.c	/^struct menu_t conductor_config_m[] = {$/;"	v	typeref:struct:menu_t
+conductor_task	badge_apps/conductor.c	/^void conductor_task(void *args)$/;"	f
+controlLineStateData	app.h	/^    USB_CDC_CONTROL_LINE_STATE controlLineStateData;$/;"	m	struct:__anon1
+create_flier	badge_apps/screensaver.c	/^void create_flier(struct gof_cell_t cell_grid[][GRID_DIM],$/;"	f
+create_player_vector	badge_apps/badgelandia.c	/^void create_player_vector(short pts[][2]){$/;"	f
+credits	badge_apps/badgelandia.c	/^    unsigned int credits;$/;"	m	struct:badgelandia_basic_inventory_t	file:
+ctor_badgelandia_basic_object	badge_apps/badgelandia.c	/^void ctor_badgelandia_basic_object(struct badgelandia_basic_object_t *o){$/;"	f
+currMenu	badge_menu.c	/^   struct menu_t *currMenu;$/;"	m	struct:menuStack_t	typeref:struct:menuStack_t::menu_t	file:
+current_fuel	badge_apps/badgelandia.c	/^    unsigned char max_fuel, current_fuel, ticks_per_fuel;$/;"	m	struct:badgelandia_basic_ship_t	file:
+current_hp	badge_apps/badgelandia.c	/^    unsigned char max_hp, current_hp;$/;"	m	struct:badgelandia_basic_ship_t	file:
+current_hp	badge_apps/groundwar.c	/^    unsigned char x, y, current_hp,$/;"	m	struct:groundwar_minion_t	file:
+current_wave	badge_apps/groundwar.c	/^    unsigned char current_wave;$/;"	m	struct:groundwar_level_t	file:
+cursor	badge_apps/udraw.c	/^    struct _cursor cursor;              \/\/cursor pos struct$/;"	m	struct:_draw_state	typeref:struct:_draw_state::_cursor	file:
+data	include/badge_menu.h	/^    } data; \/**< extra data used to process menu item; depends on type *\/$/;"	m	struct:menu_t	typeref:union:menu_t::__anon6
+data	include/ir.h	/^       unsigned  data:16;$/;"	m	struct:IRpacket_t
+dataId	include/flash.h	/^    unsigned char dataId;$/;"	m	struct:flashHeader_t
+dataSize	include/flash.h	/^    unsigned char dataSize;$/;"	m	struct:flashHeader_t
+data_cmap	include/assetList.h	/^    const char *data_cmap; \/**< color map lookup table for image data *\/$/;"	m	struct:asset
+datacb	include/assetList.h	/^    void (*datacb)(unsigned char, int); \/**< routine that can display or play asset *\/$/;"	m	struct:asset
+debugChar	debug.c	/^void debugChar(int level, unsigned char outChar)$/;"	f
+debugLevelSet	debug.c	/^void debugLevelSet(int level)$/;"	f
+debugString	debug.c	/^void debugString(int level, unsigned char *string)$/;"	f
+debug_h	include/debug.h	2;"	d
+defense_cost	badge_apps/groundwar.c	/^short defense_cost[] = {10, 35, 55};$/;"	v
+defense_damage	badge_apps/groundwar.c	/^const unsigned char defense_damage[] = {$/;"	v
+defense_range	badge_apps/groundwar.c	/^const unsigned char defense_range[] = {$/;"	v
+deviceHandle	app.h	/^    USB_DEVICE_HANDLE deviceHandle;$/;"	m	struct:__anon2
+dice_roll_task	badge_apps/dice_roll.c	/^void dice_roll_task(void* p_arg) {$/;"	f
+display_menu	badge_menu.c	/^struct menu_t *display_menu(struct menu_t *menu,$/;"	f
+distance_between_coords	utils.c	/^unsigned char distance_between_coords(unsigned char x1, unsigned char y1,$/;"	f
+distribution_of_units	badge_apps/groundwar.c	/^    unsigned char distribution_of_units[NUM_WAVES][NUM_MINION_TYPES];$/;"	m	struct:groundwar_level_t	file:
+doAudio	assets.c	/^void doAudio()$/;"	f
+doLED_PWM	timer1_int.c	/^void doLED_PWM()$/;"	f
+drag_cnt	include/lander.h	/^    unsigned char drag_cnt;$/;"	m	struct:lander_game_state_t
+drawAsset	assets.c	/^void drawAsset(unsigned char assetId)$/;"	f
+drawLCD1	assets.c	/^void drawLCD1(unsigned char assetId, int frame)$/;"	f
+drawLCD2	assets.c	/^void drawLCD2(unsigned char assetId, int frame)$/;"	f
+drawLCD4	assets.c	/^void drawLCD4(unsigned char assetId, int frame)$/;"	f
+drawLCD8	assets.c	/^void drawLCD8(unsigned char assetId, int frame)$/;"	f
+draw_1	badge_apps/dice_roll.c	/^void draw_1(){$/;"	f
+draw_2	badge_apps/dice_roll.c	/^void draw_2(){$/;"	f
+draw_3	badge_apps/dice_roll.c	/^void draw_3(){$/;"	f
+draw_4	badge_apps/dice_roll.c	/^void draw_4(){$/;"	f
+draw_5	badge_apps/dice_roll.c	/^void draw_5(){$/;"	f
+draw_6	badge_apps/dice_roll.c	/^void draw_6(){$/;"	f
+draw_cursor	badge_apps/udraw.c	/^void draw_cursor(struct _cursor pos) {$/;"	f
+draw_dpad	badge_apps/badge_tutorial.c	/^void draw_dpad(unsigned char dpad_up, $/;"	f
+draw_draw_pixel	badge_apps/udraw.c	/^void draw_draw_pixel(unsigned char x, unsigned char y, unsigned short color) {$/;"	f
+draw_drop_down	badge_apps/udraw.c	/^void draw_drop_down(void) {$/;"	f
+draw_exit	badge_apps/udraw.c	/^void draw_exit(void) {$/;"	f
+draw_get_first_line	badge_apps/udraw.c	/^unsigned char draw_get_first_line(struct _image_buffer img_buf) {$/;"	f
+draw_get_input	badge_apps/udraw.c	/^void draw_get_input(void) {$/;"	f
+draw_get_last_line	badge_apps/udraw.c	/^unsigned char draw_get_last_line(struct _image_buffer img_buf) {$/;"	f
+draw_init	badge_apps/udraw.c	/^void draw_init(void) {$/;"	f
+draw_ir_udraw	badge_apps/udraw.c	/^void draw_ir_udraw(struct IRpacket_t p) {$/;"	f
+draw_is_empty	badge_apps/udraw.c	/^unsigned char draw_is_empty(struct _image_buffer img_buf, unsigned char line) {$/;"	f
+draw_process	badge_apps/udraw.c	/^void draw_process() {$/;"	f
+draw_read_pixel	badge_apps/udraw.c	/^unsigned short draw_read_pixel(struct _image_buffer img_buf,unsigned char x, unsigned char y) {$/;"	f
+draw_read_pixel_data	badge_apps/udraw.c	/^unsigned char draw_read_pixel_data(PIX_NUM_WIDE const vert_index,unsigned const char horz_index) {$/;"	f
+draw_remove_pixel_data	badge_apps/udraw.c	/^void draw_remove_pixel_data(PIX_NUM_WIDE * vert_index,unsigned const char horz_index) {$/;"	f
+draw_render	badge_apps/udraw.c	/^void draw_render(void) {$/;"	f
+draw_send_first_pkt	badge_apps/udraw.c	/^union half_pkt draw_send_first_pkt(struct _image_buffer img_buf) {$/;"	f
+draw_send_image	badge_apps/udraw.c	/^void draw_send_image(struct _image_buffer img_buf) {$/;"	f
+draw_send_packet	badge_apps/udraw.c	/^void draw_send_packet(struct _image_buffer img_buf, unsigned char byte, unsigned char vert_index) {$/;"	f
+draw_state	badge_apps/udraw.c	/^struct _draw_state draw_state = {{0,0},DRAW_BLACK, DRAW_OFF,DRAW_INIT};$/;"	v	typeref:struct:_draw_state
+draw_write_pixel	badge_apps/udraw.c	/^void draw_write_pixel(struct _image_buffer * img_buf,struct _draw_state g_data) {$/;"	f
+draw_write_pixel_data	badge_apps/udraw.c	/^void draw_write_pixel_data(PIX_NUM_WIDE * vert_index,unsigned const char horz_index) {$/;"	f
+dumpSys	flash.c	/^void dumpSys(struct sysData_t *sdata)$/;"	f
+endNote	assets.c	/^void endNote(){$/;"	f
+enter_build_mode	badge_apps/groundwar.c	/^void enter_build_mode(){$/;"	f
+enter_spectate_mode	badge_apps/groundwar.c	/^void enter_spectate_mode(){$/;"	f
+equilateral_polygon_points	utils.c	/^void equilateral_polygon_points(short point_arr[][2], $/;"	f
+exist	badge_apps/star_shooter.c	/^    unsigned char exist;$/;"	m	struct:_ss_asteroid	file:
+exit_groundwar	badge_apps/groundwar.c	/^void exit_groundwar(){$/;"	f
+explosion	badge_apps/star_shooter.c	/^unsigned short explosion[] = {0b0000001010001000,$/;"	v
+fb_h	include/fb.h	2;"	d
+flags	include/lander.h	/^        char flags;$/;"	m	struct:lander_level_init_callback_t
+flare_leds	timer1_int.c	/^void flare_leds(unsigned char onPWM) {$/;"	f
+flashErasePage	flash.c	/^void flashErasePage()$/;"	f
+flashHeader_t	include/flash.h	/^struct flashHeader_t {$/;"	s
+flashInit	flash.c	/^void flashInit()$/;"	f
+flashRead_fd	flash.c	/^FILE *flashRead_fd=0;$/;"	v
+flashWord_u	include/flash.h	/^union flashWord_u {$/;"	u
+flashWrite_fd	flash.c	/^FILE *flashWrite_fd=0;$/;"	v
+flash_h	include/flash.h	2;"	d
+flash_test_task	badge_apps/flash_test.c	/^void flash_test_task(void *p_arg) {$/;"	f
+flashedBadgeId	flash.c	/^const unsigned short flashedBadgeId = 0xefbe; \/* MAGIC value for script. It will be replaced by awk script in final flashing *\/$/;"	v
+font	include/fb.h	/^   unsigned char font;$/;"	m	struct:framebuffer_t
+fontHeight	include/fb.h	/^   unsigned char fontHeight;$/;"	m	struct:framebuffer_t
+for_president	badge_apps/screensaver.c	/^void for_president(void* p_arg){$/;"	f
+framebuffer_t	include/fb.h	/^struct framebuffer_t {$/;"	s
+fuel_can	include/lander.h	/^    object_state ship, pad, alien, fuel_can;$/;"	m	struct:lander_game_state_t
+func	include/badge_menu.h	/^        void (*func)();$/;"	m	union:menu_t::__anon6
+game	badge_apps/star_shooter.c	/^struct _game game = {1,SS_NEW_LEVEL,SS_NEW_LEVEL,ss_init};$/;"	v	typeref:struct:_game
+game_of_life_task	badge_apps/screensaver.c	/^void game_of_life_task(void* p_arg)$/;"	f
+game_state	badge_apps/groundwar.c	/^enum groundwar_game_state game_state = SPECTATING;$/;"	v	typeref:enum:groundwar_game_state
+game_state	badge_apps/star_shooter.c	/^    void (*game_state)(void);$/;"	m	struct:_game	file:
+generate_level	badge_apps/lander.c	/^void generate_level(lander_game_state_t *g_state){$/;"	f
+generic	include/badge_menu.h	/^        void *generic;$/;"	m	union:menu_t::__anon6
+genericMenu	badge_menu.c	/^void genericMenu(struct menu_t *L_menu, MENU_STYLE style) {$/;"	f
+getCurrMenu	badge_menu.c	/^struct menu_t *getCurrMenu() {$/;"	f
+getLineCodingData	app.h	/^    USB_CDC_LINE_CODING getLineCodingData;$/;"	m	struct:__anon1
+getMenuStack	badge_menu.c	/^struct menu_t *getMenuStack(unsigned char item) {$/;"	f
+getSelectedMenu	badge_menu.c	/^struct menu_t *getSelectedMenu() {$/;"	f
+getSelectedMenuStack	badge_menu.c	/^struct menu_t *getSelectedMenuStack(unsigned char item) {$/;"	f
+gof_cell_t	badge_apps/screensaver.c	/^struct gof_cell_t{$/;"	s	file:
+goon_follow	badge_apps/badgelandia.c	/^void goon_follow(struct badgelandia_player_t goons,$/;"	f
+grav_cnt	include/lander.h	/^    unsigned char grav_cnt;$/;"	m	struct:lander_game_state_t
+green	badge_apps/udraw.c	/^    PIX_NUM_WIDE green[PIX_NUM];        \/\/uint32 pixel wide green mask[32 element tall]$/;"	m	struct:_image_buffer	file:
+green	timer1_int.c	/^void green(unsigned char onPWM) {$/;"	f
+groundwar_defense_t	badge_apps/groundwar.c	/^struct groundwar_defense_t{$/;"	s	file:
+groundwar_defense_type	badge_apps/groundwar.c	/^enum groundwar_defense_type{$/;"	g	file:
+groundwar_draw	badge_apps/groundwar.c	/^void groundwar_draw(struct groundwar_minion_t minions[NUM_MINIONS],$/;"	f
+groundwar_draw_defense	badge_apps/groundwar.c	/^void groundwar_draw_defense(unsigned char x, unsigned char y,$/;"	f
+groundwar_game_state	badge_apps/groundwar.c	/^enum groundwar_game_state {$/;"	g	file:
+groundwar_io	badge_apps/groundwar.c	/^void groundwar_io(struct groundwar_defense_t defenses[MAX_DEFENSE_STRUCTURES],$/;"	f
+groundwar_level_health	badge_apps/groundwar.c	/^short groundwar_level_health;$/;"	v
+groundwar_level_t	badge_apps/groundwar.c	/^struct groundwar_level_t {$/;"	s	file:
+groundwar_menu	badge_apps/groundwar.c	/^struct menu_t groundwar_menu[] = {$/;"	v	typeref:struct:menu_t
+groundwar_minion_t	badge_apps/groundwar.c	/^struct groundwar_minion_t {$/;"	s	file:
+groundwar_minion_type	badge_apps/groundwar.c	/^enum groundwar_minion_type{$/;"	g	file:
+groundwar_points	badge_apps/groundwar.c	/^short groundwar_points;$/;"	v
+groundwar_projectile_t	badge_apps/groundwar.c	/^struct groundwar_projectile_t{$/;"	s	file:
+groundwar_state	badge_apps/groundwar.c	/^enum groundwar_state {$/;"	g	file:
+groundwar_step	badge_apps/groundwar.c	/^unsigned char groundwar_step(struct groundwar_minion_t minions[NUM_MINIONS],$/;"	f
+groundwar_task	badge_apps/groundwar.c	/^void groundwar_task(void* p_arg) {$/;"	f
+h	include/flash.h	/^    struct flashHeader_t h;$/;"	m	union:flashWord_u	typeref:struct:flashWord_u::flashHeader_t
+h_slide	include/lander.h	/^    unsigned char h_slide;$/;"	m	struct:lander_game_state_t
+half_pkt	badge_apps/udraw.c	/^union half_pkt {$/;"	u	file:
+handler	include/ir.h	/^    void (*handler)(struct IRpacket_t p);$/;"	m	struct:IRcallback_t
+health	badge_apps/badgelandia.c	/^    unsigned char health;$/;"	m	struct:badgelandia_goon_t	file:
+health_kits	badge_apps/badgelandia.c	/^    unsigned char health_kits, repair_kits;$/;"	m	struct:badgelandia_basic_inventory_t	file:
+height	include/lander.h	/^    unsigned char width, height;$/;"	m	struct:object_state
+hello_world_task	badge_apps/hello_world_app.c	/^void hello_world_task(void* p_arg)$/;"	f
+hextab	utils.c	/^const char hextab[]={"0123456789ABCDEF"};$/;"	v
+hull	badge_apps/star_shooter.c	/^    char hull;$/;"	m	struct:_ss_player	file:
+hz	include/adc.h	/^   int hz; \/\/ see list below$/;"	m	struct:sample_info_t
+image	badge_apps/blinkenlights.c	/^char image = 0;$/;"	v
+image_buffer	badge_apps/udraw.c	/^struct _image_buffer image_buffer;$/;"	v	typeref:struct:_image_buffer
+image_received	badge_apps/udraw.c	/^unsigned char image_received = 0;$/;"	v
+init	include/lander.h	/^        void (*init)(lander_game_state_t *g_state);$/;"	m	struct:lander_level_init_callback_t
+init_CTMU	buttons.c	/^void init_CTMU()$/;"	f
+init_defenses	badge_apps/groundwar.c	/^void init_defenses(struct groundwar_defense_t defenses[MAX_DEFENSE_STRUCTURES]){$/;"	f
+init_minions	badge_apps/groundwar.c	/^void init_minions(struct groundwar_minion_t minions[NUM_MINIONS],$/;"	f
+inventory	badge_apps/badgelandia.c	/^   struct badgelandia_basic_inventory_t inventory;$/;"	m	struct:badgelandia_player_t	typeref:struct:badgelandia_player_t::badgelandia_basic_inventory_t	file:
+ir_achievements	ir.c	/^void ir_achievements(struct IRpacket_t p)$/;"	f
+ir_app0	ir.c	/^void ir_app0(struct IRpacket_t p)$/;"	f
+ir_app1	ir.c	/^void ir_app1(struct IRpacket_t p)$/;"	f
+ir_app2	ir.c	/^void ir_app2(struct IRpacket_t p)$/;"	f
+ir_app3	ir.c	/^void ir_app3(struct IRpacket_t p)$/;"	f
+ir_app4	ir.c	/^void ir_app4(struct IRpacket_t p)$/;"	f
+ir_app5	ir.c	/^void ir_app5(struct IRpacket_t p)$/;"	f
+ir_app6	ir.c	/^void ir_app6(struct IRpacket_t p)$/;"	f
+ir_app7	ir.c	/^void ir_app7(struct IRpacket_t p)$/;"	f
+ir_asset	ir.c	/^void ir_asset(struct IRpacket_t p)$/;"	f
+ir_backlight	ir.c	/^void ir_backlight(struct IRpacket_t p)$/;"	f
+ir_badgeid	ir.c	/^void ir_badgeid(struct IRpacket_t p)$/;"	f
+ir_code	ir.c	/^void ir_code(struct IRpacket_t p)$/;"	f
+ir_date_DDAMPM	ir.c	/^void ir_date_DDAMPM(struct IRpacket_t p)$/;"	f
+ir_date_YYMM	ir.c	/^void ir_date_YYMM(struct IRpacket_t p)$/;"	f
+ir_draw_unlockable	ir.c	/^void ir_draw_unlockable(struct IRpacket_t p)$/;"	f
+ir_error	ir.c	/^void ir_error(struct IRpacket_t p)$/;"	f
+ir_forthcode	ir.c	/^void ir_forthcode(struct IRpacket_t p)$/;"	f
+ir_h	include/ir.h	2;"	d
+ir_in_buffer	badge_apps/udraw.c	/^struct _image_buffer ir_in_buffer;$/;"	v	typeref:struct:_image_buffer
+ir_lastaddress	ir.c	/^void ir_lastaddress(struct IRpacket_t p)$/;"	f
+ir_led	ir.c	/^void ir_led(struct IRpacket_t p)$/;"	f
+ir_liveaudio	ir.c	/^void ir_liveaudio(struct IRpacket_t p)$/;"	f
+ir_liveled	ir.c	/^void ir_liveled(struct IRpacket_t p)$/;"	f
+ir_livetext	ir.c	/^void ir_livetext(struct IRpacket_t p)$/;"	f
+ir_name	ir.c	/^void ir_name(struct IRpacket_t p)$/;"	f
+ir_ping	ir.c	/^void ir_ping(struct IRpacket_t p)$/;"	f
+ir_screensaver	ir.c	/^void ir_screensaver(struct IRpacket_t p)$/;"	f
+ir_sekrits	ir.c	/^void ir_sekrits(struct IRpacket_t p)$/;"	f
+ir_time	ir.c	/^void ir_time(struct IRpacket_t p)$/;"	f
+irbit2	utils.c	/^unsigned int irbit2(unsigned int iseed)$/;"	f
+is_active	badge_apps/badgey_bird.c	/^    unsigned char is_active;$/;"	m	struct:BB_pipe_state	file:
+is_active	badge_apps/screensaver.c	/^   unsigned char is_active : 1;$/;"	m	struct:gof_cell_t	file:
+is_active	include/lander.h	/^    unsigned char is_active;$/;"	m	struct:object_state
+just_the_badge_tips	badge_apps/screensaver.c	/^void just_the_badge_tips(void* p_arg){$/;"	f
+l	include/flash.h	/^    unsigned int l;	\/* int word access *\/$/;"	m	union:flashWord_u
+lander_bound	badge_apps/lander.c	/^void lander_bound(unsigned char *x_pos, unsigned char *y_pos,$/;"	f
+lander_draw	badge_apps/lander.c	/^void lander_draw(){$/;"	f
+lander_draw_alien	badge_apps/lander.c	/^void lander_draw_alien(){$/;"	f
+lander_draw_fuel_bar	badge_apps/lander.c	/^void lander_draw_fuel_bar(){$/;"	f
+lander_draw_fuel_can	badge_apps/lander.c	/^void lander_draw_fuel_can(){$/;"	f
+lander_draw_landing_pad	badge_apps/lander.c	/^void lander_draw_landing_pad(){$/;"	f
+lander_draw_level_number	badge_apps/lander.c	/^void lander_draw_level_number(){$/;"	f
+lander_draw_ship	badge_apps/lander.c	/^void lander_draw_ship()$/;"	f
+lander_game	badge_apps/lander.c	/^lander_game_state_t lander_game;$/;"	v
+lander_game_state_t	include/lander.h	/^typedef struct lander_game_state_t{$/;"	s
+lander_game_state_t	include/lander.h	/^} lander_game_state_t;$/;"	t	typeref:struct:lander_game_state_t
+lander_help_m	badge_apps/lander.c	/^struct menu_t lander_help_m[] = {$/;"	v	typeref:struct:menu_t
+lander_init	badge_apps/lander.c	/^void lander_init()$/;"	f
+lander_is_colliding	badge_apps/lander.c	/^unsigned char lander_is_colliding(unsigned char x1,unsigned char y1,unsigned char w1,unsigned char h1,$/;"	f
+lander_is_overlap	badge_apps/lander.c	/^unsigned char lander_is_overlap(unsigned char p1, unsigned char o1,$/;"	f
+lander_level_id	include/lander.h	/^    char lander_level_id;$/;"	m	struct:lander_game_state_t
+lander_level_init_callback_t	include/lander.h	/^typedef struct lander_level_init_callback_t {$/;"	s
+lander_level_init_callback_t	include/lander.h	/^} lander_level_init_callback_t;$/;"	t	typeref:struct:lander_level_init_callback_t
+lander_main_m	badge_apps/lander.c	/^struct menu_t lander_main_m[] = {$/;"	v	typeref:struct:menu_t
+lander_menu_exit	badge_apps/lander.c	/^void lander_menu_exit(){$/;"	f
+lander_menu_fueler	badge_apps/lander.c	/^void lander_menu_fueler(){$/;"	f
+lander_menu_play	badge_apps/lander.c	/^void lander_menu_play(){$/;"	f
+lander_obj_is_colliding	badge_apps/lander.c	/^unsigned char lander_obj_is_colliding(object_state o1,$/;"	f
+lander_ship_fuel	include/lander.h	/^    unsigned char lander_ship_fuel;$/;"	m	struct:lander_game_state_t
+lander_update	badge_apps/lander.c	/^void lander_update()$/;"	f
+lander_update_object_position	badge_apps/lander.c	/^void lander_update_object_position(object_state *o_state){$/;"	f
+lander_update_pad	badge_apps/lander.c	/^void lander_update_pad(lander_game_state_t *g_state){$/;"	f
+last_input_timestamp	buttons.c	/^unsigned int last_input_timestamp = 0;$/;"	v
+led	timer1_int.c	/^void led(unsigned char r, unsigned char g, unsigned char b){$/;"	f
+ledBrightness	include/flash.h	/^   char ledBrightness;  \/* 1 byte *\/$/;"	m	struct:sysData_t
+led_brightness	timer1_int.c	/^void led_brightness(unsigned char bright) {$/;"	f
+left_note	badge_apps/conductor.c	/^unsigned short left_note = 145;$/;"	v
+level	badge_apps/star_shooter.c	/^    unsigned char level;$/;"	m	struct:_game	file:
+line	badge_apps/udraw.c	/^    uint32_t line;$/;"	m	union:line_byte_index	file:
+line_byte_index	badge_apps/udraw.c	/^union line_byte_index {                 \/\/union for breaking up image buffer data$/;"	u	file:
+loc_x	badge_apps/badgelandia.c	/^       float loc_x, loc_y, \/\/ quantize to fixed point?$/;"	m	struct:badgelandia_basic_object_t	file:
+loc_y	badge_apps/badgelandia.c	/^       float loc_x, loc_y, \/\/ quantize to fixed point?$/;"	m	struct:badgelandia_basic_object_t	file:
+lower	badge_apps/udraw.c	/^    unsigned char lower;$/;"	m	struct:short_halfs	file:
+main	flash.c	/^void main(int argc, char **argv, char **envp)$/;"	f
+main	main.c	/^int main ( void )$/;"	f
+main	test.c	/^main() $/;"	f
+main_m	badge_menu.c	/^struct menu_t main_m[] = {$/;"	v	typeref:struct:menu_t
+matrix	badge_apps/screensaver.c	/^void matrix(){$/;"	f
+max_fuel	badge_apps/badgelandia.c	/^    unsigned char max_fuel, current_fuel, ticks_per_fuel;$/;"	m	struct:badgelandia_basic_ship_t	file:
+max_hp	badge_apps/badgelandia.c	/^    unsigned char max_hp, current_hp;$/;"	m	struct:badgelandia_basic_ship_t	file:
+max_speed	badge_apps/badgelandia.c	/^    unsigned char accel, max_speed;$/;"	m	struct:badgelandia_basic_ship_t	file:
+menu	include/badge_menu.h	/^        const struct menu_t *menu;$/;"	m	union:menu_t::__anon6	typeref:struct:menu_t::__anon6::menu_t
+menuStack_t	badge_menu.c	/^struct menuStack_t {$/;"	s	file:
+menu_and_manage_task	badge_menu.c	/^void menu_and_manage_task(void *p_arg){$/;"	f
+menu_func	include/badge_menu.h	/^typedef void (*menu_func)(void*);$/;"	t
+menu_left	badge_menu.c	/^unsigned char menu_left = 5;$/;"	v
+menu_t	include/badge_menu.h	/^struct menu_t {$/;"	s
+midi_offTime	assets.c	/^static unsigned char midi_offTime[] = {$/;"	v	file:
+minion_hp	badge_apps/groundwar.c	/^const unsigned char minion_hp[] = {$/;"	v
+minion_speeds	badge_apps/groundwar.c	/^const unsigned char minion_speeds[] = {$/;"	v
+mode	badge_apps/star_shooter.c	/^    unsigned char mode;$/;"	m	struct:_game	file:
+mode_last	badge_apps/star_shooter.c	/^    unsigned char mode_last;$/;"	m	struct:_game	file:
+move	badge_apps/star_shooter.c	/^    unsigned char move;$/;"	m	struct:_ss_stars	file:
+moved	badge_apps/udraw.c	/^    unsigned char moved;                \/\/cursor moved true or false$/;"	m	struct:_cursor	file:
+myBadgeid_cb	settings.c	/^void myBadgeid_cb(struct menu_t *h) {$/;"	f
+myBadgeid_m	settings.c	/^struct menu_t myBadgeid_m[] = {$/;"	v	typeref:struct:menu_t
+name	include/adc.h	/^   char name[16];    \/\/ human name$/;"	m	struct:analog_src_t
+name	include/adc.h	/^   char name[8]; \/\/ human name$/;"	m	struct:sample_info_t
+name	include/badge_menu.h	/^    char name[16]; \/**< menu item name \/ displayed text *\/$/;"	m	struct:menu_t
+name	include/flash.h	/^   char name[32];$/;"	m	struct:sysData_t
+neighbors	badge_apps/screensaver.c	/^   unsigned char neighbors : 3;$/;"	m	struct:gof_cell_t	file:
+nextMIDI_cb	assets.c	/^void nextMIDI_cb(unsigned char assetId, int frame) $/;"	f
+nextNote_cb	assets.c	/^void nextNote_cb(unsigned char assetId, int frame) $/;"	f
+no_LED_PWM	timer1_int.c	/^void no_LED_PWM(unsigned char trueFalse) {$/;"	f
+note_crazy_task	badge_apps/administrator.c	/^void note_crazy_task(void *p_arg){$/;"	f
+num_path_points	badge_apps/groundwar.c	/^    unsigned char num_path_points;$/;"	m	struct:groundwar_level_t	file:
+o	badge_apps/badgelandia.c	/^    struct badgelandia_basic_object_t o;$/;"	m	struct:badgelandia_basic_ship_t	typeref:struct:badgelandia_basic_ship_t::badgelandia_basic_object_t	file:
+o	badge_apps/badgelandia.c	/^    struct badgelandia_basic_object_t o;$/;"	m	struct:badgelandia_goon_t	typeref:struct:badgelandia_goon_t::badgelandia_basic_object_t	file:
+object_state	include/lander.h	/^typedef struct object_state$/;"	s
+object_state	include/lander.h	/^} object_state;$/;"	t	typeref:struct:object_state
+on_off	badge_apps/udraw.c	/^    unsigned char on_off;               \/\/drawing on or off true or false$/;"	m	struct:_draw_state	file:
+opening_height	badge_apps/badgey_bird.c	/^    unsigned char opening_height;$/;"	m	struct:BB_pipe_state	file:
+orientation_rads	badge_apps/badgelandia.c	/^    float orientation_rads;$/;"	m	struct:badgelandia_basic_ship_t	file:
+p	include/ir.h	/^    struct IRpacket_t p;$/;"	m	union:IRpacket_u	typeref:struct:IRpacket_u::IRpacket_t
+pad	include/flash.h	/^    unsigned char pad; \/* to fit into 32 bits *\/$/;"	m	struct:flashHeader_t
+pad	include/lander.h	/^    object_state ship, pad, alien, fuel_can;$/;"	m	struct:lander_game_state_t
+path_between_points	utils.c	/^void path_between_points(unsigned char *x0, unsigned char *y0,$/;"	f
+peerBadgeNum_m	settings.c	/^const struct menu_t peerBadgeNum_m[] = {$/;"	v	typeref:struct:menu_t
+peerBadgeid_cb	settings.c	/^void peerBadgeid_cb(struct menu_t *h) {$/;"	f
+peerBadgeid_m	settings.c	/^struct menu_t peerBadgeid_m[] = {$/;"	v	typeref:struct:menu_t
+perchanKHZ	adc_int.c	/^   int perchanKHZ;$/;"	m	struct:adc_table_t	file:
+perchanKHZ	test.c	/^   int perchanKHZ;$/;"	m	struct:adc_table_t	file:
+phasers	badge_apps/star_shooter.c	/^    unsigned char phasers;$/;"	m	struct:_ss_player	file:
+ping_cb	settings.c	/^void ping_cb(){$/;"	f
+ping_responded	ir.c	/^unsigned short ping_responded = 0;$/;"	v
+pinged	ir.c	/^unsigned short pinged = 0 ;$/;"	v
+pixdata	include/assetList.h	/^    const char *pixdata;   \/**< color pixel data *\/$/;"	m	struct:asset
+playAsset	assets.c	/^void playAsset(unsigned char assetId) $/;"	f
+player_phaser_on	badge_apps/star_shooter.c	/^    unsigned char player_phaser_on;$/;"	m	struct:_ss_torp_map	file:
+player_x	badge_apps/star_shooter.c	/^    unsigned char player_x[MAX_TORP];$/;"	m	struct:_ss_torp_map	file:
+player_y	badge_apps/star_shooter.c	/^    unsigned char player_y[MAX_TORP];$/;"	m	struct:_ss_torp_map	file:
+point_heading	badge_apps/groundwar.c	/^            point_heading; \/\/ index of point in the level path that this is moving towards$/;"	m	struct:groundwar_minion_t	file:
+populate_menu	badge_apps/conductor.c	/^void populate_menu()$/;"	f
+pos	include/fb.h	/^   struct vector8_t pos;$/;"	m	struct:framebuffer_t	typeref:struct:framebuffer_t::vector8_t
+pos_x	badge_apps/badgey_bird.c	/^    unsigned char pos_x;$/;"	m	struct:BB_pipe_state	file:
+pos_x	include/lander.h	/^    unsigned char pos_x, pos_y;$/;"	m	struct:object_state
+pos_y	include/lander.h	/^    unsigned char pos_x, pos_y;$/;"	m	struct:object_state
+print_high_water_marks	app.c	/^void print_high_water_marks(){$/;"	f
+print_task_high_water_mark_to_CDC	app.c	/^void print_task_high_water_mark_to_CDC(TaskHandle_t xHandle)$/;"	f
+print_to_com1	app.c	/^void print_to_com1(uint8_t buffer[APP_WRITE_BUFFER_SIZE]){$/;"	f
+projectile	badge_apps/groundwar.c	/^    struct groundwar_projectile_t projectile;$/;"	m	struct:groundwar_defense_t	typeref:struct:groundwar_defense_t::groundwar_projectile_t	file:
+quick_rand	utils.c	/^unsigned int quick_rand(unsigned int seed){$/;"	f
+random_dots	badge_apps/screensaver.c	/^void random_dots(void* p_arg){$/;"	f
+random_screen_saver	badge_apps/screensaver.c	/^void random_screen_saver(void* p_arg){$/;"	f
+red	badge_apps/udraw.c	/^    PIX_NUM_WIDE red[PIX_NUM];          \/\/uint32 pixel wide red mask[32 element tall]$/;"	m	struct:_image_buffer	file:
+red	timer1_int.c	/^void red(unsigned char onPWM) {$/;"	f
+repair_kits	badge_apps/badgelandia.c	/^    unsigned char health_kits, repair_kits;$/;"	m	struct:badgelandia_basic_inventory_t	file:
+returnToMenus	badge_menu.c	/^void returnToMenus(){$/;"	f
+right_note	badge_apps/conductor.c	/^unsigned short right_note = 129;$/;"	v
+rotate_cb	settings.c	/^void rotate_cb(struct menu_t *h) {$/;"	f
+rotate_m	settings.c	/^const struct menu_t rotate_m[] = {$/;"	v	typeref:struct:menu_t
+rotate_points	utils.c	/^void rotate_points(short point_arr[][2],$/;"	f
+rotate_points_to	utils.c	/^void rotate_points_to(short point_arr[][2],$/;"	f
+run_conductor	badge_apps/conductor.c	/^void run_conductor()$/;"	f
+samp	adc_int.c	/^   unsigned char samp;$/;"	m	struct:adc_table_t	file:
+samp	test.c	/^   unsigned char samp;$/;"	m	struct:adc_table_t	file:
+sample_info_t	include/adc.h	/^struct sample_info_t {$/;"	s
+sample_info_t	include/adc.h	/^} sample_info_t;$/;"	v	typeref:struct:sample_info_t
+samples_info	adc_int.c	/^const struct sample_info_t samples_info[] = {$/;"	v	typeref:struct:sample_info_t
+scale_points	utils.c	/^void scale_points(short point_arr[][2],$/;"	f
+sch_d1_1_m	schedule.c	/^const struct menu_t sch_d1_1_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d1_2_m	schedule.c	/^const struct menu_t sch_d1_2_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d1_3_m	schedule.c	/^const struct menu_t sch_d1_3_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d1_4_m	schedule.c	/^const struct menu_t sch_d1_4_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d1_5_m	schedule.c	/^const struct menu_t sch_d1_5_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d1_6_m	schedule.c	/^const struct menu_t sch_d1_6_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d1_7_m	schedule.c	/^const struct menu_t sch_d1_7_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d2_1_m	schedule.c	/^const struct menu_t sch_d2_1_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d2_2_m	schedule.c	/^const struct menu_t sch_d2_2_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d2_3_m	schedule.c	/^const struct menu_t sch_d2_3_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d2_4_m	schedule.c	/^const struct menu_t sch_d2_4_m[] = {$/;"	v	typeref:struct:menu_t
+sch_d2_5_m	schedule.c	/^const struct menu_t sch_d2_5_m[] = {$/;"	v	typeref:struct:menu_t
+sch_main_m	schedule.c	/^const struct menu_t sch_main_m[] = {$/;"	v	typeref:struct:menu_t
+screensaver_task	badge_apps/screensaver.c	/^void screensaver_task(void* p_arg)$/;"	f
+sekrits	include/flash.h	/^   char sekrits[8];$/;"	m	struct:sysData_t
+selectedMenu	badge_menu.c	/^   struct menu_t *selectedMenu;$/;"	m	struct:menuStack_t	typeref:struct:menuStack_t::menu_t	file:
+selected_defense	badge_apps/groundwar.c	513;"	d	file:
+selected_defense_idx	badge_apps/groundwar.c	/^char selected_defense_idx = 0;$/;"	v
+seqNum	include/assetList.h	/^    unsigned char seqNum; \/**< \\# images in the asset for animation, frame # for font char id *\/$/;"	m	struct:asset
+setLineCodingData	app.h	/^    USB_CDC_LINE_CODING setLineCodingData;$/;"	m	struct:__anon1
+setNote	assets.c	/^void setNote(unsigned short freq, unsigned short dur) {$/;"	f
+set_bl_exit	badge_apps/blinkenlights.c	/^void set_bl_exit()$/;"	f
+set_bl_go	badge_apps/blinkenlights.c	/^void set_bl_go()$/;"	f
+set_bl_mode	badge_apps/blinkenlights.c	/^void set_bl_mode()$/;"	f
+set_blue	badge_apps/blinkenlights.c	/^void set_blue()$/;"	f
+set_conductor_bottom_note	badge_apps/conductor.c	/^void set_conductor_bottom_note()$/;"	f
+set_conductor_left_note	badge_apps/conductor.c	/^void set_conductor_left_note()$/;"	f
+set_conductor_right_note	badge_apps/conductor.c	/^void set_conductor_right_note()$/;"	f
+set_conductor_top_note	badge_apps/conductor.c	/^void set_conductor_top_note()$/;"	f
+set_exit	badge_apps/conductor.c	/^void set_exit()$/;"	f
+set_go	badge_apps/conductor.c	/^void set_go()$/;"	f
+set_green	badge_apps/blinkenlights.c	/^void set_green()$/;"	f
+set_local_leds	badge_apps/blinkenlights.c	/^void set_local_leds()$/;"	f
+set_mode	badge_apps/conductor.c	/^void set_mode()$/;"	f
+set_red	badge_apps/blinkenlights.c	/^void set_red()$/;"	f
+shields	badge_apps/star_shooter.c	/^    char shields;$/;"	m	struct:_ss_player	file:
+shields	badge_apps/star_shooter.c	/^unsigned short shields[] = {0b0001111110001100,$/;"	v
+ship	badge_apps/badgelandia.c	/^   struct badgelandia_basic_ship_t ship;$/;"	m	struct:badgelandia_player_t	typeref:struct:badgelandia_player_t::badgelandia_basic_ship_t	file:
+ship	include/lander.h	/^    object_state ship, pad, alien, fuel_can;$/;"	m	struct:lander_game_state_t
+ship_description	badge_apps/badgelandia.c	/^struct ship_description{$/;"	s	file:
+ship_id	badge_apps/badgelandia.c	/^    unsigned char ship_id;$/;"	m	struct:badgelandia_basic_ship_t	file:
+ship_on_pad_cnt	include/lander.h	/^    char ship_on_pad_cnt;$/;"	m	struct:lander_game_state_t
+short_halfs	badge_apps/udraw.c	/^struct short_halfs {                    \/\/used to access halves of 16bits$/;"	s	file:
+show_drop_down	badge_apps/udraw.c	/^unsigned char show_drop_down = DRAW_DROP_DOWN_OFF;$/;"	v
+show_ir_buff	badge_apps/udraw.c	/^unsigned char show_ir_buff = 0;$/;"	v
+show_str_num	badge_apps/flash_test.c	/^void show_str_num(const char const *str, int32_t num, uint8_t line) {$/;"	f
+silence_task	badge_apps/administrator.c	/^void silence_task(void *p_arg){$/;"	f
+spirals_task	badge_apps/screensaver.c	/^void spirals_task(void* p_arg){$/;"	f
+sprite	badge_apps/star_shooter.c	/^    unsigned short sprite[5];$/;"	m	struct:_ss_player	file:
+ss_ai	badge_apps/star_shooter.c	/^struct _ss_player ss_ai;$/;"	v	typeref:struct:_ss_player
+ss_ai_count	badge_apps/star_shooter.c	/^unsigned char ss_ai_count = 0;$/;"	v
+ss_check_dead	badge_apps/star_shooter.c	/^void ss_check_dead(void) {$/;"	f
+ss_detect_hits	badge_apps/star_shooter.c	/^unsigned char ss_detect_hits(struct _ss_player * ship) {$/;"	f
+ss_do_ai	badge_apps/star_shooter.c	/^void ss_do_ai(void) {$/;"	f
+ss_draw	badge_apps/star_shooter.c	/^void ss_draw(void) {$/;"	f
+ss_draw_game_over	badge_apps/star_shooter.c	/^void ss_draw_game_over(void) {$/;"	f
+ss_draw_hit	badge_apps/star_shooter.c	/^void ss_draw_hit(struct _ss_player * ship) {$/;"	f
+ss_draw_player	badge_apps/star_shooter.c	/^void ss_draw_player(struct _ss_player * ship_to_draw) {$/;"	f
+ss_draw_sprite	badge_apps/star_shooter.c	/^void ss_draw_sprite(struct _ss_player * ship, unsigned short * sprite) {$/;"	f
+ss_draw_stars_and_torps	badge_apps/star_shooter.c	/^void ss_draw_stars_and_torps(void) {$/;"	f
+ss_events	badge_apps/star_shooter.c	/^void ss_events(void) {$/;"	f
+ss_exit	badge_apps/star_shooter.c	/^void ss_exit(void) {$/;"	f
+ss_game_counter	badge_apps/star_shooter.c	/^unsigned int ss_game_counter = 0;$/;"	v
+ss_init	badge_apps/star_shooter.c	/^void ss_init(void) {$/;"	f
+ss_init_alien	badge_apps/star_shooter.c	/^void ss_init_alien(void) {$/;"	f
+ss_init_stars	badge_apps/star_shooter.c	/^void ss_init_stars(void) {$/;"	f
+ss_phasers	badge_apps/star_shooter.c	/^void ss_phasers(void) {$/;"	f
+ss_player	badge_apps/star_shooter.c	/^struct _ss_player ss_player = {16,16,10,100,100,100,SS_PLAYER,{0b1111111000011000,$/;"	v	typeref:struct:_ss_player
+ss_reset_player	badge_apps/star_shooter.c	/^void ss_reset_player(void) {$/;"	f
+ss_stars	badge_apps/star_shooter.c	/^struct _ss_stars ss_stars;$/;"	v	typeref:struct:_ss_stars
+ss_torp_map	badge_apps/star_shooter.c	/^struct _ss_torp_map ss_torp_map;$/;"	v	typeref:struct:_ss_torp_map
+ss_torps	badge_apps/star_shooter.c	/^void ss_torps(struct _ss_player * ship) {$/;"	f
+star_shooter_task	badge_apps/star_shooter.c	/^void star_shooter_task(void* p_arg){$/;"	f
+startBit	include/ir.h	/^       unsigned  startBit:1;$/;"	m	struct:IRpacket_t
+state	badge_apps/groundwar.c	/^enum groundwar_state state = INIT_LEVEL;$/;"	v	typeref:enum:groundwar_state
+state	badge_apps/udraw.c	/^    unsigned char state;                \/\/current app state function$/;"	m	struct:_draw_state	file:
+stop_screensaver	badge_apps/screensaver.c	/^unsigned char stop_screensaver = 0;$/;"	v
+sysDataRead	flash.c	/^unsigned char sysDataRead(struct sysData_t *sdata)$/;"	f
+sysDataWrite	flash.c	/^unsigned char sysDataWrite(struct sysData_t *sdata)$/;"	f
+sysData_t	include/flash.h	/^struct sysData_t {$/;"	s
+targeted_minion	badge_apps/groundwar.c	/^    unsigned char targeted_minion, x, y;$/;"	m	struct:groundwar_projectile_t	file:
+task	include/badge_menu.h	/^        void (*task)(void* p_arg);$/;"	m	union:menu_t::__anon6
+team	badge_apps/star_shooter.c	/^    unsigned char team;$/;"	m	struct:_ss_player	file:
+test_task	app.c	/^void test_task(void* p_arg)$/;"	f
+ticks_per_fuel	badge_apps/badgelandia.c	/^    unsigned char max_fuel, current_fuel, ticks_per_fuel;$/;"	m	struct:badgelandia_basic_ship_t	file:
+timer1_int_h	include/timer1_int.h	2;"	d
+timerInit	timer1_int.c	/^void timerInit(void)$/;"	f
+timestamp	buttons.c	/^unsigned int timestamp = 0;$/;"	v
+top_note	badge_apps/conductor.c	/^unsigned short top_note = 173;$/;"	v
+torps	badge_apps/star_shooter.c	/^    unsigned char torps;$/;"	m	struct:_ss_player	file:
+transIndex	include/fb.h	/^   unsigned short transIndex;$/;"	m	struct:framebuffer_t
+transMask	include/fb.h	/^   unsigned short transMask;$/;"	m	struct:framebuffer_t
+tutorial_state	badge_apps/badge_tutorial.c	/^enum tutorial_state{$/;"	g	file:
+type	badge_apps/groundwar.c	/^    unsigned char type;$/;"	m	struct:groundwar_defense_t	file:
+type	badge_apps/groundwar.c	/^    unsigned char type;$/;"	m	struct:groundwar_minion_t	file:
+type	include/assetList.h	/^    unsigned char type;    \/**< image\/audio\/midi\/private *\/$/;"	m	struct:asset
+type	include/badge_menu.h	/^    unsigned char type; \/**< Type of menu item (see enum) *\/$/;"	m	struct:menu_t
+type	include/badge_menu.h	/^enum type {$/;"	g
+uCHAR	fb.c	9;"	d	file:
+udraw_task	badge_apps/udraw.c	/^void udraw_task(void *p_arg){$/;"	f
+unit_path	badge_apps/groundwar.c	/^    short unit_path[6][2];$/;"	m	struct:groundwar_level_t	file:
+update	include/lander.h	/^        void (*update)(lander_game_state_t *g_state);$/;"	m	struct:lander_level_init_callback_t
+update_gof_grid	badge_apps/screensaver.c	/^void update_gof_grid(struct gof_cell_t cell_grid[GRID_DIM][GRID_DIM],$/;"	f
+upper	badge_apps/udraw.c	/^    unsigned char upper;$/;"	m	struct:short_halfs	file:
+ushow_str_num	badge_apps/flash_test.c	/^void ushow_str_num(const char const *str, uint32_t num, uint8_t line) {$/;"	f
+v	include/ir.h	/^    unsigned int v;$/;"	m	union:IRpacket_u
+v_slide	include/lander.h	/^    unsigned char v_slide;$/;"	m	struct:lander_game_state_t
+vector8_t	include/fb.h	/^struct vector8_t {$/;"	s
+vel_x	badge_apps/badgelandia.c	/^             vel_x, vel_y;$/;"	m	struct:badgelandia_basic_object_t	file:
+vel_x	include/lander.h	/^    char vel_x, vel_y;$/;"	m	struct:object_state
+vel_y	badge_apps/badgelandia.c	/^             vel_x, vel_y;$/;"	m	struct:badgelandia_basic_object_t	file:
+vel_y	include/lander.h	/^    char vel_x, vel_y;$/;"	m	struct:object_state
+width	include/lander.h	/^    unsigned char width, height;$/;"	m	struct:object_state
+x	badge_apps/groundwar.c	/^    unsigned char targeted_minion, x, y;$/;"	m	struct:groundwar_projectile_t	file:
+x	badge_apps/groundwar.c	/^    unsigned char x, y, current_hp,$/;"	m	struct:groundwar_minion_t	file:
+x	badge_apps/groundwar.c	/^    unsigned char x, y;$/;"	m	struct:groundwar_defense_t	file:
+x	badge_apps/star_shooter.c	/^    unsigned char x;$/;"	m	struct:_ss_asteroid	file:
+x	badge_apps/star_shooter.c	/^    unsigned char x;$/;"	m	struct:_ss_player	file:
+x	badge_apps/star_shooter.c	/^    unsigned char x[N_STARS];$/;"	m	struct:_ss_stars	file:
+x	badge_apps/udraw.c	/^    unsigned char x;$/;"	m	struct:_cursor	file:
+x	include/assetList.h	/^    unsigned short x;	\/**< array x *\/$/;"	m	struct:asset
+x	include/fb.h	/^   unsigned char x;$/;"	m	struct:vector8_t
+y	badge_apps/groundwar.c	/^    unsigned char targeted_minion, x, y;$/;"	m	struct:groundwar_projectile_t	file:
+y	badge_apps/groundwar.c	/^    unsigned char x, y, current_hp,$/;"	m	struct:groundwar_minion_t	file:
+y	badge_apps/groundwar.c	/^    unsigned char x, y;$/;"	m	struct:groundwar_defense_t	file:
+y	badge_apps/star_shooter.c	/^    unsigned char y;$/;"	m	struct:_ss_asteroid	file:
+y	badge_apps/star_shooter.c	/^    unsigned char y;$/;"	m	struct:_ss_player	file:
+y	badge_apps/star_shooter.c	/^    unsigned char y[N_STARS];$/;"	m	struct:_ss_stars	file:
+y	badge_apps/udraw.c	/^    unsigned char y;                                       $/;"	m	struct:_cursor	file:
+y	include/assetList.h	/^    unsigned short y;	\/**< array y *\/$/;"	m	struct:asset
+y	include/fb.h	/^   unsigned char y;$/;"	m	struct:vector8_t
