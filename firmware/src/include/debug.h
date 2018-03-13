@@ -5,8 +5,8 @@
 /*
  level -> 0 ... N
  0 is lots of noise
- > 0 should be much less so to avoid swamping 
-   USB serial or just overflowing it 
+ > 0 should be much less so to avoid swamping
+   USB serial or just overflowing it
    with too much printing
 
    set level of noise output with:
@@ -20,11 +20,11 @@
 
 #define DEBUGPRINT
 #ifdef DEBUGPRINT
-  #define DEBUGSTRLVL(L, X) debugString(L, &(X))
-  #define DEBUGSTR(X) debugString(0, &(X))
+  #define DEBUGSTRLVL(L, X) debugString(L, (X))
+  #define DEBUGSTR(X) debugString(0, (X))
   #define DEBUGCHAR(X) debugChar(0, (X))
 #else
-  #define DEBUGSTRLVL(L, X) debugString(0, &(X))
+  #define DEBUGSTRLVL(L, X) debugString(0, (X))
   #define DEBUGSTR(X)
   #define DEBUGCHAR(X)
 #endif
@@ -42,7 +42,7 @@ extern unsigned char G_debugBuffer[];
 extern int G_debugBufferFilled;
 
 void debugLevelSet(int level);
-void debugString(int level, unsigned char *string);
-void debugChar(int level, unsigned char outChar);
+void debugString(int level, char *string);
+void debugChar(int level, char outChar);
 
 #endif

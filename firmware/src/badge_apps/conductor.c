@@ -16,16 +16,17 @@ void set_go();
 void set_exit();
 void conductor_task(void *args);
 void run_conductor();
+void populate_menu();
 
 struct menu_t conductor_config_m[] = {
     {"Top: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_conductor_top_note}},
     {"Bottom: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_conductor_bottom_note}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"Left: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_conductor_left_note}},
-    {"Right: ", VERT_ITEM, FUNCTION, {{(struct menu_t *)set_conductor_right_note}} },
+    {"Right: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_conductor_right_note}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
-    {"Mode: ", VERT_ITEM, FUNCTION, {{(struct menu_t *)set_mode}} },
-    {"Go!!", VERT_ITEM|DEFAULT_ITEM, FUNCTION, {(struct menu_t *)set_go} },
+    {"Mode: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_mode}},
+    {"Go!!", VERT_ITEM|DEFAULT_ITEM, FUNCTION, {(struct menu_t *)set_go}},
     {"Exit", VERT_ITEM|LAST_ITEM, FUNCTION, {(struct menu_t *) set_exit}},
 };
 

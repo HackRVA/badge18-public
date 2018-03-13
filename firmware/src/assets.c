@@ -29,7 +29,8 @@ void drawAsset(unsigned char assetId)
 
 void drawLCD1(unsigned char assetId, int frame)
 {
-    unsigned char i, j, p, r, g, b, pixbyte, *cmap, *pixdata;
+    unsigned char i, j, p, r, g, b, pixbyte;
+    const unsigned char *cmap, *pixdata;
     unsigned short pixel ;
 
     // S6B33_rect(0, 0, assetList[assetId].x - 1, assetList[assetId].y - 1);
@@ -60,7 +61,8 @@ void drawLCD1(unsigned char assetId, int frame)
 
 void drawLCD2(unsigned char assetId, int frame)
 {
-    unsigned char i, j, r, g, b, pixbyte, *cmap, *pixdata;
+    unsigned char i, j, r, g, b, pixbyte;
+    const unsigned char *cmap, *pixdata;
     unsigned short pixel ;
 
     S6B33_rect(0, 0, assetList[assetId].x - 1, assetList[assetId].y - 1);
@@ -123,7 +125,8 @@ void drawLCD2(unsigned char assetId, int frame)
 
 void drawLCD4(unsigned char assetId, int frame)
 {
-    unsigned char i, j, r, g, b, pixbyte, *cmap, *pixdata;
+    unsigned char i, j, r, g, b, pixbyte;
+    const unsigned char *cmap, *pixdata;
     unsigned short pixel ;
 
     S6B33_rect(0, 0, assetList[assetId].x - 1, assetList[assetId].y - 1);
@@ -162,7 +165,8 @@ void drawLCD4(unsigned char assetId, int frame)
 
 void drawLCD8(unsigned char assetId, int frame)
 {
-    unsigned char i, j, r, g, b, pixbyte, *cmap;
+    unsigned char i, j, r, g, b, pixbyte;
+    const unsigned char *cmap;
     unsigned short pixel;
 
     S6B33_rect(0, 0, assetList[assetId].x - 1, assetList[assetId].y - 1);

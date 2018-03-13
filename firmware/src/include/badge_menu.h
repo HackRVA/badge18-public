@@ -44,6 +44,14 @@ typedef enum {
 
 typedef void (*menu_func)(void*);
 
+union menu_data_t {
+    const struct menu_t *menu;
+    //void (*func)(struct menu_t *m); /**< An application callback function */
+    void (*func)();
+    void (*task)(void *p_arg);
+    void *generic;
+};
+
 /** A menu item */
 struct menu_t {
     char name[16]; /**< menu item name / displayed text */
@@ -52,13 +60,7 @@ struct menu_t {
 
     /** @note when initing the union, coerce non void data to a menu_t to
         keep compiler from whining. */
-    union {
-        const struct menu_t *menu;
-        //void (*func)(struct menu_t *m); /**< An application callback function */
-        void (*func)();
-        void (*task)(void* p_arg);
-        void *generic;
-    } data; /**< extra data used to process menu item; depends on type */
+    union menu_data_t data; /**< extra data used to process menu item; depends on type */
 };
 
 /**
@@ -127,4 +129,3 @@ void closeMenuAndReturn();
 void menu_and_manage_task(void* p_arg);
 
 #endif	/* BADGE_MENU_H */
-
