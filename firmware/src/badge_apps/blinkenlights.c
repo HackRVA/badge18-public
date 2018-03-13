@@ -30,10 +30,10 @@ struct menu_t blinkenlights_config_m[] = {
     {"Red: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_red}},
     {"Blue: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_blue}},
     {"Green: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_green}},
-    {"--CLEAR--", VERT_ITEM, FUNCTION, {(struct menu_t *)bl_clear_colors} },
+    {"--CLEAR--", VERT_ITEM, FUNCTION, {(struct menu_t *)bl_clear_colors}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
-    {"Mode: ", VERT_ITEM, FUNCTION, {{(struct menu_t *)set_bl_mode}} },
-    {"Go!!", VERT_ITEM|DEFAULT_ITEM, FUNCTION, {(struct menu_t *)set_bl_go} },
+    {"Mode: ", VERT_ITEM, FUNCTION, {(struct menu_t *)set_bl_mode}},
+    {"Go!!", VERT_ITEM|DEFAULT_ITEM, FUNCTION, {(struct menu_t *)set_bl_go}},
     {"Exit", VERT_ITEM|LAST_ITEM, FUNCTION, {(struct menu_t *) set_bl_exit}},
 };
 unsigned char bl_red = 50, bl_green = 40, bl_blue = 0;

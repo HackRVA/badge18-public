@@ -1,4 +1,5 @@
 #include "debug.h"
+#include "string.h"
 
 unsigned char G_debugBuffer[MAXDEBUGBUFFER+8];
 int G_debugLevel=0;
@@ -9,7 +10,7 @@ void debugLevelSet(int level)
     G_debugLevel = level;
 }
 
-void debugString(int level, unsigned char *string)
+void debugString(int level, char *string)
 {
    int len;
 
@@ -22,7 +23,7 @@ void debugString(int level, unsigned char *string)
    }
 }
 
-void debugChar(int level, unsigned char outChar)
+void debugChar(int level, char outChar)
 {
    if (level >= G_debugLevel) {
 	if (G_debugBufferFilled+1 < MAXDEBUGBUFFER) {

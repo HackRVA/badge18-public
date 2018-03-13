@@ -457,9 +457,9 @@ struct menu_t main_m[] = {
 //        {badge_lander_task}},
 //    {"Star Shooter", VERT_ITEM, TASK,
 //        {star_shooter_task}},    
-    {"adc", VERT_ITEM|DEFAULT_ITEM, TASK, {adc_task}},
-    {"Conductor", VERT_ITEM, TASK, {conductor_task}},
-    {"blinkenlite", VERT_ITEM, TASK, {blinkenlights_task}},        
+    {"adc", VERT_ITEM|DEFAULT_ITEM, TASK, (union menu_data_t) adc_task},
+    {"Conductor", VERT_ITEM, TASK, (union menu_data_t) conductor_task},
+    {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},        
 //    {"dice roll", VERT_ITEM, TASK,
 //        {dice_roll_task}},        
 

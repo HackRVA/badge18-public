@@ -43,7 +43,7 @@ void flashInit()
    // align addr on a 1k boundary within the 2k block we allocated
    // erase page first, don't have to erase if writing an area already erased
    /* seems there should be a way to statically define this */
-   G_flashAddr = (unsigned long *)(((unsigned long)(&G_flashstart)+1024) & 0b11111111111111111111110000000000); // 1k flash boundary
+   G_flashAddr = (unsigned int *)(((unsigned long)(&G_flashstart)+1024) & 0b11111111111111111111110000000000); // 1k flash boundary
 
 #ifdef MAIN
    {
