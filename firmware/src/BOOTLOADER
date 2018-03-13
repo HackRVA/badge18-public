@@ -1,5 +1,5 @@
 use:
-~/Harmony-Badge-2018/bootloader_an1388/PIC32_Bootloaders/Firmware/Bootloader/MPLAB_X_Workspace/USB_HID_Btl_StarterKit.X/dist/default/production/USB_HID_Btl_StarterKit.X.production.hex
+~/Harmony-Badge-2018/bootloader_an1388/USB_HID_Btl_StarterKit.X.production.hex
 
 doesn't use harmony.
 built against:
