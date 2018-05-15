@@ -1,5 +1,6 @@
 #include "app.h"
 #include "buttons.h"
+#include "adc.h"
 
 unsigned char G_pressed_button = 0;
 
@@ -26,34 +27,23 @@ unsigned int last_input_timestamp = 0;
 // 
 // the initial version of this is from example 37-3 of pic32_pdfs/pic32-sec37-ctmu-61167B.pdf
 // 
-void init_CTMU()
+
+
+
+void init_CTMU18()
 {
     /* setup analog pins */
-    // PEB RA0/CTED1 RA1/CTED2 RB1/CTED12 RB2/CTED13
-    // make them inputs
-    // MSS: Don't touch last years slider pins
-    //TRISAbits.TRISA0 = 1;
-    //TRISAbits.TRISA1 = 1;
-    // This years two pads
-
-// 2018 NOPE    TRISBbits.TRISB1 = 1; //AN3
-// fuck not an analog pin    TRISBbits.TRISB4 = 1; //AN3
-    TRISBbits.TRISB2 = 1; //AN4
-
-    //ANSELA = (1<<0) | (1<<1); //RA0,1
-    //ANSELB = (1<<1) | (1<<2); //RB1,2
-    // ANSELB = (1<<1) ; //RB1 // USE FORM BELOW SO OTHER BITS AREN'T AFFECTED 
+    TRISBbits.TRISB2 = 1; //AN4 
     ANSELBbits.ANSB2 = 1; // RB2
-
-    vTaskDelay(1 / portTICK_PERIOD_MS);    
-
+    // wait because...?
+    vTaskDelay(1 / portTICK_PERIOD_MS);
     // CTMU Setup
     CTMUCONbits.IRNG = 3;  // 1 = 0.55uA 2 = 5.5uA 3 = 55uA 0 = 550uA
     CTMUCONbits.ON = 1;    // Turn on CTMU
     vTaskDelay(1 / portTICK_PERIOD_MS);    // Wait 1 msec
 
     // ADC Setup
-AD1CON2 = 0x0; // VR+ = AVDD, V- = AVSS, Don't scan, MUX A only
+    AD1CON2 = 0x0; // VR+ = AVDD, V- = AVSS, Don't scan, MUX A only
 
     // ADC clock derived from peripheral buss clock
     // Tadc = 4 * Tpbus = 4 * 25 ns = 100 ns > 65 ns required
@@ -64,15 +54,16 @@ AD1CON2 = 0x0; // VR+ = AVDD, V- = AVSS, Don't scan, MUX A only
 // WTF   AD1CON3bits.SAMC = 0b10000; // Tad = 1..31
 // WTF   AD1CON3bits.ADCS = 0b00010000; // needed for autoconvert. conversion clock select
 
-// 2018 XXX    AD1CSSL = 0x0;        // No channels scanned
-IEC0bits.AD1IE = 0;   // Disable ADC interrupts
-AD1CON1bits.ON = 1;   // Turn on ADC
+    // 2018 XXX    AD1CSSL = 0x0;        // No channels scanned
+    IEC0bits.AD1IE = 0;   // Disable ADC interrupts
+    AD1CON1bits.ON = 1;   // Turn on ADC
 }
+
 
 void button_task(void* p_arg)
 {
 #define BADGE_2018
-#ifndef BADGE_2018
+
     const unsigned char ButtonADCChannels[2] = {3,4};
     const unsigned char n_averages = 16, log2_n_averages = 4;
     unsigned short int ButtonVavgADCs[2]={0,0};
@@ -81,40 +72,63 @@ void button_task(void* p_arg)
     unsigned short int VmeasADC; // Measured Voltages, 65536 = Full Scale
     unsigned long int ADC_Sum; // For averaging multiple ADC measurements
     unsigned char i = 0, chan_idx = 0;
-    
+
     TickType_t xDelay = 5 / portTICK_PERIOD_MS;
-
-    //Analog pins: AN3 (B1) is outside pad, AN4 (B2) is interior pad
-// 2018   #define AN3 ButtonVavgADCs[0]
-// 2018   #define AN4 ButtonVavgADCs[1]
-
-    #define AN3 ButtonVavgADCs[1] // PEB lazy AN3 swap hack
-
-#ifdef BADGE_2016
-    #define Y1 (31000 - 2*AN3)
-    #define Y2 (  900 + 2*AN3)
-    #define Y3 (-6000 + 2*AN3)
-    #define TOUCH_PCT_CALC (char)((AN3*-3 + AN4*1 + 25043) >> 8)
-#endif
-#ifdef BADGE_2017_orig
-    #define Y1 (28000 - 2*AN3)
-    #define Y2 (  -1500 + 2*AN3)
-    #define Y3 (-7500 + 2*AN3)
-    #define TOUCH_PCT_CALC (char)((AN3*-3 + AN4*1 + 32934) >> 8)
-#endif
-#ifdef BADGE_2017
-    #define Y1 (20000 - 1*AN3)
-    #define Y2 (  -1500 + 2*AN3)
-    #define Y3 (-7500 + 2*AN3)
-    #define TOUCH_PCT_CALC (char)((AN3*-10 + AN4*1 + 121400) >> 10)
-#endif
-
-    init_CTMU();
     
+//#define ADC_TOUCH    
+#define CTMU_TOUCH
+    // Two ways:
+    // (1) Use raw ADC values on the pad to gauge touch
+    //      - Probably not as accurate, or might require more ops
+    // (2) Use CTMU
+    //      - Drawback: Have to toggle between ADC and CTMU modes?
+    
+    // Use ADC_init
+
+#ifdef ADC_TOUCH
+#define CHANNEL 0
+#define N_CHANNELS 4
+    
+    init_CTMU18();
+    unsigned short i=0;
+    static unsigned short touch_adc_val=0;
+    
+    static unsigned char bcnt = 0;
+#endif
+ 
+char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
+
+#ifdef CTMU_TOUCH    
+    init_CTMU18();
+#endif
     for(;;){
         timestamp++;
-    //------------------
-    //---CTMU---
+#ifdef ADC_TOUCH
+        if(ADCbufferCntMark == 0){
+            if (ADCbufferCnt >= ADC_BUFFER_SIZE ){
+                for(i=0; i < ADC_BUFFER_SIZE; i+=N_CHANNELS){
+                    touch_adc_val = ADCbuffer[i+CHANNEL];
+
+                    itoa(words, (int)touch_adc_val, 10);
+                    
+                    print_to_com1(words);
+                    print_to_com1("\n\0");
+                    vTaskDelay(50/portTICK_PERIOD_MS);  
+                }
+                ADCbufferCntMark = 1; 
+            }
+        }
+
+        //print_to_com1(words);
+        //print_to_com1("\n\0");
+        //vTaskDelay(100/portTICK_PERIOD_MS);   
+#endif
+        
+  
+#ifdef CTMU_TOUCH
+        #define AN4 ButtonVavgADCs[1]
+        //------------------
+        //---CTMU---
         for(chan_idx=0; chan_idx < 2; chan_idx++)
         {
             AD1CHSbits.CH0SA = ButtonADCChannels[chan_idx];
@@ -153,112 +167,51 @@ void button_task(void* p_arg)
                     ((G_entropy_pool)<<(0xF&timestamp)) ^
                     (timestamp));
             ADC_Sum = 0;
-        }
-        //---------
-        // Check activation boundaries
-#ifdef badge_hack_2018
-        if(AN4 < Y1)
-        {                        
-            if((AN4 < Y3) && (G_down_touch_cnt < 255))
+        }      
+                 
+        char tmp_touch = (char)((AN4 >> 6) - 70);
+        //tmp_touch = 100 - tmp_touch;
+        if( tmp_touch > 100 )
+            tmp_touch = 0;
+            //tmp_touch = 100;
+        else if( tmp_touch < 0 )
+            tmp_touch = 0;
+        
+        G_touch_pct = tmp_touch;
+#define NULL_TOUCH_BTN_THRESH 9000
+//#define LOW_TOUCH_BTN_THRESH 5800
+#define LOW_TOUCH_BTN_THRESH 6100
+#define HIGH_TOUCH_BTN_THRESH 7400        
+        if((AN4 < LOW_TOUCH_BTN_THRESH)){
+            if(G_down_touch_cnt < 255)
                 G_down_touch_cnt++;
-            else{
-                G_down_touch_cnt = 0;
-            }
-                
-            
-            if((AN4 < Y2) && (AN4 > Y3) && (G_middle_touch_cnt < 255))
+
+            G_middle_touch_cnt = G_up_touch_cnt = 0;
+        }
+        else if( (AN4 >= LOW_TOUCH_BTN_THRESH) 
+                && (AN4 < HIGH_TOUCH_BTN_THRESH)){
+            if(G_middle_touch_cnt < 255)
                 G_middle_touch_cnt++;
-            else{
-                G_middle_touch_cnt = 0;
-            }
-            
-            if((AN4 > Y2) && (G_up_touch_cnt < 255))
+            G_up_touch_cnt = G_down_touch_cnt = 0;
+        }
+        else if( (AN4 >= HIGH_TOUCH_BTN_THRESH)
+                && (AN4 < NULL_TOUCH_BTN_THRESH)){
+            if(G_up_touch_cnt < 255)
                 G_up_touch_cnt++;
-            else{
-                G_up_touch_cnt = 0;
-            }
             
-            // TODO: This cast may cause problems
-            // Could just use this pct to detect buttons...
-            G_touch_pct = TOUCH_PCT_CALC;
-            
-            if(G_touch_pct >= 100)
-                G_touch_pct = 99;
-            else if(G_touch_pct < 0)
-                G_touch_pct = 0;
-            
-            last_input_timestamp = timestamp;
+            G_middle_touch_cnt = G_down_touch_cnt = 0;
         }
         else{
             G_up_touch_cnt = G_down_touch_cnt = G_middle_touch_cnt = G_touch_pct =0;
             REMOVE_FROM_MASK(G_pressed_button, ALL_TOUCH_MASK);
         }
+//        itoa(words, (int)G_touch_pct, 10);
+//        print_to_com1(words);
+//        print_to_com1("\n\0");
+//        vTaskDelay(50/portTICK_PERIOD_MS);  
 #endif
-
-        //print_to_com1("HELLO");
-        //led(0, 50, 50);
-//#define PRINT_TOUCH_VALS
-#ifdef PRINT_TOUCH_VALS
-        char words[8]={0};
-        static unsigned char bcnt = 0;
-        vTaskDelay(100/portTICK_PERIOD_MS);        
         
         
-        itoa(words, (int)AN3, 10);
-        print_to_com1(words);
-        print_to_com1(",");
-// 2018        itoa(words, (int)AN4, 10);
-        print_to_com1(words);
-
-//        print_to_com1(",");
-//        itoa(words, (int)G_down_touch_cnt, 10);
-//        print_to_com1(words);
-//
-//        print_to_com1(",");
-//        itoa(words, (int)G_middle_touch_cnt, 10);
-//        print_to_com1(words);
-//        
-//        print_to_com1(",");
-//        itoa(words, (int)G_up_touch_cnt, 10);
-//        print_to_com1(words);
-        
-        print_to_com1(",");
-        //itoa(words, (int)G_button_cnt, 10);
-        if(G_button_cnt >5){
-            bcnt++;
-            vTaskDelay(2000/portTICK_PERIOD_MS);   
-        }
-        itoa(words, (int)bcnt, 10);
-        print_to_com1(words);
-        
-//        if(TOUCH_DOWN_PRESSED)
-//        {
-//            print_to_com1(",");
-//            print_to_com1("DOWN");
-//            led(0, 0, 1);
-//        }
-//        if(TOUCH_MIDDLE_PRESSED)
-//        {
-//            print_to_com1(",");
-//            print_to_com1("MID");
-//            led(1, 0, 0);
-//        }   
-//        if(TOUCH_UP_PRESSED)
-//        {
-//            print_to_com1(",");
-//            print_to_com1("UP");
-//            led(0, 1, 0);
-//        }         
-//        
-        print_to_com1("\n\r");
-        
-#endif        
-#else // 2018
-    TickType_t xDelay = 5 / portTICK_PERIOD_MS;
-    for(;;){
-        timestamp++;
-#endif        // badge_2018
-
     //---------------------
     //---Tactile Buttons---
     // If btn is being pressed
