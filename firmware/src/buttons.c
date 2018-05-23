@@ -65,7 +65,7 @@ void button_task(void* p_arg)
 #define BADGE_2018
 
     const unsigned char ButtonADCChannels[2] = {3,4};
-    const unsigned char n_averages = 16, log2_n_averages = 4;
+    const unsigned char n_averages = 4, log2_n_averages = 2;
     unsigned short int ButtonVavgADCs[2]={0,0};
     
     
@@ -129,9 +129,11 @@ char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
         #define AN4 ButtonVavgADCs[1]
         //------------------
         //---CTMU---
-        for(chan_idx=0; chan_idx < 2; chan_idx++)
+        //for(chan_idx=0; chan_idx < 2; chan_idx++)
+        chan_idx = 1;
         {
-            AD1CHSbits.CH0SA = ButtonADCChannels[chan_idx];
+            //AD1CHSbits.CH0SA = ButtonADCChannels[chan_idx];
+            AD1CHSbits.CH0SA = 4;
             for(i=0; i < n_averages; i++)
             {
                 //CTMUCONCLR = 0x03000000;
@@ -169,33 +171,32 @@ char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
             ADC_Sum = 0;
         }      
                  
-        char tmp_touch = (char)((AN4 >> 6) - 70);
-        //tmp_touch = 100 - tmp_touch;
+        char tmp_touch = ((char)(AN4 >> 6)) - 35;
         if( tmp_touch > 100 )
-            tmp_touch = 0;
-            //tmp_touch = 100;
+            tmp_touch = 100;
         else if( tmp_touch < 0 )
             tmp_touch = 0;
         
         G_touch_pct = tmp_touch;
 #define NULL_TOUCH_BTN_THRESH 9000
 //#define LOW_TOUCH_BTN_THRESH 5800
-#define LOW_TOUCH_BTN_THRESH 6100
-#define HIGH_TOUCH_BTN_THRESH 7400        
+#define LOW_TOUCH_BTN_THRESH 6800
+#define HIGH_TOUCH_BTN_LOWER_THRESH 7200        
+#define HIGH_TOUCH_BTN_UPPER_THRESH 8100        
         if((AN4 < LOW_TOUCH_BTN_THRESH)){
             if(G_down_touch_cnt < 255)
                 G_down_touch_cnt++;
 
             G_middle_touch_cnt = G_up_touch_cnt = 0;
         }
-        else if( (AN4 >= LOW_TOUCH_BTN_THRESH) 
-                && (AN4 < HIGH_TOUCH_BTN_THRESH)){
-            if(G_middle_touch_cnt < 255)
-                G_middle_touch_cnt++;
-            G_up_touch_cnt = G_down_touch_cnt = 0;
-        }
-        else if( (AN4 >= HIGH_TOUCH_BTN_THRESH)
-                && (AN4 < NULL_TOUCH_BTN_THRESH)){
+//        else if( (AN4 >= LOW_TOUCH_BTN_THRESH) 
+//                && (AN4 < HIGH_TOUCH_BTN_THRESH)){
+//            if(G_middle_touch_cnt < 255)
+//                G_middle_touch_cnt++;
+//            G_up_touch_cnt = G_down_touch_cnt = 0;
+//        }
+        else if( (AN4 >= HIGH_TOUCH_BTN_LOWER_THRESH)
+                && (AN4 < HIGH_TOUCH_BTN_UPPER_THRESH)){
             if(G_up_touch_cnt < 255)
                 G_up_touch_cnt++;
             
@@ -205,7 +206,8 @@ char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
             G_up_touch_cnt = G_down_touch_cnt = G_middle_touch_cnt = G_touch_pct =0;
             REMOVE_FROM_MASK(G_pressed_button, ALL_TOUCH_MASK);
         }
-//        itoa(words, (int)G_touch_pct, 10);
+        //itoa(words, (int)G_touch_pct, 10);
+//        itoa(words, (int)AN4, 10);
 //        print_to_com1(words);
 //        print_to_com1("\n\0");
 //        vTaskDelay(50/portTICK_PERIOD_MS);  
