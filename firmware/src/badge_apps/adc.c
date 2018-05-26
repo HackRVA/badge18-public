@@ -28,6 +28,7 @@ void adc_task(void* p_arg) {
    static int hz_num=0;
    static int analog_src_num=0;
 
+   stop_CTMU18();
 
    for(;;){
         switch(state){
@@ -35,7 +36,7 @@ void adc_task(void* p_arg) {
 		// pwm creates ADC noise
 		no_LED_PWM(1);
 
-                if (cnt == 10 || BUTTON_PRESSED_AND_CONSUME){ // delay to read
+        if (cnt == 10 || BUTTON_PRESSED_AND_CONSUME){ // delay to read
 		   ADC_init(analog_src_num, hz_num); // init w/ current hz_num
                    state++;
                    cnt = 0;
@@ -214,14 +215,21 @@ void adc_task(void* p_arg) {
 		break;
 
             case EXIT:
-		FbBackgroundColor(GREY1);
-		state = INIT;
+                FbBackgroundColor(GREY1);
+                state = INIT;
                 cnt = 0;
-		no_LED_PWM(0);
+                no_LED_PWM(0);
+                
+                ADC_init(2, 2); // Just read MIC
+                init_CTMU18(); // Turn on CTMU
+                
                 returnToMenus();
                 break;
         }
 	vTaskDelay(xDelay);
 	cnt++;
    }
+   
+   
+   
 }
