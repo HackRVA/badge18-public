@@ -752,7 +752,6 @@ void print_task_high_water_mark_to_CDC(TaskHandle_t xHandle)
 void print_high_water_marks(){
     TaskHandle_t xHandle = NULL;
 
-
     // The 'main' MHC provided task, stack size configured in MHC
     xHandle = xTaskGetHandle("APP Tasks");
     print_to_com1("main:\0");
@@ -819,10 +818,10 @@ void test_task(void* p_arg)
   Remarks:
     See prototype in app.h.
  */
+//#define BTN_DEBUG
 void APP_Tasks ( void )
 {
     BaseType_t errStatus;
-
 
     errStatus = xTaskCreate((TaskFunction_t) USBDevice_Task,
             "USB_AttachTask",
@@ -836,27 +835,30 @@ void APP_Tasks ( void )
         while(1);
     }
 
+#ifndef BTN_DEBUG
     errStatus = xTaskCreate((TaskFunction_t) button_task,
             "button_task",
             200u,
             NULL,
             2u,
             NULL);
-
     if(errStatus != pdTRUE){
         red(100);
         while(1);
     }
+#endif
     setNote(100, 1024);
     // Wait for for things (USB) to be ready? easier debugging
     vTaskDelay(1000 / portTICK_PERIOD_MS);
     led(0,0,0);
 
-    ADC_init(0); // slowest sample rate
+    //ADC_init(1, 0); // slowest sample rate
 //    flare_leds(5);
 
     //test_task(NULL);
-    //button_task(NULL);
+#ifdef BTN_DEBUG
+    button_task(NULL);
+#endif
     menu_and_manage_task(NULL);
     //new_menu_and_manage_task(NULL);
 }

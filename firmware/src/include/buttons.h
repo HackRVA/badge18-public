@@ -72,7 +72,7 @@ extern unsigned char G_middle_touch_cnt;
 extern unsigned char G_down_touch_cnt;
 extern char G_touch_pct;
 
-#define DEFAULT_TOUCH_DBC 2 
+#define DEFAULT_TOUCH_DBC 4
 #define DOWN_TOUCH_AND_CONSUME (G_down_touch_cnt > DEFAULT_TOUCH_DBC  && CHECK_THEN_ADD_TO_MASK(G_pressed_button, DOWN_TOUCH_MASK))
 #define MIDDLE_TOUCH_AND_CONSUME (G_middle_touch_cnt > DEFAULT_TOUCH_DBC  && CHECK_THEN_ADD_TO_MASK(G_pressed_button, MIDDLE_TOUCH_MASK))
 #define UP_TOUCH_AND_CONSUME (G_up_touch_cnt > DEFAULT_TOUCH_DBC  && CHECK_THEN_ADD_TO_MASK(G_pressed_button, UP_TOUCH_MASK))
