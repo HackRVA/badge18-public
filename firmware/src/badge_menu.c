@@ -459,7 +459,9 @@ struct menu_t main_m[] = {
 //        {star_shooter_task}},    
     {"adc", VERT_ITEM|DEFAULT_ITEM, TASK, (union menu_data_t) adc_task},
     {"Conductor", VERT_ITEM, TASK, (union menu_data_t) conductor_task},
-    {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},        
+    {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},       
+    
+    //{"badgelandia", VERT_ITEM, TASK, (union menu_data_t) badgelandia_task},
 //    {"dice roll", VERT_ITEM, TASK,
 //        {dice_roll_task}},        
 
@@ -486,7 +488,7 @@ struct menu_t main_m[] = {
 #define LAUNCH_APP boot_splash_task
 //#define LAUNCH_APP badge_tutorial_task
 //#define RUN_TUTORIAL 
-//#define QC_FIRST
+#define QC_FIRST
 //#define DO_BOOT_SPLASH
 //#define DEBUG_PRINT_TO_CDC
 
