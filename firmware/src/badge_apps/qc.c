@@ -14,7 +14,7 @@
 extern unsigned char QC_IR;
 
 #define LED_LVL 50
-void hello_world_task(void* p_arg)
+void QC(void* p_arg)
 {
     //static unsigned char call_count = 0;
     const TickType_t xDelay = 20 / portTICK_PERIOD_MS;
@@ -38,6 +38,7 @@ void hello_world_task(void* p_arg)
     FbMove(15, 55);
     FbWriteLine("Do things");
     FbSwapBuffers();
+    flare_leds(200);
     led(0, 30, 0);
     QC_IR = 0;
     
