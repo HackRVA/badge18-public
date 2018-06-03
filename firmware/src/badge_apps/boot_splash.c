@@ -54,22 +54,24 @@ void boot_splash_task(void* p_arg) {
                                 "smtp server", "sshd", "cryptolocker", };
 #else
 #define NUM_WORD_THINGS 18
-    const unsigned char *splash_word_things[] = {"Fire retardant",
-                                                 "important bits",
-                                                  "russian backdoor",
-                                                  "d-pad driver",
-                                                  "fake fake news",
+    const unsigned char *splash_word_things[] = {"Zero Trust Badge",
+                                                 "GDPR compliant",
+                                                  "erasing badge",
+                                                  "Next Gen Badge",
+                                                  "Speculative Mode",
                                                   "hoisting tables",
-                                                  "X-badge scripts",
-                                                  "important bits",
-                                                  "bitcoin2.0",
-                                                   "badgey bear",
-                                                  "podestas emails",
-                                                    "salt miner", 
-    "border wall",
-                                                  "submission module",
+                                                  "badge-crypt.sh",
+                                                  "blockchain.exe",
+                                                  "Start Spectre",
+                                                  "Badge Melting",
+                                                  "loading AWS keys",
+                                                  "Etherium.exploit", 
+                                                  "decrypting email",
+                                                  "cmd_injection.sh",
                                                   "thought logger",
-                                "app drm", "removing covefe", "ransomware", };    
+                                                  "app drm", 
+                                                  "btrfs", 
+                                                  "unused space", };    
 #endif
     const unsigned char splash_words_btn1[] = "Press the blue";
     const unsigned char splash_words_btn2[] = "button to continue!";

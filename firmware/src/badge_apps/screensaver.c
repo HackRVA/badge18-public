@@ -57,15 +57,15 @@ void just_the_badge_tips(void* p_arg){
         switch(tipnum){
             case 0:
                 FbMove(2, 20);
-                FbWriteLine("Dont lick badge");
+                FbWriteLine("The Mic is on");
                 break;
             case 1:
                 FbMove(2, 20);
-                FbWriteLine("These are land");
+                FbWriteLine("Badges are like");
                 FbMove(2, 30);
-                FbWriteLine("dwelling badges.");
+                FbWriteLine("cats. They don't");
                 FbMove(2, 40);
-                FbWriteLine("Avoid water");
+                FbWriteLine("like water");
                 break;
             case 2:
                 FbMove(2, 20);
@@ -97,15 +97,19 @@ void just_the_badge_tips(void* p_arg){
                 break;
             case 6:
                 FbMove(2, 20);
-                FbWriteLine("Jet fuel cant");
+                FbWriteLine("The earth is");
                 FbMove(2, 30);
-                FbWriteLine("melt steel beams.");
+                FbWriteLine("flat, just like");
+                FbMove(2, 40);
+                FbWriteLine("this joke");
                 break;
             case 7:
                 FbMove(2, 20);
                 FbWriteLine("Sit down and");
                 FbMove(2, 30);
-                FbWriteLine("   STFU");
+                FbWriteLine("Talk to your");
+                FbMove(2, 40);
+                FbWriteLine("Your Badge");
                 break;
             case 8:
                 FbMove(2, 20);
@@ -178,22 +182,20 @@ void just_the_badge_tips(void* p_arg){
                 FbWriteLine("with your badge");
                 FbMove(2, 50);
                 FbWriteLine("go to hackrva");
-                FbMove(2, 60);
-                FbWriteLine("near the CTF");
                 break;
             case 17:
                 FbMove(2, 20);
-                FbWriteLine("These arent the");
+                FbWriteLine("I see dead");
                 FbMove(2, 30);
-                FbWriteLine("badges your ");
+                FbWriteLine("badges. All");
                 FbMove(2, 40);
-                FbWriteLine("looking for.");
+                FbWriteLine("The time.");
                 break;
             case 18:
                 FbMove(2, 20);
-                FbWriteLine("Bitches love");
+                FbWriteLine("NSA Loves");
                 FbMove(2, 30);
-                FbWriteLine("badges. Woof.");
+                FbWriteLine("badges");
                 //FbMove(2, 40);
                 //FbWriteLine("");
                 break;
@@ -208,20 +210,13 @@ void just_the_badge_tips(void* p_arg){
 
 
 void for_president(void* p_arg){
-    unsigned char president1[] = "badge FOR";
-    unsigned char president2[] = "president";
-    unsigned char president3[] = "make badge";
-    unsigned char president4[] = "great again";
+    unsigned char president1[] = "badge wants";
+    unsigned char president2[] = "you for";
+    unsigned char president3[] = " US ";
+    unsigned char president4[] = "ARMY";
     unsigned short popup_time = 0;
     unsigned short anim_cnt = 0;
     FbBackgroundColor(GREY8);
-    FbMove(20, 17);
-    FbColor(WHITE);
-    FbWriteLine(president1);
-
-    FbMove(30, 35);
-    FbWriteLine(president2);
-
     while(!stop_screensaver){
         if(popup_time > 30){
             unsigned char i = 0;
@@ -231,12 +226,16 @@ void for_president(void* p_arg){
                 FbFilledRectangle(132, 10);
             }
         }
-        else{
+        else{    
+            FbMove(20, 50);
             FbColor(WHITE);
-            FbMove(30, 70);
+            FbWriteLine(president1);
+            FbMove(30, 60);
+            FbWriteLine(president2);
+            FbColor(WHITE);
+            FbMove(45, 70);
             FbWriteLine(president3);
-
-            FbMove(10, 80);
+            FbMove(45, 80);
             FbWriteLine(president4);
         }
         anim_cnt++;
@@ -599,17 +598,17 @@ void screensaver_task(void* p_arg)
     }
 }
 
-#define NUM_SCREEN_SAVERS 8
+#define NUM_SCREEN_SAVERS 7
 void random_screen_saver(void* p_arg){
-    unsigned char rnd = 2;//quick_rand(42)%NUM_SCREEN_SAVERS;
+    unsigned char rnd = 2;//
+    rnd = quick_rand(42)%NUM_SCREEN_SAVERS;
     
     switch(rnd){
         case 0:
             about_the_bird(NULL);
             break;
         case 1:
-            //game_of_life_task(NULL);
-            //break;            
+            matrix();
         case 2:
             spirals_task(NULL);
             break;       
@@ -617,19 +616,20 @@ void random_screen_saver(void* p_arg){
             random_dots(NULL);  
             break;     
         case 4:
-            //just_the_badge_tips(NULL);
-            //break;                   
+            just_the_badge_tips(NULL);
+            break;                   
         case 5:
-//            for_president(NULL);
-//            break;
+            for_president(NULL);
+            break;
         case 6:
             carzy_tunnel_animator(NULL);
             break;
-        case 7:
-            matrix();
-            break;
+        //case 7:
+          //  matrix();
+          //  break;
     }
-    
+    FbClear();
+    FbSwapBuffers();
 #ifndef SDL_BADGE
     returnToMenus();
 #endif
