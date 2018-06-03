@@ -18,7 +18,7 @@ unsigned char G_up_touch_cnt = 0;
 unsigned char G_middle_touch_cnt = 0;
 unsigned char G_down_touch_cnt = 0;
 char G_touch_pct = 0;
-
+char touch_running = 0;
 
 unsigned int G_entropy_pool = 961748927;
 unsigned int timestamp = 0;
@@ -57,8 +57,17 @@ void init_CTMU18()
     // 2018 XXX    AD1CSSL = 0x0;        // No channels scanned
     IEC0bits.AD1IE = 0;   // Disable ADC interrupts
     AD1CON1bits.ON = 1;   // Turn on ADC
+    
+    touch_running = 1;
 }
 
+void stop_CTMU18()
+{
+    AD1CON1bits.ON = 0;
+    CTMUCONbits.ON = 0;
+    vTaskDelay(1 / portTICK_PERIOD_MS);    // Wait 1 msec
+    touch_running = 0;
+}
 
 void button_task(void* p_arg)
 {
@@ -131,6 +140,7 @@ char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
         //---CTMU---
         //for(chan_idx=0; chan_idx < 2; chan_idx++)
         chan_idx = 1;
+        if(touch_running)
         {
             //AD1CHSbits.CH0SA = ButtonADCChannels[chan_idx];
             AD1CHSbits.CH0SA = 4;

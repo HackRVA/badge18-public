@@ -480,6 +480,8 @@ struct menu_t main_m[] = {
 //#define RUN_TUTORIAL 
 //#define QC_FIRST
 #define DO_BOOT_SPLASH
+//#define QC_FIRST
+//#define DO_BOOT_SPLASH
 //#define DEBUG_PRINT_TO_CDC
 
 // speed up flashing
