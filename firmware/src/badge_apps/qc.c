@@ -10,6 +10,7 @@
 #include "task.h"
 #include "badge_menu.h"
 #include "assetList.h"
+#include "adc.h"
 
 extern unsigned char QC_IR;
 
@@ -41,6 +42,10 @@ void QC(void* p_arg)
     flare_leds(200);
     led(0, 30, 0);
     QC_IR = 0;
+    
+    char adc_on = 0;
+    unsigned short mic_adc=0;
+    char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
     
     for(;;)
     {
@@ -94,7 +99,7 @@ void QC(void* p_arg)
             redraw = 1;
         }
 
-        if(G_touch_pct >0){
+        if((G_touch_pct >0) && !(adc_on) ){
             FbMove(16, 16);
             //FbWriteLine((unsigned char) "TOUCH");
             FbWriteLine("TOUCH");
@@ -151,7 +156,54 @@ void QC(void* p_arg)
             setNote(20, 1024);
             //print_to_com1("RIGHT");
             redraw = 1;
-        }        
+        }       
+        
+        if(DOWN_BTN_HOLD(155)){
+            if(!adc_on){
+                adc_on = 1;
+                //ADC_init(0, 2); // Init all
+                ADC_init(2, 2); // Init just mic
+                setNote(20, 1024);
+            }else{
+//                adc_on = 0;
+//                setNote(60, 1024);
+            }
+        }
+        
+        if (adc_on){           
+
+#define MIC_CHANNEL 0
+#define ANTENNA_CHANNEL 2            
+#define N_CHANNELS 1
+            if(ADCbufferCntMark == 0){
+                unsigned char i = 0;
+                if(ADCbufferCnt >= ADC_BUFFER_SIZE ){
+                    
+                    //for(i=0; i < ADC_BUFFER_SIZE; i+=N_CHANNELS){
+                    //for(i=0; i < 128; i+=N_CHANNELS){
+                    for(i=0; i < 120; i+=N_CHANNELS){
+                        //------ MIC
+                        FbColor(GREEN);
+                        mic_adc = ADCbuffer[i + MIC_CHANNEL ] >> 1;
+                        
+                        mic_adc = mic_adc < 64 ? mic_adc : 64;
+                        FbMove(i + 1, 120 - (unsigned char) (mic_adc));
+                        FbFilledRectangle(2, 2);
+                        
+                        //----- RF
+//                        FbColor(YELLOW);
+//                        mic_adc = ADCbuffer[i + ANTENNA_CHANNEL ];
+//                        
+//                        mic_adc = mic_adc < 64 ? mic_adc : 64;
+//                        FbMove(i, 70 - (unsigned char) (mic_adc));
+//                        FbFilledRectangle(2, 2);
+                    }// END LOOP
+                    
+                    redraw=1;
+                    ADCbufferCntMark = 1;
+                }                
+            }
+        }
         
         if(redraw){
             redraw = 0;
