@@ -220,8 +220,8 @@ void adc_task(void* p_arg) {
                 cnt = 0;
                 no_LED_PWM(0);
                 
-                ADC_init(2, 2); // Just read MIC
-                init_CTMU18(); // Turn on CTMU
+                ADC_stop(); 
+		init_CTMU18();
                 
                 returnToMenus();
                 break;
