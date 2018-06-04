@@ -171,33 +171,17 @@ rubix_draw_cursor(void) {
 //render all pixels and cursor to the display
 void rubix_render(void) {
     rubix.state = RUBIX_GET_INPUT;
-    FbMove(15,10);
-    FbColor(rubix_get_block_color(rubix.side_order[0],0,0));
-    FbFilledRectangle(30,30);
-    FbMove(47,10);
-    FbColor(rubix_get_block_color(rubix.side_order[0],0,1));
-    FbFilledRectangle(30,30);
-    FbMove(79,10);
-    FbColor(rubix_get_block_color(rubix.side_order[0],0,2));
-    FbFilledRectangle(30,30);
-    FbMove(15,42);
-    FbColor(rubix_get_block_color(rubix.side_order[0],1,0));
-    FbFilledRectangle(30,30);
-    FbMove(47,42);
-    FbColor(rubix_get_block_color(rubix.side_order[0],1,1));
-    FbFilledRectangle(30,30);
-    FbMove(79,42);
-    FbColor(rubix_get_block_color(rubix.side_order[0],1,2));
-    FbFilledRectangle(30,30);
-    FbMove(15,74);
-    FbColor(rubix_get_block_color(rubix.side_order[0],2,0));
-    FbFilledRectangle(30,30);
-    FbMove(47,74);
-    FbColor(rubix_get_block_color(rubix.side_order[0],2,1));
-    FbFilledRectangle(30,30);
-    FbMove(79,74);
-    FbColor(rubix_get_block_color(rubix.side_order[0],2,2));
-    FbFilledRectangle(30,30);
+    
+    unsigned char x=0;
+    unsigned char y=0;
+    
+    for(y=0;y<3;y++) {
+        for(x=0;x<3;x++) {
+            FbMove(15+x*32,10+y*32);
+            FbColor(rubix_get_block_color(rubix.side_order[0],y,x));
+            FbFilledRectangle(30,30);
+        }
+    }
     FbColor(WHITE);
     FbMove(15,106);
     FbFilledRectangle(62,20);
