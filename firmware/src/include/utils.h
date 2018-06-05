@@ -54,6 +54,9 @@ void rotate_points(short point_arr[][2],
 void path_between_points(unsigned char *x0, unsigned char *y0,
                          unsigned char x1, unsigned char y1);
 
+void big_path_between_points(short *x0, short *y0,
+                               short x1, short y1);
+
 void badge_itoa(int value, unsigned char buffer[], int c);
 #endif	/* UTILS_H */
 
