@@ -1,6 +1,9 @@
 #ifndef assets_h
 #define assets_h
 
+#define NUM_AUDIO_CHANNELS 2
+#define BYTES_PER_LINE (NUM_AUDIO_CHANNELS * sizeof(float) + 1)
+
 /** Makes assetId active and calls draw routine 
  *
  * @param [in] assetId ID of asset to draw
@@ -36,16 +39,13 @@ void drawLCD8(unsigned char assetId, int frame);
 void doAudio();
 /**
  * Tells timer interrupt to play a note.
- * @param [in] freq The note frequency (# of timer ticks between pulses)
- *        <needed here> formula for HZ -> freq value
- * @param [in] dur The duration of the note, in timer ticks
+ * @param [in] wavehop The frequency in samples.
+ * @param [in] steps The duration in samples.
  */
-void setNote(unsigned short freq, unsigned short dur) ;
+void setNote(unsigned short freq, unsigned short dur);
 
-/* void setBeep(unsigned short freq); */ /* not implemented */
+void nextNote(void);
 
-/** Callback for setting next note when current note is complete. */
-void nextNote_cb(unsigned char assetId, int frame);
-void nextMIDI_cb(unsigned char assetId, int frame) ;
+void endNote(void);
 
 #endif

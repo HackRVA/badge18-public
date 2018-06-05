@@ -36,9 +36,9 @@ enum {
 struct asset {
     unsigned char assetId; /**< number (enum) used to reference object */
     unsigned char type;    /**< image/audio/midi/private */
-    unsigned char seqNum; /**< \# images in the asset for animation, frame # for font char id */
-    unsigned short x;	/**< array x */
-    unsigned short y;	/**< array y */
+    unsigned char seqNum; /**< \# images in the asset for animation, frame # for font char id; whether to loop for audio */
+    unsigned short x;	/**< array x; number of notes for audio */
+    unsigned short y;	/**< array y; samples_per_step for audio */
     const char *data_cmap; /**< color map lookup table for image data */
     const char *pixdata;   /**< color pixel data */
     void (*datacb)(unsigned char, int); /**< routine that can display or play asset */
