@@ -46,6 +46,7 @@ enum BADGELANDIA_ITEM {
     UNUSED_ITEM,
     FUEL_UP_ITEM,
     SHIELD_UP_ITEM,
+    GOLD_ASTEROID,
     WEAPON_SPRAYSHOT_ITEM,
     WEAPON_MISSILE_ITEM,
 
@@ -57,16 +58,10 @@ enum BADGELANDIA_ITEM {
 struct badgelandia_basic_item_t{
     struct badgelandia_basic_object_t o;
     enum BADGELANDIA_ITEM item_type;
-    char modifier;
+    char modifier, modifier2, modifier3;
 };
 
-//#define BADGELANDIA_MAX_ITEMS 30
-#define BADGELANDIA_MAX_ITEMS 3
-struct badgelandia_world_t {
-    float view_x, view_y;
-    unsigned char zoom;
-    struct badgelandia_basic_item_t items[BADGELANDIA_MAX_ITEMS];
-};
+;
 
 void ctor_badgelandia_basic_object(struct badgelandia_basic_object_t *o){
     o->loc_x = .0;
@@ -86,8 +81,10 @@ struct badgelandia_basic_ship_t {
     unsigned char max_hp, current_hp;
 };
 
+#define MAX_SHIELD 1000
 struct badgelandia_basic_inventory_t {
     unsigned int credits;
+    short shield_amnt;
     unsigned char health_kits, repair_kits;
 
     unsigned char available_weapons_mask;
@@ -101,11 +98,26 @@ struct badgelandia_player_t {
 
 };
 
+enum BADGELANDIA_GOON{
+    UNUSED_GOON,
+    DOT_GOON,
+    SMALL_GOON
+};
+#define BADGELANDIA_MAX_GOONS 10
 struct badgelandia_goon_t {
     struct badgelandia_basic_object_t o;
-    unsigned char health;
+    enum BADGELANDIA_GOON goon_type;
+    unsigned char modified, modifier2;
 };
 
+//#define BADGELANDIA_MAX_ITEMS 30
+#define BADGELANDIA_MAX_ITEMS 3
+struct badgelandia_world_t {
+    float view_x, view_y;
+    unsigned char zoom;
+    struct badgelandia_basic_item_t items[BADGELANDIA_MAX_ITEMS];
+    struct badgelandia_goon_t goons[BADGELANDIA_MAX_GOONS];
+};
 
 ////
 #define  MAX_FUEL 8100
@@ -122,6 +134,9 @@ void badgelandia_init_level(struct badgelandia_player_t* player,
     player->ship.orientation_rads = 0.0;
     player->ship.o.vel_x = player->ship.o.vel_y = 0.0;
     player->ship.o.loc_x = player->ship.o.loc_y = 50.0;
+
+    //player->inventory.shield_amnt = MAX_SHIELD;
+    player->inventory.shield_amnt = 250;
 
 }
 
@@ -267,6 +282,43 @@ unsigned char badgelandia_vector_ship(short shared_vertices[][2],
 
 }
 
+void draw_player(struct badgelandia_player_t* player,
+                 struct badgelandia_world_t* world){
+    static float rot = 0.0;
+    short shared_vertices[8][2] = {0};
+    unsigned char x = (player->ship.o.loc_x - world->view_x);
+    unsigned char y = (player->ship.o.loc_y - world->view_y);
+
+    badgelandia_vector_ship(shared_vertices, 0,
+                            (short)((player->ship.o.loc_x - world->view_x)) ,
+                            (short)((player->ship.o.loc_y - world->view_y)),
+                            player->ship.orientation_rads);
+
+    if(player->inventory.shield_amnt== 0)
+        return;
+
+    FbColor(CYAN);
+    if(player->inventory.shield_amnt > 200){
+        equilateral_polygon_points(shared_vertices,
+                                   17.0, 6, rot);
+        FbPolygonFromPoints(shared_vertices,//goon_vertices,
+                            6, x, y);
+    }
+    if(player->inventory.shield_amnt > 500){
+        equilateral_polygon_points(shared_vertices,
+                                   20.0, 6, rot*.5);
+        FbPolygonFromPoints(shared_vertices,//goon_vertices,
+                            6, x, y);
+    }
+    if(player->inventory.shield_amnt > 700){
+        equilateral_polygon_points(shared_vertices,
+                                   23.0, 6, rot*.25);
+        FbPolygonFromPoints(shared_vertices,//goon_vertices,
+                            6, x, y);
+    }
+    rot += 0.05;
+}
+
 enum BADGELANDIA_ITEM random_item_type(){
     int r = rand();
 
@@ -291,37 +343,72 @@ unsigned char update_world_items(struct badgelandia_player_t* player,
 #define SHIP_Y (unsigned char)(player->ship.o.loc_y - world->view_y)
 #define SHIP_HEIGHT 15
 #define SHIP_WIDTH 15
+    unsigned char redraw = 0;
     unsigned char i  = 0, tmp = 0;
     for(i=0; i < BADGELANDIA_MAX_ITEMS; i++){
-#define ITEM GET_WORLD_ITEM(i)
         switch (world->items[i].item_type){
             case UNUSED_ITEM:
                 world->items[i].item_type = random_item_type();
+                // ---- X
+                world->items[i].o.loc_x = player->ship.o.loc_x;
+                world->items[i].o.loc_x += rand()%850;
+                world->items[i].o.loc_x -= rand()%850;
+
+                if(world->items[i].o.loc_x < 0)
+                    world->items[i].o.loc_x = 5;
+
+                // ---- Y
+                world->items[i].o.loc_y = player->ship.o.loc_y;
+                world->items[i].o.loc_y += rand()%850;
+                world->items[i].o.loc_y -= rand()%850;
+
+                if(world->items[i].o.loc_y < 0)
+                    world->items[i].o.loc_y = 5;
+
+                ///-----
+                if (
+                    big_check_box_collision(world->view_x, world->view_y,
+                                            132, 132,
+                                            world->items[i].o.loc_x, world->items[i].o.loc_y,
+                                            20, 20
+                                            )
+                        ){
+                    world->items[i].o.loc_x += 132;
+                    world->items[i].o.loc_y += 132;
+                }
+                short _i, _j;
+                for(_i = 0; _i < BADGELANDIA_MAX_ITEMS; _i++){
+                    for(_j=_i+1; _j < BADGELANDIA_MAX_ITEMS; _j++){
+
+                        if(big_check_box_collision(world->items[_i].o.loc_x, world->items[_i].o.loc_y,
+                                                20, 20,
+                                                world->items[_j].o.loc_x, world->items[_j].o.loc_y,
+                                                20, 20)){
+                            world->items[_j].item_type = UNUSED_ITEM;
+                        }
+                    }
+                }
+
+                //----
+                world->items[i].o.vel_x = 0;
+                world->items[i].o.vel_y = 0;
 
                 // INIT ITEMS
                 switch(world->items[i].item_type){
                     case UNUSED_ITEM:
                         break;
-                    default:
-                        world->items[i].o.loc_x = player->ship.o.loc_x;
-                        world->items[i].o.loc_x += rand()%300;
-                        world->items[i].o.loc_x -= rand()%300;
-
-                        if(world->items[i].o.loc_x < 0)
-                            world->items[i].o.loc_x = 5;
-
-
-                        world->items[i].o.loc_y = player->ship.o.loc_y;
-                        world->items[i].o.loc_y += rand()%300;
-                        world->items[i].o.loc_y -= rand()%300;
-
-                        if(world->items[i].o.loc_y < 0)
-                            world->items[i].o.loc_y = 5;
-
-                        world->items[i].o.vel_x = 0;
-                        world->items[i].o.vel_y = 0;
-
+                    case FUEL_UP_ITEM:
                         world->items[i].modifier = 100;
+                        break;
+                    case SHIELD_UP_ITEM:
+                        world->items[i].modifier = 50;
+                        break;
+                    case GOLD_ASTEROID:
+                        world->items[i].o.vel_x = 0.001 * (rand()%100);
+                        world->items[i].o.vel_y = 0.001* (rand()%100);
+                        world->items[i].modifier = 5;
+                        break;
+                    default:
                         break;
                 }
                 break;
@@ -332,10 +419,10 @@ unsigned char update_world_items(struct badgelandia_player_t* player,
                                         20, 20);
                 if(tmp){
                     if(player->ship.current_fuel < player->ship.max_fuel){
-                        if((player->ship.max_fuel - player->ship.current_fuel) < world->items[i].modifier *10){
+                        if((player->ship.max_fuel - player->ship.current_fuel) < world->items[i].modifier *15){
                             player->ship.current_fuel = player->ship.max_fuel;
                         }else{
-                            player->ship.current_fuel += world->items[i].modifier *10;
+                            player->ship.current_fuel += world->items[i].modifier *15;
                         }
                     }
 
@@ -343,6 +430,21 @@ unsigned char update_world_items(struct badgelandia_player_t* player,
                 }
 
 
+                break;
+            case SHIELD_UP_ITEM:
+                tmp = big_check_box_collision(player->ship.o.loc_x, player->ship.o.loc_y, SHIP_WIDTH, SHIP_HEIGHT,
+                                              world->items[i].o.loc_x, world->items[i].o.loc_y,
+                                              20, 20);
+                if(tmp){
+                    if(player->ship.current_fuel < player->ship.max_fuel){
+                        if((MAX_SHIELD - player->inventory.shield_amnt) < world->items[i].modifier * 10){
+                            player->inventory.shield_amnt = MAX_SHIELD;
+                        }else{
+                            player->inventory.shield_amnt += world->items[i].modifier * 10;
+                        }
+                    }
+                    world->items[i].item_type = UNUSED_ITEM;
+                }
                 break;
             default:
                 tmp = big_check_box_collision(player->ship.o.loc_x, player->ship.o.loc_y, SHIP_WIDTH, SHIP_HEIGHT,
@@ -352,7 +454,36 @@ unsigned char update_world_items(struct badgelandia_player_t* player,
                     world->items[i].item_type = UNUSED_ITEM;
                 break;
             }
+
+        world->items[i].o.loc_x += world->items[i].o.vel_x;
+        if (world->items[i].o.loc_x < 5){
+            if(world->items[i].o.vel_x < 0)
+                world->items[i].o.vel_x *= -1;
+        }
+        if (world->items[i].o.loc_x > PIXEL_DIM - 9){
+            if(world->items[i].o.vel_x > 0)
+                world->items[i].o.vel_x *= -1;
+        }
+
+        world->items[i].o.loc_y += world->items[i].o.vel_y;
+        if (world->items[i].o.loc_y < 5){
+            if(world->items[i].o.vel_y < 0)
+                world->items[i].o.vel_y *= -1;
+        }
+        if (world->items[i].o.loc_y > PIXEL_DIM - 9){
+            if(world->items[i].o.vel_y > 0)
+                world->items[i].o.vel_y *= -1;
+        }
+
+        if(big_check_box_collision(world->view_x, world->view_y,
+                                    132, 132,
+                                    world->items[i].o.loc_x, world->items[i].o.loc_y,
+                                    20, 20)){
+            redraw |= 1;
+        }
+
     }
+    return redraw;
 
 }
 
@@ -361,6 +492,8 @@ unsigned char update_world_items(struct badgelandia_player_t* player,
 void draw_world_items(struct badgelandia_player_t* player,
                         struct badgelandia_world_t* world ){
     unsigned char i  = 0, tmp = 0;
+    short shared_vertices[8][2] = {0};
+    float tmp_float = 0.0;
     short x, y = 0;
     for(i=0; i < BADGELANDIA_MAX_ITEMS; i++) {
         x = BADGELANDIA_WORLD_X_TO_SCREEN_X(world->items[i].o.loc_x);
@@ -371,9 +504,13 @@ void draw_world_items(struct badgelandia_player_t* player,
 
         switch (world->items[i].item_type) {
             case FUEL_UP_ITEM:
-                FbMove(x, y);
                 FbColor(WHITE);
-                FbFilledRectangle(10, 10);
+                tmp_float = (float)world->items[i].modifier2 * 0.1;
+                world->items[i].modifier2++;
+                equilateral_polygon_points(shared_vertices,
+                                           9.0, 6, tmp_float);
+                FbPolygonFromPoints(shared_vertices,//goon_vertices,
+                                    6, x, y);
                 break;
             case SHIELD_UP_ITEM:
                 FbMove(x, y);
@@ -384,6 +521,14 @@ void draw_world_items(struct badgelandia_player_t* player,
                 FbMove(x, y);
                 FbColor(YELLOW);
                 FbFilledRectangle(10, 10);
+                break;
+            case GOLD_ASTEROID:
+                FbColor(YELLOW);
+                equilateral_polygon_points(shared_vertices,
+                           9.0, 6, tmp_float);
+                FbPolygonFromPoints(shared_vertices,//goon_vertices,
+                                    6, x, y);
+
                 break;
             case WEAPON_MISSILE_ITEM:
                 FbMove(x, y);
@@ -505,12 +650,17 @@ void badgelandia_task(void* p_arg){
 
     badgelandia_init_level(&player, &world);
     set_world_items_unused(&world);
+    world.items[0].item_type = FUEL_UP_ITEM;
+    world.items[0].o.loc_x = 100;
+    world.items[0].o.loc_y = 100;
+    world.items[0].o.vel_x = .1;
+    world.items[0].o.vel_y = .1;
+    world.items[0].modifier = 100;
 
 #define N_GOONS 5
 #define GOON_ROTATION_DELTA .01
     struct badgelandia_goon_t goons[N_GOONS];
 
-    short shared_vertices[8][2] = {0};
 
     FbBackgroundColor(GREY2);
     FbClear();
@@ -532,7 +682,11 @@ void badgelandia_task(void* p_arg){
 
         update_world_view(&player, &world);
 
-        update_world_items(&player, &world);
+        redraw |= update_world_items(&player, &world);
+
+        // -_-
+        if(player.inventory.shield_amnt > 0)
+            redraw |= 1;
 
         if(redraw || (G_touch_pct > 0)
             || (player.ship.o.vel_x != 0.0)
@@ -549,7 +703,6 @@ void badgelandia_task(void* p_arg){
             badge_itoa((int)(player.ship.o.loc_y), thrust_str, 6);
             FbMove(80, 115);
             FbWriteLine(thrust_str);
-#endif
             ///-----
             FbColor(WHITE);
             //badge_itoa((int)(G_touch_pct), thrust_str, 6);
@@ -557,8 +710,7 @@ void badgelandia_task(void* p_arg){
             FbMove(80, 10);
             FbWriteLine(thrust_str);
             ///-----
-
-
+#endif
 
             badgelandia_draw_grid(&world);
 
@@ -589,19 +741,14 @@ void badgelandia_task(void* p_arg){
                                         player.ship.orientation_rads);
             }
 #endif
-           badgelandia_vector_ship(shared_vertices, 0,
-                        (short)((player.ship.o.loc_x - world.view_x)) ,
-                        (short)((player.ship.o.loc_y - world.view_y)),
-                        //ZOOM_X(player, world),
-                        //ZOOM_Y(player, world)
-                        //(short)(player.ship.o.loc_x - world.view_x),
-                        //(short)(player.ship.o.loc_y - world.view_y),
-                        player.ship.orientation_rads);
+
+            draw_player(&player, &world);
+
             // -----
             //player.ship.current_fuel
             FbColor(WHITE);
             FbMove(3, 124);
-            FbRectangle(player.ship.max_fuel >> FUEL_MAX_SHIFT, 5);
+            FbRectangle((unsigned char) (player.ship.max_fuel >> FUEL_MAX_SHIFT), 5);
 
             if(player.ship.current_fuel < 500)
                 FbColor(RED);
