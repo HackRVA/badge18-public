@@ -455,28 +455,18 @@ struct menu_t main_m[] = {
 //        {groundwar_task}},        
 //    {"Lander", VERT_ITEM, TASK,
 //        {badge_lander_task}},
-//    {"Star Shooter", VERT_ITEM, TASK,
-//        {star_shooter_task}},    
+    {"U Draw", VERT_ITEM, TASK, {udraw_task}},    
     {"adc", VERT_ITEM|DEFAULT_ITEM, TASK, (union menu_data_t) adc_task},
     {"Conductor", VERT_ITEM, TASK, (union menu_data_t) conductor_task},
-    {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},       
-    
-    //{"badgelandia", VERT_ITEM, TASK, (union menu_data_t) badgelandia_task},
-//    {"dice roll", VERT_ITEM, TASK,
-//        {dice_roll_task}},        
-
-
-//    {"Schedule", VERT_ITEM|DEFAULT_ITEM, MENU,
-//        {sch_main_m}},
+    {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},        
+    {"Rubix", VERT_ITEM, TASK, {rubix_task}},        
+    {"Schedule", VERT_ITEM|DEFAULT_ITEM, MENU, {sch_main_m}},
 //    {"tutorial", VERT_ITEM, TASK,
 //        {(struct menu_t *)badge_tutorial_task}},        
-    {"backlight", VERT_ITEM, MENU,
-        {(struct menu_t *) backlight_m}},
+    {"backlight", VERT_ITEM, MENU, {(struct menu_t *) backlight_m}},
 //    {"led", VERT_ITEM, MENU,
 //        {(struct menu_t *) LEDlight_m}}, /* coerce/cast to a menu_t data pointer */
-    {"buzzer", VERT_ITEM|LAST_ITEM, MENU,
-        {(struct menu_t *) buzzer_m}},        
-
+    {"buzzer", VERT_ITEM|LAST_ITEM, MENU, {(struct menu_t *) buzzer_m}},        
 //    {"", VERT_ITEM|LAST_ITEM|HIDDEN_ITEM, BACK,
 //        {NULL}},
 };
@@ -488,7 +478,9 @@ struct menu_t main_m[] = {
 #define LAUNCH_APP boot_splash_task
 //#define LAUNCH_APP badge_tutorial_task
 //#define RUN_TUTORIAL 
-#define QC_FIRST
+//#define QC_FIRST
+#define DO_BOOT_SPLASH
+//#define QC_FIRST
 //#define DO_BOOT_SPLASH
 //#define DEBUG_PRINT_TO_CDC
 
@@ -502,7 +494,7 @@ enum badge_idle_state{
     WAKEUP
 };
 
-#define NOSCREENSAVER
+//#define NOSCREENSAVER
 #ifndef NOSCREENSAVER
 extern unsigned char stop_screensaver;
 #endif
@@ -533,7 +525,7 @@ void menu_and_manage_task(void *p_arg){
                             &xHandle);
 #else
 
-    
+#define DOLAUNCH    
 #ifdef DOLAUNCH
     xReturned = xTaskCreate((TaskFunction_t) LAUNCH_APP,
                             "exec_app",

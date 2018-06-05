@@ -20,7 +20,7 @@ const struct analog_src_t analog_info[] = {
    {"red led", AN_RED_MASK, 1},
    {"green led", AN_GREEN_MASK, 1},
    {"blue led", AN_BLUE_MASK, 1},
-   {"VSS", AN_BLUE_MASK, 1},
+   {"VSS", AN_VSS, 1},
 };
 
 // see adc.h for HZ_ enums
@@ -126,6 +126,17 @@ void ADC_init(unsigned char analog_src_num, unsigned char hz_num) // enum {HZ_50
    AD1CON1bits.ON = 1;   // adc on
  
    IEC0bits.AD1IE = 1; // enable interrupt
+}
+
+void ADC_stop()
+{
+   IEC0bits.AD1IE = 0; // disable int 
+
+   AD1CON1 = 0;
+   AD1CON2 = 0;
+   AD1CON3 = 0;
+
+   IFS0bits.AD1IF = 0; // clear flag
 }
 
 // {IPL4}SOFT == overwritten registers are shadow by software. 

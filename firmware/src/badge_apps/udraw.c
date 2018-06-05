@@ -300,15 +300,18 @@ void draw_get_input(void) {
         if(draw_state.color < DRAW_CYAN) {
             draw_state.color++;
         }
+        if(draw_state.color == DRAW_CYAN) {
+            draw_state.on_off = !draw_state.on_off;
+        }
     }
     if(UP_TOUCH_AND_CONSUME) {
         if(draw_state.color > DRAW_BLACK) {
             draw_state.color--;
         }
     }
-    if(MIDDLE_TOUCH_AND_CONSUME) {
-        draw_state.on_off = !draw_state.on_off;
-    }
+    //if(MIDDLE_TOUCH_AND_CONSUME) {
+    //    draw_state.on_off = !draw_state.on_off;
+    //}
 }
 
 //process data based on what changed in draw_get_input
