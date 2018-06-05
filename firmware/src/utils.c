@@ -71,12 +71,13 @@ unsigned char big_check_box_collision(short x1, short y1,
 
 unsigned char distance_between_coords(unsigned char x1, unsigned char y1,
                                       unsigned char x2, unsigned y2){
-    return sqrt(((x2 - x1)<< 1) + ((y2 - y1) << 1));
+    //return sqrt(((x2 - x1)<< 1) + ((y2 - y1) << 1));
+    return sqrt((pow(x2 - x1, 2)) + (pow(y2 - y1,2)));
 }
 
 short big_distance_between_coords(short x1, short y1,
                                   short x2, short y2){
-    return sqrt(((x2 - x1)<< 1) + ((y2 - y1) << 1));
+    return sqrt((pow(x2 - x1, 2)) + (pow(y2 - y1,2)));
 }
 
 
@@ -179,6 +180,26 @@ void path_between_points(unsigned char *x0, unsigned char *y0,
     if (e2 < dy) { err += dx; *y0 += sy; }
 
 }
+
+void big_path_between_points(short *x0, short *y0,
+                             short x1, short y1){
+    int dx, dy,
+    sx, sy,
+    err, e2;
+
+    //unsigned char x0, y0, x1, y1, i, j;
+    dx = abs(x1 - *x0);
+    dy = abs(y1 - *y0);
+    sx = *x0 < x1 ? 1: -1;
+    sy = *y0 < y1 ? 1: -1;
+    err = (dx > dy ? dx : -dy)/2;
+
+    e2 = err;
+    if (e2 > -dx) { err -= dy; *x0 += sx; }
+    if (e2 < dy) { err += dx; *y0 += sy; }
+
+}
+
 
 #define NOPE
 #ifdef NOPE
