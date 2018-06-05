@@ -13,11 +13,11 @@
 enum {
 //    DRBOB=0,
         FONT=0,
-//    HACKRVA4,
-//    RVASEC2016,
+    HACKRVA4,
+    RVASEC2016,
 
 //    BI_SPRITE,
-//    BADGEY_BIRD,
+    BADGEY_BIRD,
     LASTASSET,
 };
 
