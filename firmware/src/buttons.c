@@ -188,11 +188,21 @@ char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
             tmp_touch = 0;
         
         G_touch_pct = tmp_touch;
+
+//if using pro compiler with 16 mips optimizations,         
+//#define MIPS16_INST_OPTIM
+#ifdef MIPS16_INST_OPTIM   
 #define NULL_TOUCH_BTN_THRESH 9000
-//#define LOW_TOUCH_BTN_THRESH 5800
+#define LOW_TOUCH_BTN_THRESH 8700
+#define HIGH_TOUCH_BTN_LOWER_THRESH 9400        
+#define HIGH_TOUCH_BTN_UPPER_THRESH 11000 
+#else
+//Without MIPS 16 instructions        
+#define NULL_TOUCH_BTN_THRESH 9000
 #define LOW_TOUCH_BTN_THRESH 6800
 #define HIGH_TOUCH_BTN_LOWER_THRESH 7200        
-#define HIGH_TOUCH_BTN_UPPER_THRESH 8100        
+#define HIGH_TOUCH_BTN_UPPER_THRESH 8100    
+#endif        
         if((AN4 < LOW_TOUCH_BTN_THRESH)){
             if(G_down_touch_cnt < 255)
                 G_down_touch_cnt++;
