@@ -4,6 +4,15 @@
 #define NUM_AUDIO_CHANNELS 2
 #define BYTES_PER_LINE (NUM_AUDIO_CHANNELS * sizeof(float) + 1)
 
+/** Stops playback of the current audio asset */
+void haltPlayback(void);
+
+/** Makes assetId active and calls play routine
+ *
+ * @param [in] assetId ID of asset to draw
+ */
+void playAsset(unsigned char assetId);
+
 /** Makes assetId active and calls draw routine 
  *
  * @param [in] assetId ID of asset to draw

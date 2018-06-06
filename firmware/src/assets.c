@@ -224,6 +224,12 @@ void playAsset(unsigned char assetId)
     nextNote();
 }
 
+void haltPlayback(void)
+{
+    G_audioAssetId = 255;
+    endNote();
+}
+
 void setNote(unsigned short freq, unsigned short dur)
 {
     G_wavehop[0] = (float) sizeof(wave_table) / (float) freq;

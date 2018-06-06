@@ -50,6 +50,7 @@ char jb_state = INIT;
 
 void set_jb_exit(void)
 {
+    haltPlayback();
     jb_state = INIT;
     returnToMenus();
 }
