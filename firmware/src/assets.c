@@ -219,6 +219,7 @@ volatile unsigned short G_mute = 0;
 
 void playAsset(unsigned char assetId)
 {
+    haltPlayback();
     G_audioAssetId = assetId;
     nextNote();
 }

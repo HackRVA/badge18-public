@@ -3,6 +3,7 @@
 #include "buttons.h"
 #include "jukebox.h"
 
+#include "assets.h"
 #include "assetList.h"
 
 // If ordering changed, make sure indices still work
