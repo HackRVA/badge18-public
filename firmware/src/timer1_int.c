@@ -468,20 +468,20 @@ void doLED_PWM()
     if (G_no_LED_PWM) return;
 
     G_backlight_cnt++;
-    if (G_backlight_cnt <= G_backlight)
+    if (G_backlight_cnt < G_backlight)
         LATCbits.LATC9 = 1;
     else
         LATCbits.LATC9 = 0;
 
     G_flare_cnt++;
-    if (G_flare_cnt <= G_flare_pwm)
+    if (G_flare_cnt < G_flare_pwm)
         FLARE_LED = 1;
     else
         FLARE_LED = 0;
 
     /* red */
     G_red_cnt++;
-    if (G_red_cnt <= G_red_pwm)
+    if (G_red_cnt < G_red_pwm)
         LATCbits.LATC0 = 1;
     else
         LATCbits.LATC0 = 0;
@@ -490,7 +490,7 @@ void doLED_PWM()
 
     /* Green */
     G_green_cnt++;
-    if (G_green_cnt <= G_green_pwm)
+    if (G_green_cnt < G_green_pwm)
         LATBbits.LATB3 = 1;
     else
         LATBbits.LATB3 = 0;
@@ -499,7 +499,7 @@ void doLED_PWM()
 
     /* Blue */
     G_blue_cnt++;
-    if (G_blue_cnt <= G_blue_pwm)
+    if (G_blue_cnt < G_blue_pwm)
         LATCbits.LATC1 = 1;
     else
         LATCbits.LATC1 = 0;
