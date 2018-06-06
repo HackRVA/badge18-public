@@ -74,7 +74,7 @@ const struct asset assetList[] = {
  { FONT, PICTURE1BIT, 42, 8, 8, (const char *) BW_cmap, (const char *) font_2_bits, (drawLCD1) },
  { BADGIO, AUDIO, NOTEDATA_badgio_NOTES, NOTEDATA_badgio_SPEED, 0, (void *) 0, notedata_badgio, (void *) 0 },
  { BURGUNDY_POWER, AUDIO, NOTEDATA_burgundy_power_NOTES, NOTEDATA_burgundy_power_SPEED, 1, (void *) 0, notedata_burgundy_power, (void *) 0 },
- { DFIRE_BLURGGGH, AUDIO, NOTEDATA_dfire_blurgggh_NOTES, NOTEDATA_dfire_blurgggh_SPEED, 1, (void *) 0, notedata_dfire_blurgggh, (void *) 0 },
+ { DFIRE_BLURGGGH, AUDIO, NOTEDATA_dfire_blurgggh_NOTES, NOTEDATA_dfire_blurgggh_SPEED, 33, (void *) 0, notedata_dfire_blurgggh, (void *) 0 },
  { DFIRE_BOSS, AUDIO, NOTEDATA_dfire_boss_NOTES, NOTEDATA_dfire_boss_SPEED, 1, (void *) 0, notedata_dfire_boss, (void *) 0 },
  { DFIRE_DIRIGIBLE, AUDIO, NOTEDATA_dfire_dirigible_NOTES, NOTEDATA_dfire_dirigible_SPEED, 1, (void *) 0, notedata_dfire_dirigible, (void *) 0 },
  { DFIRE_GAMEOF, AUDIO, NOTEDATA_dfire_gameof_NOTES, NOTEDATA_dfire_gameof_SPEED, 1, (void *) 0, notedata_dfire_gameof, (void *) 0 },

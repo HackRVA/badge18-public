@@ -314,6 +314,8 @@ void nextNote(void)
             G_audioAssetId = 255; /* clear curent asset */
             G_playing = 0;
             return;
+        } else {
+            G_note_num = assetList[G_audioAssetId].y - 1;
         }
     }
 

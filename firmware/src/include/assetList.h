@@ -46,7 +46,7 @@ enum {
 struct asset {
     unsigned char assetId; /**< number (enum) used to reference object */
     unsigned char type;    /**< image/audio/midi/private */
-    unsigned char seqNum; /**< \# images in the asset for animation, frame # for font char id; whether to loop for audio */
+    unsigned char seqNum; /**< \# images in the asset for animation, frame # for font char id; for audio, if you want to loop, 1 + the note index of the note you want to jump back to once completed, or zero if you don't want to loop */
     unsigned short x;	/**< array x; number of notes for audio */
     unsigned short y;	/**< array y; samples_per_step for audio */
     const char *data_cmap; /**< color map lookup table for image data */
