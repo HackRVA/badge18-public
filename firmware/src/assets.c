@@ -190,7 +190,6 @@ void drawLCD8(unsigned char assetId, int frame)
 }
 
 volatile unsigned char G_audioAssetId = 255;
-volatile unsigned int G_audioFrame = 0; /**< persistent current "frame" of audio, like a "frame" of video */
 
 /* whether to even bother playing anything */
 volatile char G_playing = 0;
@@ -228,6 +227,13 @@ void haltPlayback(void)
 {
     G_audioAssetId = 255;
     endNote();
+    G_playing = 0;
+    G_samples_cnt = 0;
+    G_note_num = 0;
+    G_duration_cnt = 0;
+    int channel;
+    for (channel = 0; channel < NUM_AUDIO_CHANNELS; channel++)
+        G_wavepos[NUM_AUDIO_CHANNELS] = 0.0;
 }
 
 void setNote(unsigned short freq, unsigned short dur)

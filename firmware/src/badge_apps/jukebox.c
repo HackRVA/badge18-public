@@ -15,13 +15,14 @@ struct menu_t jukebox_config_m[] = {
     {"Dirigible", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_dirigible}},
     {"Game of", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_gameof}},
     {"Imperial", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_imperial}},
-    {"J46k", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_j46k}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
+    {"Stop", VERT_ITEM, FUNCTION, {(struct menu_t *) haltPlayback}},
     {"Next page", VERT_ITEM|DEFAULT_ITEM, FUNCTION, {(struct menu_t *) jb_switch_pages}},
     {"Exit", VERT_ITEM|LAST_ITEM, FUNCTION, {(struct menu_t *) set_jb_exit}},
 };
 
 struct menu_t jukebox_config_n[] = {
+    {"J46k", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_j46k}},
     {"Mau5", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_mau5}},
     {"Slurm", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_slurm}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
@@ -29,8 +30,7 @@ struct menu_t jukebox_config_n[] = {
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
-    {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
-    {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
+    {"Stop", VERT_ITEM, FUNCTION, {(struct menu_t *) haltPlayback}},
     {"Prev page", VERT_ITEM|DEFAULT_ITEM, FUNCTION, {(struct menu_t *) jb_switch_pages}},
     {"Exit", VERT_ITEM|LAST_ITEM, FUNCTION, {(struct menu_t *) set_jb_exit}},
 };
