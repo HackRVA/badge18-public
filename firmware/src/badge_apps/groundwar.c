@@ -459,7 +459,7 @@ void groundwar_draw(struct groundwar_minion_t minions[NUM_MINIONS],
 
     FbMove(105, 120);
 
-    badge_itoa((int)groundwar_level_health, pt_str);
+    badge_itoa((int)groundwar_level_health, pt_str, 6);
     FbWriteLine(pt_str);
 
     // -----
@@ -467,7 +467,7 @@ void groundwar_draw(struct groundwar_minion_t minions[NUM_MINIONS],
     FbMove(1, 120);
     FbColor(WHITE);
     FbWriteLine("PTS:");
-    badge_itoa((int)groundwar_points, pt_str);
+    badge_itoa((int)groundwar_points, pt_str, 6);
 
     FbMove(30, 120);
     FbWriteLine(pt_str);
@@ -495,7 +495,7 @@ void groundwar_draw(struct groundwar_minion_t minions[NUM_MINIONS],
         FbColor(YELLOW);
     FbWriteLine("Cost:");
 
-    badge_itoa((int)defense_cost[defenses[selected_defense_idx].type], pt_str);
+    badge_itoa((int)defense_cost[defenses[selected_defense_idx].type], pt_str, 6);
     FbWriteLine(pt_str);
 
     groundwar_draw_defense(defenses[selected_defense_idx].x,
@@ -691,14 +691,14 @@ void groundwar_task(void* p_arg) {
                     FbColor(WHITE);
                     FbMove(50, 2);
                     FbWriteLine("LVL:");
-                    badge_itoa((int)current_level, str);
+                    badge_itoa((int)current_level, str, 8);
                     FbMove(70, 2);
                     FbWriteLine(str);
 
                     FbColor(WHITE);
                     FbMove(98, 2);
                     FbWriteLine("WV:");
-                    badge_itoa((int)lvl.current_wave, str);
+                    badge_itoa((int)lvl.current_wave, str, 8);
                     FbMove(105, 2);
                     FbWriteLine(str);
                     state = IO;
