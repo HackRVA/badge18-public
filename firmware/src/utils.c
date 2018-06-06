@@ -41,6 +41,11 @@ unsigned char check_range_overlap(unsigned char p1, unsigned char o1,
 {
     return ((p1+o1) > p2) && (p1 < (p2 + o2));
 }
+unsigned char big_check_range_overlap(short p1, short o1,
+                                       short p2, short o2)
+{
+    return ((p1+o1) > p2) && (p1 < (p2 + o2));
+}
 
 
 unsigned char check_box_collision(unsigned char x1, unsigned char y1,
@@ -53,10 +58,28 @@ unsigned char check_box_collision(unsigned char x1, unsigned char y1,
     return (x_check && y_check);
 }
 
+unsigned char big_check_box_collision(short x1, short y1,
+                                  short w1, short h1,
+                                  short x2, short y2,
+                                  short w2, short h2)
+{
+    unsigned char x_check = big_check_range_overlap(x1, w1, x2, w2);
+    unsigned char y_check = big_check_range_overlap(y1, h1, y2, h2);
+    return (x_check && y_check);
+}
+
+
 unsigned char distance_between_coords(unsigned char x1, unsigned char y1,
                                       unsigned char x2, unsigned y2){
-    return sqrt(((x2 - x1)<< 1) + ((y2 - y1) << 1));
+    //return sqrt(((x2 - x1)<< 1) + ((y2 - y1) << 1));
+    return sqrt((pow(x2 - x1, 2)) + (pow(y2 - y1,2)));
 }
+
+short big_distance_between_coords(short x1, short y1,
+                                  short x2, short y2){
+    return sqrt((pow(x2 - x1, 2)) + (pow(y2 - y1,2)));
+}
+
 
 void rotate_points_to(short point_arr[][2],
                    unsigned int n_points, 
@@ -158,17 +181,38 @@ void path_between_points(unsigned char *x0, unsigned char *y0,
 
 }
 
+void big_path_between_points(short *x0, short *y0,
+                             short x1, short y1){
+    int dx, dy,
+    sx, sy,
+    err, e2;
+
+    //unsigned char x0, y0, x1, y1, i, j;
+    dx = abs(x1 - *x0);
+    dy = abs(y1 - *y0);
+    sx = *x0 < x1 ? 1: -1;
+    sy = *y0 < y1 ? 1: -1;
+    err = (dx > dy ? dx : -dy)/2;
+
+    e2 = err;
+    if (e2 > -dx) { err -= dy; *x0 += sx; }
+    if (e2 < dy) { err += dx; *y0 += sy; }
+
+}
+
+
 #define NOPE
 #ifdef NOPE
 // grabbed from online, so it's gotta be good:
 //char *itoa(int value)
-void badge_itoa(int value, unsigned char buffer[])
+void badge_itoa(int value, unsigned char buffer[], int c)
 {
     //static char buffer[12];        // 12 bytes is big enough for an INT32
     int original = value;        // save original value
     unsigned char i = 0;
 
-    int c = sizeof(buffer)-1;
+    //int c = sizeof(buffer)-1;
+    c--;
 
     buffer[c] = 0;                // write trailing null in last byte of buffer
 

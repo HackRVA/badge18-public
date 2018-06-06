@@ -1,9 +1,18 @@
 
+#ifndef SDL_BADGE
 #include "app.h"
-#include "colors.h"
+#endif
+#ifdef SDL_BADGE
+#include "sdl_fb.h"
+#include "sdl_buttons.h"
+#else
+#include "app.h"
 #include "fb.h"
-#include "assetList.h"
 #include "buttons.h"
+#endif
+
+#include "colors.h"
+#include "assetList.h"
 #include "utils.h"
 
 /////////////////////////////
@@ -33,7 +42,9 @@ void badgey_bird_menu_exit(){
     FbClear();
     badgey_bird_state = BADGEYB_SHOW_MENU;
     setNote(175, 1024);
+#ifndef SDL_BADGE
     returnToMenus();
+#endif
 }
 
 
@@ -391,5 +402,4 @@ void badgey_bird_task_real(void* p_arg){
         vTaskDelay(tick_rate);
         
     }
-    led(1, 0, 0);
 }

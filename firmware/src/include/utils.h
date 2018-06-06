@@ -21,11 +21,17 @@ unsigned int quick_rand(unsigned int seed);
 // given points and offset, see if two ranges are overlapping
 unsigned char check_range_overlap(unsigned char p1, unsigned char o1,
                                  unsigned char p2, unsigned char o2);
+unsigned char big_check_range_overlap(short p1, short o1,
+                                      short p2, short o2);
 
 unsigned char check_box_collision(unsigned char x1, unsigned char y1,
                                   unsigned char w1, unsigned char h1,
                                   unsigned char x2, unsigned char y2,
                                   unsigned char w2, unsigned char h2);
+unsigned char big_check_box_collision(short x1, short y1,
+                                      short w1, short h1,
+                                      short x2, short y2,
+                                      short w2, short h2);
 
 void equilateral_polygon_points(short point_arr[][2], 
                                 float radius, 
@@ -37,6 +43,8 @@ void scale_points(short point_arr[][2],
 
 unsigned char distance_between_coords(unsigned char x1, unsigned char y1,
                                       unsigned char x2, unsigned y2);
+short big_distance_between_coords(short x1, short y1,
+                                  short x2, short y2);
 
 void rotate_points(short point_arr[][2],
                    unsigned int n_points,
@@ -46,6 +54,9 @@ void rotate_points(short point_arr[][2],
 void path_between_points(unsigned char *x0, unsigned char *y0,
                          unsigned char x1, unsigned char y1);
 
-void badge_itoa(int value, unsigned char buffer[]);
+void big_path_between_points(short *x0, short *y0,
+                               short x1, short y1);
+
+void badge_itoa(int value, unsigned char buffer[], int c);
 #endif	/* UTILS_H */
 
