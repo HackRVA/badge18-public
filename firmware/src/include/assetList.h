@@ -11,14 +11,23 @@
  NOTE
 */
 enum {
-//    DRBOB=0,
+        //DRBOB=0,
         FONT=0,
-    HACKRVA4,
-    RVASEC2016,
-
-//    BI_SPRITE,
-    BADGEY_BIRD,
-    LASTASSET,
+        BURGUNDY_POWER,
+        DFIRE_BLURGGGH,
+        DFIRE_BOSS,
+        DFIRE_DIRIGIBLE,
+        DFIRE_GAMEOF,
+        DFIRE_IMPERIAL,
+        DFIRE_SLURM,
+        J46K,
+        MAU5,
+        SAND,
+        HACKRVA4,
+        RVASEC2016,
+        //BI_SPRITE,
+        BADGEY_BIRD,
+        LASTASSET,
 };
 
 enum {
