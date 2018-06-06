@@ -782,6 +782,8 @@ unsigned char badgelandia_user_io(struct badgelandia_player_t* player,
                 player->projectiles[i].type = RIFLE_PROJECTILE;
                 player->projectiles[i].o.vel_y = 10 * sin(player->ship.orientation_rads);
                 player->projectiles[i].o.vel_x = 10 * cos(player->ship.orientation_rads);
+                player->projectiles[i].o.vel_y += player->ship.o.vel_y;
+                player->projectiles[i].o.vel_x += player->ship.o.vel_x;
 
                 player->projectiles[i].o.loc_x = player->ship.o.loc_x;
                 player->projectiles[i].o.loc_y = player->ship.o.loc_y;
