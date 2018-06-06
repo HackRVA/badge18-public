@@ -13,6 +13,7 @@
 enum {
         //DRBOB=0,
         FONT=0,
+        BADGIO,
         BURGUNDY_POWER,
         DFIRE_BLURGGGH,
         DFIRE_BOSS,

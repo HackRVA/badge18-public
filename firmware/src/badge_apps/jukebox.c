@@ -8,13 +8,13 @@
 // If ordering changed, make sure indices still work
 // in the populate function
 struct menu_t jukebox_config_m[] = {
+    {"Badgio", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_badgio}},
     {"Blurgggh", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_blurgggh}},
-    {"Bpower", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_burgundy_power}},
     {"Boss", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_boss}},
+    {"Bpower", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_burgundy_power}},
     {"Dirigible", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_dirigible}},
     {"Game of", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_gameof}},
     {"Imperial", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_imperial}},
-    {"Mau5", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_mau5}},
     {"J46k", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_j46k}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"Next page", VERT_ITEM|DEFAULT_ITEM, FUNCTION, {(struct menu_t *) jb_switch_pages}},
@@ -22,6 +22,7 @@ struct menu_t jukebox_config_m[] = {
 };
 
 struct menu_t jukebox_config_n[] = {
+    {"Mau5", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_mau5}},
     {"Slurm", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_slurm}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
@@ -53,14 +54,19 @@ void set_jb_exit(void)
     returnToMenus();
 }
 
-void jb_play_burgundy_power(void)
+void jb_play_badgio(void)
 {
-    playAsset(BURGUNDY_POWER);
+    playAsset(BADGIO);
 }
 
 void jb_play_blurgggh(void)
 {
     playAsset(DFIRE_BLURGGGH);
+}
+
+void jb_play_burgundy_power(void)
+{
+    playAsset(BURGUNDY_POWER);
 }
 
 void jb_play_boss(void)
