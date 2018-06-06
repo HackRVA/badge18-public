@@ -328,25 +328,27 @@ void rubix_rotate_face(unsigned char face_index, unsigned char direction) { //ri
     unsigned char tmp;
     if(direction) {
         tmp = rubix_cube[face_index][0][2];
-        rubix_cube[face_index][0][2] = rubix_cube[face_index][0][1];
-        rubix_cube[face_index][0][1] = rubix_cube[face_index][0][0];
-        rubix_cube[face_index][0][0] = rubix_cube[face_index][1][0];
-        rubix_cube[face_index][1][0] = rubix_cube[face_index][2][0];
-        rubix_cube[face_index][2][0] = rubix_cube[face_index][2][1];
-        rubix_cube[face_index][2][1] = rubix_cube[face_index][2][2];
-        rubix_cube[face_index][2][2] = rubix_cube[face_index][1][2];
+        rubix_cube[face_index][0][2] = rubix_cube[face_index][0][0];
+        rubix_cube[face_index][0][0] = rubix_cube[face_index][2][0];
+        rubix_cube[face_index][2][0] = rubix_cube[face_index][2][2];
+        rubix_cube[face_index][2][2] = tmp;
+        tmp = rubix_cube[face_index][0][1];
+        rubix_cube[face_index][0][1] = rubix_cube[face_index][1][0];
+        rubix_cube[face_index][1][0] = rubix_cube[face_index][2][1];
+        rubix_cube[face_index][2][1] = rubix_cube[face_index][1][2];
         rubix_cube[face_index][1][2] = tmp;
     }
     else {
         tmp = rubix_cube[face_index][0][0];
-        rubix_cube[face_index][0][0] = rubix_cube[face_index][0][1];
-        rubix_cube[face_index][0][1] = rubix_cube[face_index][0][2];
-        rubix_cube[face_index][0][2] = rubix_cube[face_index][1][2];
-        rubix_cube[face_index][1][2] = rubix_cube[face_index][2][2];
-        rubix_cube[face_index][2][2] = rubix_cube[face_index][2][1];
-        rubix_cube[face_index][2][1] = rubix_cube[face_index][2][0];
-        rubix_cube[face_index][2][0] = rubix_cube[face_index][1][0];
-        rubix_cube[face_index][1][0] = tmp;
+        rubix_cube[face_index][0][0] = rubix_cube[face_index][0][2];
+        rubix_cube[face_index][0][2] = rubix_cube[face_index][2][2];
+        rubix_cube[face_index][2][2] = rubix_cube[face_index][2][0];
+        rubix_cube[face_index][2][0] = tmp;
+        tmp = rubix_cube[face_index][1][0];
+        rubix_cube[face_index][1][0] = rubix_cube[face_index][0][1];
+        rubix_cube[face_index][0][1] = rubix_cube[face_index][1][2];
+        rubix_cube[face_index][1][2] = rubix_cube[face_index][2][1];
+        rubix_cube[face_index][2][1] = tmp;
     }
 }
 
