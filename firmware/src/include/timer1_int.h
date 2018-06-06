@@ -10,8 +10,5 @@ void no_LED_PWM(unsigned char onOff) ;
 
 void timerInit();
 
-void beginNote(unsigned short freq);
-void endNote();
-
 #endif
 

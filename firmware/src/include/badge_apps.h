@@ -47,5 +47,7 @@ void note_crazy_task(void *p_arg);
 void badge_lander_task(void *p_arg);
 
 void rubix_task(void *p_arg);
+
+void jukebox_task(void *p_arg);
 #endif
 

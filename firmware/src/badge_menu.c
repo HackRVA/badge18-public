@@ -457,6 +457,8 @@ struct menu_t main_m[] = {
     {"U Draw", VERT_ITEM, TASK, {udraw_task}},    
     {"sensors", VERT_ITEM, TASK, (union menu_data_t) adc_task},
 //    {"Conductor", VERT_ITEM, TASK, (union menu_data_t) conductor_task},
+    {"Jukebox", VERT_ITEM|DEFAULT_ITEM, TASK, (union menu_data_t) jukebox_task},        
+
     {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},        
     {"Rubix", VERT_ITEM, TASK, {rubix_task}},
     {"badgelandia", VERT_ITEM, TASK, {badgelandia_task}},
