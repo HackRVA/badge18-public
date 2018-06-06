@@ -77,6 +77,9 @@ struct _rubix {
 
 struct _rubix rubix = {RUBIX_INIT,{0,1,2,3,4,5},0,{0,0,0}};
 
+void rubix_move_row(unsigned char row_number, unsigned char direction);
+void rubix_move_collumn(unsigned char collumn_number, unsigned char up_down);
+
 //app loop
 void rubix_task(void *p_arg){
     static unsigned char init = 1;
@@ -121,6 +124,14 @@ void rubix_init(void) {
         }
         rubix.side_order[blk_index]=blk_index;
         blk_index++;
+    }
+    for(blk_clr = RUBIX_CYAN;blk_clr < (RUBIX_YELLOW+1); blk_clr++) {
+        for(blk_y=0;blk_y<3;blk_y++) {
+            for(blk_x=0;blk_x<3;blk_x++) {
+                rubix_move_row(quick_rand(blk_y)%2,3);
+                rubix_move_collumn(quick_rand(blk_x)%2,2);
+            }
+        }
     }
     FbBackgroundColor(BLACK);
     FbClear();
@@ -214,16 +225,24 @@ void rubix_get_input(void) {
             }
         }
         if(DOWN_BTN) {
-        
+            if(rubix.cursor.y < 3) {
+                rubix_move_collumn(rubix.cursor.x,DOWN);
+            }
         }
         if(UP_BTN) {
-        
+            if(rubix.cursor.y < 3) {
+                rubix_move_collumn(rubix.cursor.x,UP);
+            }
         }
         if(LEFT_BTN) {
-        
+            if(rubix.cursor.y < 3) { 
+                rubix_move_row(rubix.cursor.y,LEFT);
+            }
         }
         if(RIGHT_BTN) {
-        
+            if(rubix.cursor.y < 3) {
+                rubix_move_row(rubix.cursor.y,RIGHT);
+            }
         }
         if(DOWN_TOUCH_AND_CONSUME) {
         
@@ -384,11 +403,51 @@ void rubix_rotate_cube(unsigned char rot_direction) {//ROT_UP ROT_DOWN ROT_LEFT 
 }
 
 void rubix_move_collumn(unsigned char collumn_number, unsigned char up_down) {//up = 1 down = 0
+    unsigned char tmp_collumn = 0;
+    unsigned char x = 0;
+    if(up_down) {
+        for(x=0;x<3;x++) {
+            tmp_collumn = rubix_cube[rubix.side_order[2]][x][collumn_number];
+            rubix_cube[rubix.side_order[2]][x][collumn_number] = rubix_cube[rubix.side_order[0]][x][collumn_number];
+            rubix_cube[rubix.side_order[0]][x][collumn_number] = rubix_cube[rubix.side_order[4]][x][collumn_number];
+            rubix_cube[rubix.side_order[4]][x][collumn_number] = rubix_cube[rubix.side_order[5]][x][collumn_number];
+            rubix_cube[rubix.side_order[5]][x][collumn_number] = tmp_collumn;
+        }
+    }
+    else {
+        for(x=0;x<3;x++) {
+            tmp_collumn = rubix_cube[rubix.side_order[5]][x][collumn_number];
+            rubix_cube[rubix.side_order[5]][x][collumn_number] = rubix_cube[rubix.side_order[4]][x][collumn_number];
+            rubix_cube[rubix.side_order[4]][x][collumn_number] = rubix_cube[rubix.side_order[0]][x][collumn_number];
+            rubix_cube[rubix.side_order[0]][x][collumn_number] = rubix_cube[rubix.side_order[2]][x][collumn_number];
+            rubix_cube[rubix.side_order[2]][x][collumn_number] = tmp_collumn;
+            
+        }
+    }
     
 }
 
 void rubix_move_row(unsigned char row_number, unsigned char direction) {
-    
+    unsigned char tmp_row = 0;
+    unsigned char x = 0;
+    if(direction) {
+        for(x=0;x<3;x++) {
+            tmp_row = rubix_cube[rubix.side_order[3]][row_number][x];
+            rubix_cube[rubix.side_order[3]][row_number][x] = rubix_cube[rubix.side_order[0]][row_number][x];
+            rubix_cube[rubix.side_order[0]][row_number][x] = rubix_cube[rubix.side_order[1]][row_number][x];
+            rubix_cube[rubix.side_order[1]][row_number][x] = rubix_cube[rubix.side_order[5]][2-row_number][x];
+            rubix_cube[rubix.side_order[5]][2-row_number][x] = tmp_row;
+        }
+    }
+    else {
+        for(x=0;x<3;x++) {
+            tmp_row = rubix_cube[rubix.side_order[5]][2-row_number][x];
+            rubix_cube[rubix.side_order[5]][2-row_number][x] = rubix_cube[rubix.side_order[1]][row_number][x];
+            rubix_cube[rubix.side_order[1]][row_number][x] = rubix_cube[rubix.side_order[0]][row_number][x];
+            rubix_cube[rubix.side_order[0]][row_number][x] = rubix_cube[rubix.side_order[3]][row_number][x];
+            rubix_cube[rubix.side_order[3]][row_number][x] = tmp_row;
+        }
+    }
 }
 
 
