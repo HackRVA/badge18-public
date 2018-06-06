@@ -13,17 +13,10 @@
 #include "assets.h"
 #include "colors.h"
 
-<<<<<<< HEAD
 #define HACKRVA4BIT_LORES
 #include "hackrva4bit.h"
 
 #define RVASEC2016BITS_LORES
-=======
-//#define HACKRVA4BIT_LORES
-#include "hackrva4bit.h"
-
-//#define RVASEC2016BITS_LORES
->>>>>>> ab906828f2ac28bbd59b1af7103c5f3c173b21a0
 #include "rvasec2016.h"
 
 //#define DRBOB_LORES
