@@ -190,7 +190,7 @@ char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
         G_touch_pct = tmp_touch;
 
 //if using pro compiler with 16 mips optimizations,         
-//#define MIPS16_INST_OPTIM
+#define MIPS16_INST_OPTIM
 #ifdef MIPS16_INST_OPTIM   
 #define NULL_TOUCH_BTN_THRESH 9000
 #define LOW_TOUCH_BTN_THRESH 8700
