@@ -44,6 +44,7 @@ struct menu_t groundwar_menu[] = {
 
 #define NUM_MINION_TYPES 4
 #define NUM_WAVES 5
+#define NUM_LEVELS 5
 
 struct groundwar_level_t {
     // Max of 5 points
@@ -126,6 +127,7 @@ enum groundwar_state {
     NEXT_WAVE,
     IO,
     GAME_OVER,
+    GAME_WIN,
     SLEEP,
     EXIT
 };
@@ -266,8 +268,10 @@ unsigned char groundwar_step(struct groundwar_minion_t minions[NUM_MINIONS],
         if(defenses[i].projectile.targeted_minion == DEFENSE_NOT_TARGETING){
             //TODO:find front minion within range
             for(j=0; j<NUM_MINIONS; j++){
-                if(minions[j].type != UNUSED_MINION && minions[j].current_hp != 0
-&& distance_between_coords(minions[j].x, minions[j].y, defenses[i].x, defenses[i].y) <= defense_range[defenses[i].type]) {
+                if((minions[j].type != UNUSED_MINION)
+                   && (minions[j].current_hp != 0)
+                   && (big_distance_between_coords(minions[j].x, minions[j].y, defenses[i].x, defenses[i].y)
+                            <= defense_range[defenses[i].type])) {
                     defenses[i].projectile.targeted_minion = j;
                     defenses[i].projectile.x = defenses[i].x;
                     defenses[i].projectile.y = defenses[i].y;
@@ -459,7 +463,7 @@ void groundwar_draw(struct groundwar_minion_t minions[NUM_MINIONS],
 
     FbMove(105, 120);
 
-    badge_itoa((int)groundwar_level_health, pt_str, 6);
+    badge_itoa((int)groundwar_level_health, pt_str, 4);
     FbWriteLine(pt_str);
 
     // -----
@@ -467,7 +471,7 @@ void groundwar_draw(struct groundwar_minion_t minions[NUM_MINIONS],
     FbMove(1, 120);
     FbColor(WHITE);
     FbWriteLine("PTS:");
-    badge_itoa((int)groundwar_points, pt_str, 6);
+    badge_itoa((int)groundwar_points, pt_str, 4);
 
     FbMove(30, 120);
     FbWriteLine(pt_str);
@@ -495,7 +499,7 @@ void groundwar_draw(struct groundwar_minion_t minions[NUM_MINIONS],
         FbColor(YELLOW);
     FbWriteLine("Cost:");
 
-    badge_itoa((int)defense_cost[defenses[selected_defense_idx].type], pt_str, 6);
+    badge_itoa((int)defense_cost[defenses[selected_defense_idx].type], pt_str, 4);
     FbWriteLine(pt_str);
 
     groundwar_draw_defense(defenses[selected_defense_idx].x,
@@ -591,7 +595,7 @@ lvl.distribution_of_units[wave_n][CIRCLE] = c;\
 void groundwar_task(void* p_arg) {
     unsigned char cnt= 0;
     const TickType_t tick_rate = 5 / portTICK_PERIOD_MS;
-    unsigned char wave_num = 0, current_level = 0, unlocked_level = 0, alive_count=0;
+    unsigned char  current_level = 0, alive_count=0;
     unsigned char str[8];
 
     struct groundwar_minion_t groundwar_minions[NUM_MINIONS] = {0};
@@ -667,13 +671,6 @@ void groundwar_task(void* p_arg) {
                     SET_LVL_WAVE_DIST(3, 10, 11, 4, 3);
                     SET_LVL_WAVE_DIST(4, 10, 13, 5, 5);
                 }                
-                // TEST BUILD
-                //enter_build_mode();
-//                defenses[0].type = LARGE;
-//                defenses[0].x = 10;
-//                defenses[0].y = 50;
-//                selected_defense_idx = 1;
-
                 //break;
             case INIT_WAVE:
                 init_minions(groundwar_minions, lvl);
@@ -691,14 +688,14 @@ void groundwar_task(void* p_arg) {
                     FbColor(WHITE);
                     FbMove(50, 2);
                     FbWriteLine("LVL:");
-                    badge_itoa((int)current_level, str, 8);
+                    badge_itoa((int)current_level, str, 4);
                     FbMove(70, 2);
                     FbWriteLine(str);
 
                     FbColor(WHITE);
                     FbMove(98, 2);
                     FbWriteLine("WV:");
-                    badge_itoa((int)lvl.current_wave, str, 8);
+                    badge_itoa((int)lvl.current_wave, str, 4);
                     FbMove(105, 2);
                     FbWriteLine(str);
                     state = IO;
@@ -732,23 +729,41 @@ void groundwar_task(void* p_arg) {
                     state = NEXT_WAVE;
                 break;
             case NEXT_WAVE:
+                // TODO: Win condition
                 if(lvl.current_wave < NUM_WAVES - 1){
                     lvl.current_wave++;
                     state = INIT_WAVE;
                 }
-                else{
+                else if(current_level < NUM_LEVELS - 1){
                     current_level++;
                     state = INIT_LEVEL;
-                    //TODO: next level
+                }
+                else{
+                    state = GAME_WIN;
                 }
                 break;
             case GAME_OVER:
-                FbMove(10, 60);
+                FbMove(20, 60);
                 FbColor(RED);
                 FbWriteLine("GAME OVER!");
                 FbPushBuffer();
                 vTaskDelay(5000/portTICK_PERIOD_MS);
                 state = EXIT;
+                break;
+
+            case GAME_WIN:
+                FbColor(GREEN);
+                FbMove(20, 60);
+                FbWriteLine("You win!");
+                FbMove(10, 85);
+                FbWriteLine("Go show");
+                FbMove(25, 97);
+                FbWriteLine("hack.rva");
+                FbPushBuffer();
+                if(BUTTON_PRESSED_AND_CONSUME){
+                    state = EXIT;
+                }
+                vTaskDelay(5/portTICK_PERIOD_MS);
                 break;
 
             case SLEEP:
