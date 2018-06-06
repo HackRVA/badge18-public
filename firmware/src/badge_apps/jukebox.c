@@ -38,8 +38,6 @@ struct menu_t jukebox_config_n[] = {
 
 char which_menu = 0;
 
-char image = 0;
-
 enum
 {
     INIT,
