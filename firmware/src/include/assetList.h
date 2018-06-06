@@ -11,14 +11,24 @@
  NOTE
 */
 enum {
-//    DRBOB=0,
+        //DRBOB=0,
         FONT=0,
-    HACKRVA4,
-    RVASEC2016,
-
-//    BI_SPRITE,
-    BADGEY_BIRD,
-    LASTASSET,
+        BADGIO,
+        BURGUNDY_POWER,
+        DFIRE_BLURGGGH,
+        DFIRE_BOSS,
+        DFIRE_DIRIGIBLE,
+        DFIRE_GAMEOF,
+        DFIRE_IMPERIAL,
+        DFIRE_SLURM,
+        J46K,
+        MAU5,
+        SAND,
+        HACKRVA4,
+        RVASEC2016,
+        //BI_SPRITE,
+        BADGEY_BIRD,
+        LASTASSET,
 };
 
 enum {
@@ -36,9 +46,9 @@ enum {
 struct asset {
     unsigned char assetId; /**< number (enum) used to reference object */
     unsigned char type;    /**< image/audio/midi/private */
-    unsigned char seqNum; /**< \# images in the asset for animation, frame # for font char id */
-    unsigned short x;	/**< array x */
-    unsigned short y;	/**< array y */
+    unsigned char seqNum; /**< \# images in the asset for animation, frame # for font char id; for audio, if you want to loop, 1 + the note index of the note you want to jump back to once completed, or zero if you don't want to loop */
+    unsigned short x;	/**< array x; number of notes for audio */
+    unsigned short y;	/**< array y; samples_per_step for audio */
     const char *data_cmap; /**< color map lookup table for image data */
     const char *pixdata;   /**< color pixel data */
     void (*datacb)(unsigned char, int); /**< routine that can display or play asset */
