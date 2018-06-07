@@ -451,23 +451,26 @@ void returnToMenus(){
 struct menu_t main_m[] = {
 //    {"Arcade",       VERT_ITEM|DEFAULT_ITEM, MENU,
 //        {games_m}},
-//    {"GroundWar", VERT_ITEM, TASK,
-//        {groundwar_task}},        
-//    {"Lander", VERT_ITEM, TASK,
-//        {badge_lander_task}},
-    {"U Draw", VERT_ITEM, TASK, {udraw_task}},    
-    {"adc", VERT_ITEM, TASK, (union menu_data_t) adc_task},
-    {"Conductor", VERT_ITEM, TASK, (union menu_data_t) conductor_task},
-    {"Jukebox", VERT_ITEM|DEFAULT_ITEM, TASK, (union menu_data_t) jukebox_task},        
-    {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},        
-    {"Rubix", VERT_ITEM, TASK, {rubix_task}},        
     {"Schedule", VERT_ITEM|DEFAULT_ITEM, MENU, {sch_main_m}},
-//    {"tutorial", VERT_ITEM, TASK,
-//        {(struct menu_t *)badge_tutorial_task}},        
+    {"GroundWar", VERT_ITEM, TASK, {groundwar_task}},        
+//    {"Lander", VERT_ITEM, TASK, {badge_lander_task}},
+    {"U Draw", VERT_ITEM, TASK, {udraw_task}},    
+    {"sensors", VERT_ITEM, TASK, (union menu_data_t) adc_task},
+//    {"Conductor", VERT_ITEM, TASK, (union menu_data_t) conductor_task},
+    {"Jukebox", VERT_ITEM|DEFAULT_ITEM, TASK, (union menu_data_t) jukebox_task},        
+
+    {"blinkenlite", VERT_ITEM, TASK, (union menu_data_t) blinkenlights_task},        
+    {"Rubix", VERT_ITEM, TASK, {rubix_task}},
+    {"badgelandia", VERT_ITEM, TASK, {badgelandia_task}},
+
+//    {"tutorial", VERT_ITEM, TASK,   {(struct menu_t *)badge_tutorial_task}},        
     {"backlight", VERT_ITEM, MENU, {(struct menu_t *) backlight_m}},
+    
 //    {"led", VERT_ITEM, MENU,
 //        {(struct menu_t *) LEDlight_m}}, /* coerce/cast to a menu_t data pointer */
-    {"buzzer", VERT_ITEM|LAST_ITEM, MENU, {(struct menu_t *) buzzer_m}},        
+    
+    {"buzzer", VERT_ITEM|LAST_ITEM, MENU, {(struct menu_t *) buzzer_m}},     
+    
 //    {"", VERT_ITEM|LAST_ITEM|HIDDEN_ITEM, BACK,
 //        {NULL}},
 };

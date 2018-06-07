@@ -141,7 +141,7 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * pData,
             /* Device was either de-configured or reset */
 
             /* Update LED indication */
-            led(0, 0, 1);
+            //led(0, 0, 1);
 //            BSP_LEDOn ( APP_USB_LED_1);
 //            BSP_LEDOn ( APP_USB_LED_2);
 //            BSP_LEDOff ( APP_USB_LED_3);
@@ -163,7 +163,7 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * pData,
                         APP_USBDeviceCDCEventHandler, (uintptr_t)&appData);
 
                 /* Update LED indication */
-                led(0, 1, 0);
+                //led(0, 1, 0);
 //                BSP_LEDOff ( APP_USB_LED_1 );
 //                BSP_LEDOff ( APP_USB_LED_2 );
 //                BSP_LEDOn ( APP_USB_LED_3 );
@@ -180,7 +180,7 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * pData,
 
         case USB_DEVICE_EVENT_SUSPENDED:
             /* Update LED indication */
-            led(1, 0, 0);
+//            led(1, 0, 0);
 //            BSP_LEDOff ( APP_USB_LED_1 );
 //            BSP_LEDOn ( APP_USB_LED_2 );
 //            BSP_LEDOn ( APP_USB_LED_3 );
@@ -853,7 +853,7 @@ void APP_Tasks ( void )
     led(0,0,0);
 
     //ADC_init(1, 0); // slowest sample rate
-//    flare_leds(5);
+    flare_leds(255);
 
     //test_task(NULL);
 #ifdef BTN_DEBUG

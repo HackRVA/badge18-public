@@ -1086,6 +1086,7 @@ void badgelandia_task(void* p_arg){
                 FbSwapBuffers();
                 break;
             case BADGELANDIA_EXIT:
+                badgelandia_state = BADGELANDIA_INSTRUCT;
 #ifndef SDL_BADGE
                 returnToMenus();
 #endif
