@@ -309,7 +309,11 @@ void nextNote(void)
         G_note_num = 0;
 
         /* kill sound if we're not looping */
-        if (!assetList[G_audioAssetId].y) {
+        if (G_audioAssetId == BADGIO1) {
+            G_audioAssetId = BADGIO2;
+        } else if (G_audioAssetId == BADGIO2) {
+            G_audioAssetId = BADGIO1;
+        } else if (!assetList[G_audioAssetId].y) {
             endNote();
             G_audioAssetId = 255; /* clear curent asset */
             G_playing = 0;

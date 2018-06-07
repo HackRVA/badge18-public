@@ -39,6 +39,7 @@
 #include "song/dfire_slurm.h"
 #include "song/j46k.h"
 #include "song/mau5.h"
+#include "song/nge.h"
 #include "song/sand.h"
 #include "song/winxp.h"
 
@@ -73,7 +74,8 @@ const struct asset assetList[] = {
 #else
 const struct asset assetList[] = {
  { FONT, PICTURE1BIT, 42, 8, 8, (const char *) BW_cmap, (const char *) font_2_bits, (drawLCD1) },
- { BADGIO, AUDIO, NOTEDATA_badgio_NOTES, NOTEDATA_badgio_SPEED, 0, (void *) 0, notedata_badgio, (void *) 0 },
+ { BADGIO1, AUDIO, NOTEDATA_badgio1_NOTES, NOTEDATA_badgio_SPEED, 0, (void *) 0, notedata_badgio1, (void *) 0 },
+ { BADGIO2, AUDIO, NOTEDATA_badgio2_NOTES, NOTEDATA_badgio_SPEED, 0, (void *) 0, notedata_badgio2, (void *) 0 },
  { BURGUNDY_POWER, AUDIO, NOTEDATA_burgundy_power_NOTES, NOTEDATA_burgundy_power_SPEED, 1, (void *) 0, notedata_burgundy_power, (void *) 0 },
  { DFIRE_BLURGGGH, AUDIO, NOTEDATA_dfire_blurgggh_NOTES, NOTEDATA_dfire_blurgggh_SPEED, 33, (void *) 0, notedata_dfire_blurgggh, (void *) 0 },
  { DFIRE_BOSS, AUDIO, NOTEDATA_dfire_boss_NOTES, NOTEDATA_dfire_boss_SPEED, 1, (void *) 0, notedata_dfire_boss, (void *) 0 },
@@ -83,6 +85,7 @@ const struct asset assetList[] = {
  { DFIRE_SLURM, AUDIO, NOTEDATA_dfire_slurm_NOTES, NOTEDATA_dfire_slurm_SPEED, 0, (void *) 0, notedata_dfire_slurm, (void *) 0 },
  { J46K, AUDIO, NOTEDATA_j46k_NOTES, NOTEDATA_j46k_SPEED, 1, (void *) 0, notedata_j46k, (void *) 0 },
  { MAU5, AUDIO, NOTEDATA_mau5_NOTES, NOTEDATA_mau5_SPEED, 1, (void *) 0, notedata_mau5, (void *) 0 },
+ { NGE, AUDIO, NOTEDATA_nge_NOTES, NOTEDATA_nge_SPEED, 1, (void *) 0, notedata_nge, (void *) 0 },
  { SAND, AUDIO, NOTEDATA_sand_NOTES, NOTEDATA_sand_SPEED, 1, (void *) 0, notedata_sand, (void *) 0 },
  { WINXP, AUDIO, NOTEDATA_winxp_NOTES, NOTEDATA_winxp_SPEED, 0, (void *) 0, notedata_winxp, (void *) 0 },
  //{ DRBOB, DRBOB_BITS, 1, DRBOB_WIDTH, DRBOB_HEIGHT, (const char *)DRBOB_CMAP, (const char *)DRBOB_DATA, (drawLCD8) },

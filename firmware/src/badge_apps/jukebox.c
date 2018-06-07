@@ -27,7 +27,7 @@ struct menu_t jukebox_config_n[] = {
     {"Mau5", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_mau5}},
     {"Slurm", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_slurm}},
     {"WinXP", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_winxp}},
-    {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
+    {"EVA02", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_nge}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
@@ -56,7 +56,7 @@ void set_jb_exit(void)
 
 void jb_play_badgio(void)
 {
-    playAsset(BADGIO);
+    playAsset(BADGIO1);
 }
 
 void jb_play_blurgggh(void)
@@ -107,6 +107,11 @@ void jb_play_j46k(void)
 void jb_play_mau5(void)
 {
     playAsset(MAU5);
+}
+
+void jb_play_nge(void)
+{
+    playAsset(NGE);
 }
 
 void jb_switch_pages(void)
