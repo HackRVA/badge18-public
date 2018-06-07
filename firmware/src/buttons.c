@@ -193,9 +193,9 @@ char words[8]={'.', '\n', '\0', 0, 0, 0, 0, 0};
 #define MIPS16_INST_OPTIM
 #ifdef MIPS16_INST_OPTIM   
 #define NULL_TOUCH_BTN_THRESH 9000
-#define LOW_TOUCH_BTN_THRESH 8700
-#define HIGH_TOUCH_BTN_LOWER_THRESH 9400        
-#define HIGH_TOUCH_BTN_UPPER_THRESH 11000 
+#define LOW_TOUCH_BTN_THRESH 8000
+#define HIGH_TOUCH_BTN_LOWER_THRESH 8200        
+#define HIGH_TOUCH_BTN_UPPER_THRESH 12000 
 #else
 //Without MIPS 16 instructions        
 #define NULL_TOUCH_BTN_THRESH 9000

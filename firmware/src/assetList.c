@@ -40,6 +40,7 @@
 #include "song/j46k.h"
 #include "song/mau5.h"
 #include "song/sand.h"
+#include "song/winxp.h"
 
 /* for 1 bit images */
 /* testing color instead of BW */
