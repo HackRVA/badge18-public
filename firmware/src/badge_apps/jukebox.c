@@ -56,7 +56,7 @@ void set_jb_exit(void)
 
 void jb_play_badgio(void)
 {
-    playAsset(BADGIO);
+    playAsset(BADGIO1);
 }
 
 void jb_play_blurgggh(void)
