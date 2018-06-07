@@ -84,7 +84,6 @@ void boot_splash_task(void* p_arg) {
             case HACKRVA:
                 FbImage(HACKRVA4, 0);
                 FbSwapBuffers();
-                playAsset(WINXP);
                 if(cnt == 100 || BUTTON_PRESSED_AND_CONSUME){
                     state = RVASEC;
                     cnt = 0;
@@ -194,6 +193,7 @@ void boot_splash_task(void* p_arg) {
                 break;
             case EXIT:
 #ifndef SDL_BADGE
+                playAsset(WINXP);
                 returnToMenus();
 #endif
                 break;

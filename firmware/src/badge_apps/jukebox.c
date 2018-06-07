@@ -26,7 +26,7 @@ struct menu_t jukebox_config_n[] = {
     {"J46k", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_j46k}},
     {"Mau5", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_mau5}},
     {"Slurm", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_slurm}},
-    {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
+    {"WinXP", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_winxp}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
@@ -92,6 +92,11 @@ void jb_play_imperial(void)
 void jb_play_slurm(void)
 {
     playAsset(DFIRE_SLURM);
+}
+
+void jb_play_winxp(void)
+{
+    playAsset(WINXP);
 }
 
 void jb_play_j46k(void)
