@@ -1,6 +1,7 @@
 
 #include "colors.h"
 #include "assetList.h"
+#include "assets.h"
 
 #ifdef SDL_BADGE
 #include "sdl_fb.h"
@@ -192,6 +193,7 @@ void boot_splash_task(void* p_arg) {
                 break;
             case EXIT:
 #ifndef SDL_BADGE
+                playAsset(WINXP);
                 returnToMenus();
 #endif
                 break;

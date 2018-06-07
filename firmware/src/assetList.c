@@ -41,6 +41,7 @@
 #include "song/mau5.h"
 #include "song/nge.h"
 #include "song/sand.h"
+#include "song/winxp.h"
 
 /* for 1 bit images */
 /* testing color instead of BW */
@@ -86,6 +87,7 @@ const struct asset assetList[] = {
  { MAU5, AUDIO, NOTEDATA_mau5_NOTES, NOTEDATA_mau5_SPEED, 1, (void *) 0, notedata_mau5, (void *) 0 },
  { NGE, AUDIO, NOTEDATA_nge_NOTES, NOTEDATA_nge_SPEED, 1, (void *) 0, notedata_nge, (void *) 0 },
  { SAND, AUDIO, NOTEDATA_sand_NOTES, NOTEDATA_sand_SPEED, 1, (void *) 0, notedata_sand, (void *) 0 },
+ { WINXP, AUDIO, NOTEDATA_winxp_NOTES, NOTEDATA_winxp_SPEED, 0, (void *) 0, notedata_winxp, (void *) 0 },
  //{ DRBOB, DRBOB_BITS, 1, DRBOB_WIDTH, DRBOB_HEIGHT, (const char *)DRBOB_CMAP, (const char *)DRBOB_DATA, (drawLCD8) },
  { HACKRVA4, HACKRVA4_BITS, 1, HACKRVA4_WIDTH, HACKRVA4_HEIGHT, (const char *)HACKRVA4_CMAP, (const char *)HACKRVA4_DATA, (drawLCD4) },
  { RVASEC2016, RVASEC2016_BITS, 1, RVASEC2016_WIDTH, RVASEC2016_HEIGHT, (const char *)RVASEC2016_CMAP, (const char *)RVASEC2016_DATA, (drawLCD2) },

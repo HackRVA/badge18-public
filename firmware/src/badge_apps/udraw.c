@@ -8,6 +8,7 @@
 #include "colors.h"
 #include "fb.h"
 #include "assetList.h"
+#include "assets.h"
 #include "buttons.h"
 #include "utils.h"
 #include "ir.h"
@@ -193,6 +194,7 @@ void draw_init(void) {
     draw_state.cursor.y = 0;
     show_drop_down = DRAW_DROP_DOWN_OFF;
     show_ir_buff = 0;
+    playAsset(J46K);
 }
 
 //render all pixels and cursor to the display
@@ -324,6 +326,7 @@ void draw_process() {
 
 //sets function pointer and returns to menus
 void draw_exit(void) {
+    haltPlayback();
     draw_state.state = DRAW_RENDER;
     returnToMenus();
 }

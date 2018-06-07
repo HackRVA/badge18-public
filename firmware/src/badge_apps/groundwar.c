@@ -19,6 +19,8 @@
 #include <stdlib.h>
 //#include <stdio.h>
 
+#include "assets.h"
+#include "assetList.h"
 
 #define CIRCLE_GRUNT_SPEED 1
 #define CIRCLE_GRUNT_HP 100
@@ -616,6 +618,8 @@ void groundwar_task(void* p_arg) {
     };
 
 #ifdef SDL_BADGE
+    playAsset(DFIRE_BOSS);
+
     while(G_Fb.status)
 #else
     for(;;)
@@ -773,6 +777,7 @@ void groundwar_task(void* p_arg) {
             case EXIT:
                 state = INIT_LEVEL;
 #ifndef SDL_BADGE
+                haltPlayback();
                 returnToMenus();
 #else
                 G_Fb.status = 0;

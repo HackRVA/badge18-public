@@ -8,6 +8,7 @@
 #include "colors.h"
 #include "fb.h"
 #include "assetList.h"
+#include "assets.h"
 #include "buttons.h"
 #include "utils.h"
 #include "ir.h"
@@ -135,6 +136,7 @@ void rubix_init(void) {
     }
     FbBackgroundColor(BLACK);
     FbClear();
+    playAsset(DFIRE_BLURGGGH);
 }
 
 unsigned short rubix_color_to_short(unsigned char rubix_clr) {
@@ -319,6 +321,7 @@ void rubix_process() {
 
 //sets function pointer and returns to menus
 void rubix_exit(void) {
+    haltPlayback();
     rubix.state = RUBIX_RENDER;
     returnToMenus();
 }

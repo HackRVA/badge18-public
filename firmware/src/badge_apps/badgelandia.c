@@ -772,6 +772,7 @@ unsigned char badgelandia_user_io(struct badgelandia_player_t* player,
         redraw = 1;
     }
     if(DOWN_TOUCH_AND_CONSUME){
+    //if(UP_TOUCH_AND_CONSUME){
 
         if(player->projectile_cooldown == 0){
             unsigned char i = 0;

@@ -26,6 +26,7 @@ enum {
         MAU5,
         NGE,
         SAND,
+        WINXP,
         HACKRVA4,
         RVASEC2016,
         //BI_SPRITE,
