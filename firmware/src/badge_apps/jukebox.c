@@ -26,7 +26,7 @@ struct menu_t jukebox_config_n[] = {
     {"J46k", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_j46k}},
     {"Mau5", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_mau5}},
     {"Slurm", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_slurm}},
-    {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
+    {"EVA02", VERT_ITEM, FUNCTION, {(struct menu_t *) jb_play_nge}},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
     {"", VERT_ITEM|SKIP_ITEM, TEXT, 0},
@@ -102,6 +102,11 @@ void jb_play_j46k(void)
 void jb_play_mau5(void)
 {
     playAsset(MAU5);
+}
+
+void jb_play_nge(void)
+{
+    playAsset(NGE);
 }
 
 void jb_switch_pages(void)

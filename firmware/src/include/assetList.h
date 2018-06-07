@@ -23,6 +23,7 @@ enum {
         DFIRE_SLURM,
         J46K,
         MAU5,
+        NGE,
         SAND,
         HACKRVA4,
         RVASEC2016,

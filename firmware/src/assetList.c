@@ -39,6 +39,7 @@
 #include "song/dfire_slurm.h"
 #include "song/j46k.h"
 #include "song/mau5.h"
+#include "song/nge.h"
 #include "song/sand.h"
 
 /* for 1 bit images */
@@ -82,6 +83,7 @@ const struct asset assetList[] = {
  { DFIRE_SLURM, AUDIO, NOTEDATA_dfire_slurm_NOTES, NOTEDATA_dfire_slurm_SPEED, 0, (void *) 0, notedata_dfire_slurm, (void *) 0 },
  { J46K, AUDIO, NOTEDATA_j46k_NOTES, NOTEDATA_j46k_SPEED, 1, (void *) 0, notedata_j46k, (void *) 0 },
  { MAU5, AUDIO, NOTEDATA_mau5_NOTES, NOTEDATA_mau5_SPEED, 1, (void *) 0, notedata_mau5, (void *) 0 },
+ { NGE, AUDIO, NOTEDATA_nge_NOTES, NOTEDATA_nge_SPEED, 1, (void *) 0, notedata_nge, (void *) 0 },
  { SAND, AUDIO, NOTEDATA_sand_NOTES, NOTEDATA_sand_SPEED, 1, (void *) 0, notedata_sand, (void *) 0 },
  //{ DRBOB, DRBOB_BITS, 1, DRBOB_WIDTH, DRBOB_HEIGHT, (const char *)DRBOB_CMAP, (const char *)DRBOB_DATA, (drawLCD8) },
  { HACKRVA4, HACKRVA4_BITS, 1, HACKRVA4_WIDTH, HACKRVA4_HEIGHT, (const char *)HACKRVA4_CMAP, (const char *)HACKRVA4_DATA, (drawLCD4) },
