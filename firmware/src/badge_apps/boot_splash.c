@@ -1,6 +1,7 @@
 
 #include "colors.h"
 #include "assetList.h"
+#include "assets.h"
 
 #ifdef SDL_BADGE
 #include "sdl_fb.h"
@@ -83,6 +84,7 @@ void boot_splash_task(void* p_arg) {
             case HACKRVA:
                 FbImage(HACKRVA4, 0);
                 FbSwapBuffers();
+                playAsset(WINXP);
                 if(cnt == 100 || BUTTON_PRESSED_AND_CONSUME){
                     state = RVASEC;
                     cnt = 0;

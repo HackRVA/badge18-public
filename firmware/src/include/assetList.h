@@ -24,6 +24,7 @@ enum {
         J46K,
         MAU5,
         SAND,
+        WINXP,
         HACKRVA4,
         RVASEC2016,
         //BI_SPRITE,
