@@ -617,9 +617,9 @@ void groundwar_task(void* p_arg) {
             }
     };
 
+#ifdef SDL_BADGE
     playAsset(DFIRE_BOSS);
 
-#ifdef SDL_BADGE
     while(G_Fb.status)
 #else
     for(;;)
@@ -776,8 +776,8 @@ void groundwar_task(void* p_arg) {
                 break;
             case EXIT:
                 state = INIT_LEVEL;
-                haltPlayback();
 #ifndef SDL_BADGE
+                haltPlayback();
                 returnToMenus();
 #else
                 G_Fb.status = 0;
